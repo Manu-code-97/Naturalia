@@ -10,19 +10,17 @@ use Symfony\Component\Routing\Attribute\Route;
 class ProductController extends AbstractController
 {
     #[Route('/product', name: 'app_product')]
-    public function showProduct(): Response
+    public function showProduct(ProduitRepository $repo, $products): Response
     {
-        $produits = $produitRepository->findAll();
-
+        $products = $repo->findAll(); 
         return $this->render('product/index.html.twig', [
-            'produits' => $produits,
-            
+            'products' => $products,
         ]);
     }
 
-    #[Route('/product/{produit}', name: 'app_produit')]
-    public function produit(ProduitRepository $produitRepository, $produit): Response
+    #[Route('/product/{produit}', name: 'app_product_{product}')]
+    public function product(ProduitRepository $repos, $product): Response
     {
-        $produit = $produitRepository->find($produit);
+        $product = $repos->find($product);
     }
 }
