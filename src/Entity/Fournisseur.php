@@ -13,16 +13,16 @@ class Fournisseur
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 40)]
+    #[ORM\Column(length: 40, nullable: true)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, nullable: true)]
     private ?string $codePostal = null;
 
-    #[ORM\Column(length: 40)]
+    #[ORM\Column(length: 40, nullable: true)]
     private ?string $ville = null;
 
     #[ORM\Column(length: 10, nullable: true)]
