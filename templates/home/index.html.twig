@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+    {% include'partials/header.html.twig' %}
+     {% endblock %}
+
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
@@ -8,6 +12,7 @@
         <div>
             <img src="img/sac-de-courses.png" alt="Sac de courses">
         </div>
+
 
         <div>
             <h1>
@@ -30,4 +35,5 @@
         </div>
     </article>
 </main>
+
 {% endblock %}
