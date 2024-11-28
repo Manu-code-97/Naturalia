@@ -1,7 +1,12 @@
 #main .red{
     color: #840000;
+    margin-top: 72px;
 }
 #main h1{
     text-align: center;
     margin-top: 180px;
+}
+
+#main .fournisseur{
+    margin-left: 125px;
 }

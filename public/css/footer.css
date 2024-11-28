@@ -2,8 +2,11 @@
 
 #footer{
     background-color: #840000;
-    color: #FFFEFB;
-   
+    
+    .block a{
+        color: #FFFEFB;
+        text-decoration: none;
+    }
 }
 
 #footer .block{
@@ -24,5 +27,3 @@
 #footer i {
     margin-right: 10px;
 }
-
-
