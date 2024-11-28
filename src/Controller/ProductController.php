@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class ProductController extends AbstractController
 {
     #[Route('/product', name: 'app_product')]
-    public function index(): Response
+    public function showProduct(): Response
     {
         return $this->render('product/index.html.twig', [
             'controller_name' => 'ProductController',
@@ -18,6 +18,4 @@ class ProductController extends AbstractController
 
 
 
-
-    
 }
