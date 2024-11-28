@@ -16,6 +16,38 @@ class RecetteRepository extends ServiceEntityRepository
         parent::__construct($registry, Recette::class);
     }
 
+// Dans cette partie je crée une fonction pour afficher mes differentes recettes !
+
+    public function getProductsOnPromotion(): array
+{
+    $entityManager = $this->getEntityManager();
+    $recetteDujour = $entityManager->createQuery(
+        'SELECT r
+         FROM App\Entity\Recette r
+         WHERE r.recette is NULL
+         -- ORDER BY p.price DESC
+       '
+    );
+
+    return  $recetteDujour->getResult();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // en dessus ce qui est deja commenter en Amont
+
     //    /**
     //     * @return Recette[] Returns an array of Recette objects
     //     */

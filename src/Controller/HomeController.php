@@ -16,11 +16,11 @@ class HomeController extends AbstractController
     public function index(ProduitRepository $repo): Response
     {
 
-        $produitPromos= $repo->getProductsOnPromotion();
-        dd ($produitPromos);  //tester l'affichage
+        $productPromos= $repo->getProductsOnPromotion();
+       
         return $this->render('home/index.html.twig', [
           
-            'produitsPromo' => $produitPromos,   // il faut penser à recuperer la variable (produitsPromo) pour afficher la liste des tous les produits qui sont promotions
+            'productPromo' => $productPromos,   // penser à recuperer la variable (produitsPromo) pour afficher la liste des tous les produits qui sont promotions
         ]);
   
     }

@@ -20,7 +20,7 @@ class ProduitRepository extends ServiceEntityRepository
 
 public function getProductsOnPromotion(): array
 {
-    $entityManager = $this->getEntityManager();
+  /*   $entityManager = $this->getEntityManager();
     $query = $entityManager->createQuery(
         'SELECT p
          FROM App\Entity\Produit p
@@ -29,7 +29,8 @@ public function getProductsOnPromotion(): array
        '
     );
 
-    return $query->getResult();
+    return $query->getResult(); */
+    return [];
 }
 
 
