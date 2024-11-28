@@ -47,6 +47,9 @@ class Produit
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
     private ?string $prixPromo = null;
 
+    #[ORM\Column(length: 200)]
+    private ?string $slug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -180,6 +183,18 @@ class Produit
     public function setPrixPromo(?string $prixPromo): static
     {
         $this->prixPromo = $prixPromo;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
