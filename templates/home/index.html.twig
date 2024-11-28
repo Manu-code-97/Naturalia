@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+    {% include'partials/header.html.twig' %}
+     {% endblock %}
+
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
@@ -8,10 +12,5 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ }! ✅</h1>
 
-    This friendly message is coming from:
-
-</div>
 {% endblock %}

@@ -1,0 +1,25 @@
+header{
+    background-color: #fff9e7;
+}
+nav{
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+input {
+    border-radius: 50px;
+    width: 400px;
+    position: absolute;
+    right: 800px;
+    top: 20px;
+
+}
+
+.fa-solid{
+    position: absolute;
+    right: 815px;
+    top: 35px;
+}
+
