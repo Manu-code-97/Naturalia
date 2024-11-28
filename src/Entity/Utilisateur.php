@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
@@ -13,16 +15,16 @@ class Utilisateur
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 40)]
+    #[ORM\Column(length: 40, nullable: true)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 60)]
+    #[ORM\Column(length: 60, nullable: true)]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -33,6 +35,24 @@ class Utilisateur
 
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $ville = null;
+
+    /**
+     * @var Collection<int, Produit>
+     */
+    #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: 'utilisateurs')]
+    private Collection $favori;
+
+    /**
+     * @var Collection<int, Commande>
+     */
+    #[ORM\OneToMany(targetEntity: Commande::class, mappedBy: 'utilisateur', orphanRemoval: true)]
+    private Collection $commande;
+
+    public function __construct()
+    {
+        $this->favori = new ArrayCollection();
+        $this->commande = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +139,60 @@ class Utilisateur
     public function setVille(?string $ville): static
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getFavori(): Collection
+    {
+        return $this->favori;
+    }
+
+    public function addFavori(Produit $favori): static
+    {
+        if (!$this->favori->contains($favori)) {
+            $this->favori->add($favori);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Produit $favori): static
+    {
+        $this->favori->removeElement($favori);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommande(): Collection
+    {
+        return $this->commande;
+    }
+
+    public function addCommande(Commande $commande): static
+    {
+        if (!$this->commande->contains($commande)) {
+            $this->commande->add($commande);
+            $commande->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): static
+    {
+        if ($this->commande->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getUtilisateur() === $this) {
+                $commande->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

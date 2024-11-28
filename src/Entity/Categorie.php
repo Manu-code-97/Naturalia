@@ -21,6 +21,9 @@ class Categorie
     #[ORM\OneToMany(targetEntity: SousCategorie::class, mappedBy: 'categorie', orphanRemoval: true)]
     private Collection $sousCategories;
 
+    #[ORM\Column(length: 40, nullable: true)]
+    private ?string $nom = null;
+
     public function __construct()
     {
         $this->sousCategories = new ArrayCollection();
@@ -57,6 +60,18 @@ class Categorie
                 $sousCategory->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
 
         return $this;
     }

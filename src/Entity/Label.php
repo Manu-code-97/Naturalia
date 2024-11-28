@@ -13,13 +13,13 @@ class Label
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 40)]
+    #[ORM\Column(length: 40, nullable: true)]
     private ?string $nom = null;
 
     #[ORM\Column (nullable: true)]
     private ?int $score = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 30, nullable: true)]
     private ?string $image = null;
 
     public function getId(): ?int
