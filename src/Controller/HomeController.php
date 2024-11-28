@@ -19,10 +19,9 @@ class HomeController extends AbstractController
         $produitPromos= $repo->getProductsOnPromotion();
         dd ($produitPromos);  //tester l'affichage
         return $this->render('home/index.html.twig', [
-            // il faut penser à recuperer la variable (produitsPromo) pour afficher la liste des tous les produits qui sont promotions
-            'produitsPromo' => $produitPromos,
+          
+            'produitsPromo' => $produitPromos,   // il faut penser à recuperer la variable (produitsPromo) pour afficher la liste des tous les produits qui sont promotions
         ]);
   
     }
-
 }
