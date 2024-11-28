@@ -16,6 +16,14 @@
         <li>Your controller at <code>/Users/moussaillon/Documents/GitHub/Naturalia/src/Controller/ProductController.php</code></li>
         <li>Your template at <code>/Users/moussaillon/Documents/GitHub/Naturalia/templates/product/index.html.twig</code></li>
     </ul>
+
+    <ul>
+        {% for produit in produits %}
+            <li>{{ produit.nom }} - {{ produit.prix }} €</li>
+        {% endfor %}
+    </ul>
 </div>
+
+<div>{{produit}}</div>
 
 {% endblock %}

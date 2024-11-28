@@ -16,6 +16,35 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+
+
+public function getProductsOnPromotion(): array
+{
+    $entityManager = $this->getEntityManager();
+    $query = $entityManager->createQuery(
+        'SELECT p
+         FROM App\Entity\Produit p
+         WHERE p.promotion is NULL
+         -- ORDER BY p.price DESC
+       '
+    );
+
+    return $query->getResult();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //    /**
     //     * @return Produit[] Returns an array of Produit objects
     //     */
