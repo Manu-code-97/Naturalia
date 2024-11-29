@@ -18,13 +18,14 @@
         {% endblock %}
 
         {% block javascripts %}
-           {#  {% block importmap %}{{ importmap('app') }}{% endblock %} #}
+            {#  {% block importmap %}{{ importmap('app') }}{% endblock %} #}
         {% endblock %}
     </head>
 
-  
+
     <body>
     {{ include('/partials/header.html.twig') }}
+    {{ include('/partials/carousel.html.twig') }}
         {% block body %}{% endblock %}
 
         {{ include('/partials/footer.html.twig') }}
