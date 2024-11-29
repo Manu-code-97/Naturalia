@@ -17,22 +17,20 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
 
+// fonction pour affichage des produits en promotions dans le HomeController 
 
-public function getProductsOnPromotion(): array
-{
-  /*   $entityManager = $this->getEntityManager();
-    $query = $entityManager->createQuery(
-        'SELECT p
-        FROM App\Entity\Produit p
-        WHERE p.promotion is NULL
-        -- ORDER BY p.price DESC
-    '
-    );
-
-    return $query->getResult(); */
-    return [];
-}
-
+    public function getProductsOnPromotion(): array
+    {
+    
+           return $this->createQueryBuilder('p')
+                ->where('p.prixPromo IS NOT NULL')
+                // ->orderBy('p.id', 'ASC')
+                // ->setMaxResults(10)
+                ->getQuery()
+                ->getResult()
+            ;
+    }
+    
 
 public function findProductsBySousCategory($sousCategory) { 
 
