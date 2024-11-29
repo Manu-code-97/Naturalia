@@ -23,16 +23,28 @@ public function getProductsOnPromotion(): array
     $entityManager = $this->getEntityManager();
     $query = $entityManager->createQuery(
         'SELECT p
-         FROM App\Entity\Produit p
-         WHERE p.promotion is NULL
-         -- ORDER BY p.price DESC
-       '
+        FROM App\Entity\Produit p
+        WHERE p.promotion is NULL
+        -- ORDER BY p.price DESC
+    '
     );
 
     return $query->getResult();
 }
 
 
+public function findProductsBySousCategory($sousCategory) { 
+
+    $dql = '
+    SELECT p 
+    FROM App\Entity\Produit p 
+    WHERE p.sousCategorie = :sousCategory'; 
+    
+    $query = $this->getEntityManager()->createQuery($dql); 
+    $query->setParameter('sousCategory', $sousCategory); 
+    
+    return $query->getResult(); 
+}
 
 
 
