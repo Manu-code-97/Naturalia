@@ -9,12 +9,22 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {# <h1>Hello {{ controller_name }}! ✅</h1> #}
 
-    This friendly message is coming from:
+    {# <div class="show-category">
+        <ul>
+        <li>
+        {% for category in category %}
+        <li>{{category.}}</li>
+        </li>
+        </ul>
+    </div> #}
+
     <ul>
-        <li>Your controller at <code>/Users/moussaillon/Documents/GitHub/Naturalia/src/Controller/CategoryController.php</code></li>
-        <li>Your template at <code>/Users/moussaillon/Documents/GitHub/Naturalia/templates/category/index.html.twig</code></li>
+        
+        {% for  category  in  category %}
+        <li>{{category.nom}}</li>
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}
