@@ -24,6 +24,9 @@ class Categorie
     #[ORM\Column(length: 40, nullable: true)]
     private ?string $nom = null;
 
+    #[ORM\Column(length: 60, nullable: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->sousCategories = new ArrayCollection();
@@ -72,6 +75,18 @@ class Categorie
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

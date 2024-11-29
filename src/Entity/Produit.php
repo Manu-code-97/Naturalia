@@ -68,10 +68,27 @@ class Produit
     #[ORM\JoinColumn(nullable: false)]
     private ?SousCategorie $sousCategorie = null;
 
+    /**
+     * @var Collection<int, Label>
+     */
+    #[ORM\ManyToMany(targetEntity: Label::class, inversedBy: 'produits')]
+    private Collection $label;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    private ?Fournisseur $fournisseur = null;
+
+    /**
+     * @var Collection<int, Recette>
+     */
+    #[ORM\ManyToMany(targetEntity: Recette::class, mappedBy: 'produit')]
+    private Collection $recettes;
+
     public function __construct()
     {
         $this->utilisateurs = new ArrayCollection();
         $this->commandes = new ArrayCollection();
+        $this->label = new ArrayCollection();
+        $this->recettes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -285,6 +302,69 @@ class Produit
     public function setSousCategorie(?SousCategorie $sousCategorie): static
     {
         $this->sousCategorie = $sousCategorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Label>
+     */
+    public function getLabel(): Collection
+    {
+        return $this->label;
+    }
+
+    public function addLabel(Label $label): static
+    {
+        if (!$this->label->contains($label)) {
+            $this->label->add($label);
+        }
+
+        return $this;
+    }
+
+    public function removeLabel(Label $label): static
+    {
+        $this->label->removeElement($label);
+
+        return $this;
+    }
+
+    public function getFournisseur(): ?Fournisseur
+    {
+        return $this->fournisseur;
+    }
+
+    public function setFournisseur(?Fournisseur $fournisseur): static
+    {
+        $this->fournisseur = $fournisseur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Recette>
+     */
+    public function getRecettes(): Collection
+    {
+        return $this->recettes;
+    }
+
+    public function addRecette(Recette $recette): static
+    {
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes->add($recette);
+            $recette->addProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecette(Recette $recette): static
+    {
+        if ($this->recettes->removeElement($recette)) {
+            $recette->removeProduit($this);
+        }
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LabelRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LabelRepository::class)]
@@ -21,6 +23,17 @@ class Label
 
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $image = null;
+
+    /**
+     * @var Collection<int, Produit>
+     */
+    #[ORM\ManyToMany(targetEntity: Produit::class, mappedBy: 'label')]
+    private Collection $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +72,33 @@ class Label
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): static
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits->add($produit);
+            $produit->addLabel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): static
+    {
+        if ($this->produits->removeElement($produit)) {
+            $produit->removeLabel($this);
+        }
 
         return $this;
     }
