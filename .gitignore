@@ -9,6 +9,8 @@
 /vendor/
 /migrations/
 .DS_Store
+composer.json
+composer.lock
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
