@@ -28,6 +28,9 @@ class SousCategorie
     #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'sousCategorie')]
     private Collection $produit;
 
+    #[ORM\Column(length: 60, nullable: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->produit = new ArrayCollection();
@@ -88,6 +91,18 @@ class SousCategorie
                 $produit->setSousCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
