@@ -2,32 +2,38 @@ main{
     --black-naturalia: #250C0E;
     --white-naturalia: #FFFEFB;
     --red-naturalia: #840000;
+    --yellow-naturalia: #FFF9F2;
+    --grey-naturalia: #EFEFEF;
+}
+
+main{
+    background-color: var(--yellow-naturalia);
+    
 }
 
 main .red{
-    color: #840000;
+    color: #840000;            /* On met en rouge les mots du titre grâce à la classe Red */
     margin-top: 72px;
 }
 #main h1{
-    text-align: center;
-    margin-top: 180px;
+    text-align: center;         /* Margin-top pour positionner le titre */
+    margin-top: 180px;         /* On centre le titre */
 }
 
 #main .fournisseur{
-    margin-left: 125px;
+    margin-left: 125px;  /* Espace entre la photo et le paragraphe */
 }
 
 #main #title{
-    text-align: center;
+    text-align: center; 
 }
 
 #p-one button{
     width: 295px;
     height: 44px;
     color: var(--white-naturalia );
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);       /* Bouton en dessous de title */
     border-radius: 20px;
-    text-align: center;
     background: var(--black-naturalia);
     margin-top: 27px;
 }
@@ -66,7 +72,7 @@ main .red{
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     text-align: center;
-    background: var(--black-naturalia);
+    background: var(--black-naturalia);      /* Bouton fournisseur du moment */
     margin-top: 10px;
 }
 
@@ -74,19 +80,31 @@ main .red{
     margin-top: 72px;
 }
 
-#main section div div {
-    background-color: var(--red-naturalia);
-    padding: 0px 6px;
-    padding: 10px;
-    width: 155px;
-    height: 155px;
-    margin-bottom: 72px;
-    text-align: center;
-    align-items: center;
-    border-radius: 90px;
+#main section h3{
+    margin-bottom: 24px;
 }
 
-#main section div div img{
-   padding: auto;
-   margin-top: 25%;
+#main section div div div{
+    background-color: var(--red-naturalia);
+
+    width: 155px;
+    height: 155px;
+    text-align: center;         /* Ici on gère la dernière partie de la page home */
+    border-radius: 360px;
+    padding: 45px;
+}                             
+
+#main section div div figcaption p {
+    text-align: center;
+   
+}
+
+#main section div div figcaption{
+    margin-top: 15px;
+    margin-bottom: 160px;
+}
+
+#newsletter{
+    margin-top: 72px;
+    text-align: center;
 }

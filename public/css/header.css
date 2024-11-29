@@ -11,7 +11,7 @@ nav{
 input {
     border-radius: 50px;
     width: 400px;
-    position: absolute;
+    /*position: absolute;*/
     right: 800px;
     top: 20px;
 
