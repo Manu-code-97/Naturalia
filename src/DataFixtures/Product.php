@@ -9,6 +9,7 @@ use App\Entity\Categorie;
 use App\Entity\SousCategorie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class Product extends Fixture
 {
@@ -18,12 +19,15 @@ class Product extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+
+        $slugger = new AsciiSlugger();
+
         $faker = FakerFactory::create();
 
         for ($i=1; $i <= 5; $i++){
             $categorie = new Categorie();
             $categorie->setNom('categorie'.$i);
-            $categorie->setSlug($categorie->getNom());
+            $categorie->setSlug($slugger->slug($categorie->getNom())->lower());
 
             $manager->persist($categorie);
             array_push($this->categories, $categorie);
@@ -34,7 +38,7 @@ class Product extends Fixture
                 $sousCategorie = new SousCategorie();
                 $sousCategorie->setCategorie($categorie);
                 $sousCategorie->setNom($faker->sentence(2));
-                $sousCategorie->setSlug($sousCategorie->getNom());
+                $sousCategorie->setSlug($slugger->slug($sousCategorie->getNom())->lower());
 
                 $manager->persist($sousCategorie);
                 array_push($this->sousCategories, $sousCategorie);
@@ -55,7 +59,7 @@ class Product extends Fixture
                 $produit->setIngredient($faker->paragraph());
                 $produit->setPoids($faker->randomFloat(2, 0, 20));
                 $produit->setPrixPromo((rand(0,6)==0)?$faker->randomFloat(2, 1, 100):null);
-                $produit->setSlug($produit->getNom());
+                $produit->setSlug($slugger->slug($produit->getNom())->lower());
                 $produit->setSousCategorie($sousCategorie);
                 
                 $manager->persist($produit);
