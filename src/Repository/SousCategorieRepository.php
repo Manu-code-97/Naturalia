@@ -16,6 +16,24 @@ class SousCategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, SousCategorie::class);
     }
 
+
+
+     /* Fonction pour appeller un produit */
+     public function showSousCategory(int $sousCategory) : array
+     {
+         
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT s
+            FROM App\Entity\SousCategorie s
+            WHERE s.id = :sousCategorie'
+        )->setParameter('sousCategorie', $sousCategory) ;
+     
+        return $query->getResult();
+         
+ 
+     }
+
     //    /**
     //     * @return SousCategorie[] Returns an array of SousCategorie objects
     //     */

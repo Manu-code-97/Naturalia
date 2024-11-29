@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
     public function cate(CategorieRepository $repo): Response
     {
         
-        $category= $repo->categoryAll();
+        $category = $repo->findAll();
         
         return $this->render('category/index.html.twig', [
             
@@ -29,15 +29,15 @@ class CategoryController extends AbstractController
 
     /*Route pour afficher une categorie en particularité  */
 
-    #[Route('/category/{category}', name: 'app_category')]
-    public function index(CategorieRepository $repo, $category): Response
+    #[Route('/category/{category}', name: 'app_category_category')]
+    public function index(CategorieRepository $repo, $sousCategory): Response
     {
         
-        $category= $repo->showCategory($category);
+        $sousCategory= $repo->showSousCategory($sousCategory);
         
         return $this->render('category/index.html.twig', [
             
-            'category'=> $category,
+            'sousCategory'=> $sousCategory,
         ]);
     }
 

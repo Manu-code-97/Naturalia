@@ -23,7 +23,8 @@
     <ul>
         
         {% for  category  in  category %}
-        <li>{{category.nom}}</li>
+        <li><a href="{{path('app_category_category', {'category':category.id})}}">{{category.nom}}</a></li>
+        
         {% endfor %}
     </ul>
 </div>

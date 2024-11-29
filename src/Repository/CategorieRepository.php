@@ -16,14 +16,14 @@ class CategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, Categorie::class);
     }
 
-    public function categoryAll() : array
+    public function categoryAll($category) : array
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT c
             FROM App\Entity\Categorie c 
             WHERE c.nom = :categorie'
-        )->setParameter('categorie', $category);
+        )->setParameter('categorie', $category) ;
 
         return $query->getResult();
 
