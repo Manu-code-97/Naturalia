@@ -8,32 +8,82 @@
 
 {% block body %}
 <main id="main">
-    <article class="container d-flex">
+    <article class="container d-flex" id="p-one">
         <div>
-            <img src="img/sac-de-courses.png" alt="Sac de courses">
+            <img src="{{ asset('img/sac-de-courses.png') }}" alt="Sac de courses">
         </div>
 
 
-        <div>
+        <div id="title">
             <h1>
                 C’est un choix de vivre <br> <span class="red">sain</span> et <span class="red">authentique</span>. 
                 <br> Votre choix.
             </h1>
+
+            <button>Je m'engage</button>
         </div>
     </article>
 
-    <article>
-        <h3>Le fournisseur du moment</h3>
+
+
+
+
+    <article class="container" id="p-two">
+        <h3>Le Fournisseur Du Moment</h3>
         
-        <div>
+        <div class="d-flex">
             <div>
-                <img src="img/fournisseur.png" alt="Un fournisseur">
+                <img src="https://picsum.photos/400/267/?blur" alt="Un fournisseur">
             </div>
     
-            <div>
+            <div class="resume">
+                <h6>Paul Legrand</h6>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, natus autem tempora ipsum facere quod molestias cum consectetur quam recusandae odio beatae aperiam expedita at iure dolores suscipit unde officiis aut fugit sapiente labore! Provident numquam sequi adipisci magnam dolorem voluptas incidunt voluptates velit tempora aliquam. Nostrum fugit nemo saepe.</p>
+                <button>Découvrir</button>
             </div>
         </div>
     </article>
+
+    <section class="container">
+        <h3>Nos services</h3>
+
+        <div class="d-flex justify-content-around" id="services">
+            <div>
+                <img src="{{ asset('img/card/cadenas.svg') }}" alt="?">
+            </div>
+            
+            <figcaption>
+            </figcaption>
+
+            <div>
+                <img src="{{ asset('img/card/camion.svg') }}" alt="?">
+            </div>
+
+              <figcaption>
+            </figcaption>
+
+            <div>
+                <img src="{{ asset('img/card/balise.svg') }}" alt="?">
+            </div>
+
+              <figcaption>
+            </figcaption>
+
+            <div>
+                <img src="{{ asset('img/card/cube.svg') }}" alt="?">
+            </div>
+
+              <figcaption>
+            </figcaption>
+
+            <div>
+                <img src="{{ asset('img/card/fleches.svg') }}" alt="?">
+            </div>
+
+              <figcaption>
+            </figcaption>
+        </div>
+    </section>
 </main>
 
 {% endblock %}
