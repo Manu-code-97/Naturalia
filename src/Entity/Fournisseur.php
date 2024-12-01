@@ -27,7 +27,7 @@ class Fournisseur
     #[ORM\Column(length: 40, nullable: true)]
     private ?string $ville = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 80, nullable: true)]

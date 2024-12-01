@@ -16,7 +16,7 @@ class Produit
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $image = null;
 
     #[ORM\Column(length: 255, nullable: true)]

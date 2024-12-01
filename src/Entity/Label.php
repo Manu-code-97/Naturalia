@@ -21,7 +21,7 @@ class Label
     #[ORM\Column (nullable: true)]
     private ?int $score = null;
 
-    #[ORM\Column(length: 30, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $image = null;
 
     /**
