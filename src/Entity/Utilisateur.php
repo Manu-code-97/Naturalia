@@ -21,7 +21,7 @@ class Utilisateur
     #[ORM\Column(length: 60, nullable: true)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 100, nullable: true)]

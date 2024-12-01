@@ -8,7 +8,9 @@ use App\Entity\Produit;
 use App\Entity\Categorie;
 use App\Entity\Fournisseur;
 use App\Entity\Label;
+use App\Entity\Recette;
 use App\Entity\SousCategorie;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use phpDocumentor\Reflection\PseudoTypes\True_;
@@ -45,6 +47,15 @@ class Product extends Fixture
         'Thés et infusions'
     ];
     private array $fournisseurs = [];
+    private array $adresse = [
+        'Rue',
+        'Avenue',
+        'Boulevard'
+    ];
+
+    private array $produits = [];
+
+    private array $utilisateurs = [];
 
     public function load(ObjectManager $manager): void
     {
@@ -84,7 +95,7 @@ class Product extends Fixture
             $fournisseur = new Fournisseur();
             $fournisseur->setNom($fakerBE->lastName());
             $fournisseur->setPrenom($faker->firstNameMale());
-            $fournisseur->setAdresse($fakerFR->departmentNumber().' '.$fakerFR->region());
+            $fournisseur->setAdresse($fakerFR->departmentNumber().' '.$this->adresse[rand(0,2)].' '.$fakerFR->region());
             $fournisseur->setCodePostal($faker->randomNumber(5, true));
             $fournisseur->setVille($fakerFR->departmentName());
             $fournisseur->setTelephone($fakerFR->serviceNumber());
@@ -125,7 +136,48 @@ class Product extends Fixture
                 $produit->setFournisseur($this->fournisseurs[rand(0,19)]);
                 
                 $manager->persist($produit);
+                array_push($this->produits, $produit);
             }
+        }
+
+        // RECETTES
+        for ($i=0; $i < 15; $i++) { 
+            $recette = new Recette();
+            $recette->setImage('https://picsum.photos/id/'.$faker->numberBetween(0, 300).'/200/300');
+            $recette->setNom($faker->sentence(3));
+            $recette->setDescription($faker->paragraph());
+            $recette->setSlug($slugger->slug($recette->getNom())->lower());
+            // LIAISON INGREDIENTS
+            $recette->addProduit($this->produits[rand(0,count($this->produits)-1)]);
+            $recette->addProduit($this->produits[rand(0,count($this->produits)-1)]);
+            $recette->addProduit($this->produits[rand(0,count($this->produits)-1)]);
+            $recette->addProduit($this->produits[rand(0,count($this->produits)-1)]);
+            $recette->addProduit($this->produits[rand(0,count($this->produits)-1)]);
+
+            $manager->persist($recette);
+        }
+
+        // UTILISATEURS
+        for ($i=0; $i < 150; $i++) { 
+            $utilisateur = new Utilisateur();
+            $utilisateur->setNom($fakerBE->lastName());
+            $utilisateur->setPrenom($faker->firstNameMale());
+            $utilisateur->setTelephone($fakerFR->serviceNumber());
+            $utilisateur->setEmail($fakerFR->safeEmail());
+            $utilisateur->setAdresse($fakerFR->departmentNumber().' '.$this->adresse[rand(0,2)].' '.$fakerFR->region());
+            $utilisateur->setCodePostal($faker->randomNumber(5, true));
+            $utilisateur->setVille($fakerFR->departmentName());
+            // LIAISON FAVORIS
+            if (rand(0,2)!==0) {
+                $utilisateur->addFavori($this->produits[rand(0,count($this->produits)-1)]);
+                $utilisateur->addFavori($this->produits[rand(0,count($this->produits)-1)]);
+                $utilisateur->addFavori($this->produits[rand(0,count($this->produits)-1)]);
+            } else {
+                null;
+            }
+
+            $manager->persist($utilisateur);
+            array_push($this->utilisateurs, $utilisateur);
         }
 
         $manager->flush();
