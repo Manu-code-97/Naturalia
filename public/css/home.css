@@ -1,3 +1,48 @@
+@font-face {
+    font-family: 'Lora';
+    src: url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap'
+   );
+}
+
+@font-face {
+    font-family: 'Noto';
+    src: url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+}
+
+h1{
+    font-family: 'Lora';
+    font-weight: bold;
+}
+
+h2{
+    font-family: 'Lora';
+    font-weight: bold;
+}
+
+h3{
+    font-family: 'Lora';
+    font-weight: bold;
+}
+
+h4{
+    font-family: 'Lora';
+    font-weight: bold;
+}
+
+h5{
+    font-family: 'Lora';
+    font-weight: bold;
+}
+
+h6{
+    font-family: 'Lora';
+    font-weight: bold;
+}
+
+p{
+    font-family: 'Noto';
+}
+
 main{
     --black-naturalia: #250C0E;
     --white-naturalia: #FFFEFB;
@@ -108,3 +153,33 @@ main .red{
     margin-top: 72px;
     text-align: center;
 }
+
+#main form div input{
+    border-radius: 50px;
+    width: 400px;
+    margin-top: 10px;
+    border: 1px solid var(--black-naturalia);
+    padding: 5px;
+}
+#main input::placeholder{
+    color: var(--black-naturalia);
+    
+ }
+
+ #main form div img{
+    position: relative;
+    right: 40px;
+ }
+
+ #main form div img:hover{
+    transform: translate(3px);
+    transform: scale(1.2)
+ }
+
+ #main button {
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
