@@ -22,7 +22,7 @@ class ProduitRepository extends ServiceEntityRepository
     public function getProductsOnPromotion(): array
     {
     
-           return $this->createQueryBuilder('p')
+        return $this->createQueryBuilder('p')
                 ->where('p.prixPromo IS NOT NULL')
                 // ->orderBy('p.id', 'ASC')
                 // ->setMaxResults(10)
@@ -37,7 +37,8 @@ public function findProductsBySousCategory($sousCategory) {
     $dql = '
     SELECT p 
     FROM App\Entity\Produit p 
-    WHERE p.sousCategorie = :sousCategory'; 
+    INNER JOIN p.sousCategorie s
+    WHERE s.slug = :sousCategory'; 
     
     $query = $this->getEntityManager()->createQuery($dql); 
     $query->setParameter('sousCategory', $sousCategory); 
