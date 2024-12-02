@@ -17,7 +17,7 @@ class Commande
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 8, nullable: true)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $numero = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
