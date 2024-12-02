@@ -81,6 +81,7 @@ main .red{
     border-radius: 20px;
     background: var(--black-naturalia);
     margin-top: 27px;
+    margin-bottom: 72px;
 }
 
 #main #p-two {
@@ -182,4 +183,5 @@ main .red{
     outline: none;
     box-shadow: none;
 }
+
 
