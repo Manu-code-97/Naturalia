@@ -6,6 +6,7 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .ici {color: red;}
 </style>
 
 <div class="example-wrapper">
@@ -20,26 +21,19 @@
         </ul>
     </div> #}
 
-{% for category in categories %}
-        <p><strong>{{ category.nom }}</strong></p>
-        <ul>
-            {% for sousCategory in category.sousCategories %}
-                <li>
-                    <a href="{{ path('app_category_category', { 'category': category.id, 'sousCategory': sousCategory.id }) }}">
-                        {{ sousCategory.nom }}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-{% endfor %}
 
-
-    {# <ul>
+        <h1>{{category.nom}}<h1>
         
-        {% for  sousCategory  in  sousCategory %}
-        <li>{{sousCategorie.nom}}</li>
+    <ul>
+        
+        {% for  sousCategory  in  sousCategories %}
+        {% if(sousCategory.id == sousCategoryId) %}
+        <li class="ici">{{sousCategory.nom}}</li>
+        {% else %}
+        <li>{{sousCategory.nom}}</li>
+        {% endif %}
         
         {% endfor %}
-    </ul> #}
+    </ul>
 </div>
 {% endblock %}
