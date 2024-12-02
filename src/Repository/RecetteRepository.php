@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Recette;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\BrowserKit\Response;
 
 /**
  * @extends ServiceEntityRepository<Recette>
@@ -18,30 +19,26 @@ class RecetteRepository extends ServiceEntityRepository
 
 // Dans cette partie je crée une fonction pour afficher mes differentes recettes !
 
-    public function getProductsOnPromotion(): array
-{
-    $entityManager = $this->getEntityManager();
-    $recetteDujour = $entityManager->createQuery(
-        'SELECT r
-         FROM App\Entity\Recette r
-         WHERE r.recette is NULL
-         -- ORDER BY p.price DESC
-       '
-    );
+  // Dans cette partie je crée une fonction pour afficher les differentes recettes !
 
-    return  $recetteDujour->getResult();
+
+
+// function pour Récupère un nombre défini de recettes aléatoires
+  
+public function findRandomRecipe(): Array
+{
+    // Récupérer une recette aléatoire directement avec DQL
+    $dql = 
+    'SELECT r 
+    FROM App\Entity\Recette r';
+
+    $query = $this->getEntityManager()->createQuery($dql)->getResult();
+
+    return $query;
 }
 
 
-
-
-
-
-
-
-
-
-
+// fonction pour afficher une recette en particulier 
 
 
 
