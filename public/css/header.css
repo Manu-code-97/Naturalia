@@ -1,4 +1,12 @@
 header{
+    --black-naturalia: #250C0E;
+    --white-naturalia: #FFFEFB;
+    --red-naturalia: #840000;
+    --yellow-naturalia: #FFF9F2;
+    --grey-naturalia: #EFEFEF;
+}
+
+header{
     background-color: #fff9e7;
 }
 #header nav{
@@ -11,19 +19,51 @@ header{
 
 
 
-#header input {
+#header form div input{
     border-radius: 50px;
     width: 400px;
     margin-top: 10px;
- /*    position: absolute;
-    right: 800px;
-    top: 20px; */
-
 }
 
-#header .fa-solid{
-    position: absolute;
-    right: 715px;
-    top: 34px;
+#header input::placeholder{
+    color: var(--black-naturalia);
+    
+ }
+
+#header form div img{
+    position: relative;
+    right: 50px;
+}
+
+#header form div img:hover{
+    transform: translate(3px);
+    transform: scale(1.2)
+ }
+
+
+.circle{
+    background-color: var(--red-naturalia);
+    width: 54px;
+    height: 54px;
+    border-radius: 180px;
+    
+    
+}
+
+.content{
+    text-align: center;
+    color: var(--red-naturalia);
+    margin-right: 20px;
+}
+
+.circle img {
+    margin-top: 13px;
+    width: 28px;
+}
+
+.content:hover{
+    transform: scale(1.5);
+    animation-duration: 3s;
+    animation-delay: 0.5s;
 }
 
