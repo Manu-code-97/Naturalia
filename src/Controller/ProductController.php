@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Controller; 
+namespace App\Controller;
 
-use App\Repository\ProduitRepository; 
+use App\Repository\CategorieRepository;
+use App\Repository\ProduitRepository;
+use App\Repository\SousCategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; 
 use Symfony\Component\HttpFoundation\Response; 
 use Symfony\Component\Routing\Annotation\Route; 
@@ -22,6 +24,17 @@ class ProductController extends AbstractController
     public function sousCategory (ProduitRepository $repo , $sousCategory): Response{
         $products = $repo -> findProductsBySousCategory($sousCategory);
         $productsPromos = $repo -> getProductsOnPromotion();
+        //dd ($products);
+        return $this->render('product/index.html.twig', 
+        [ 'products' => $products, 
+        'productsPromos' => $productsPromos,  ]); 
+    }
+
+    #[Route('/categorie/{category}', name: 'catProduits')]
+    public function categoryProduit (ProduitRepository $repo , $category): Response{
+        $products = $repo -> findProductsByCategory($category);
+        $productsPromos = $repo -> getProductsOnPromotion();
+
         //dd ($products);
         return $this->render('product/index.html.twig', 
         [ 'products' => $products, 
