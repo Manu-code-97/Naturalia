@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/engagement.css') }}">
+{% endblock %}
+
+{% block title %}Nos Engagements{% endblock %}
+
+{% block body %}
+
+    <div class="doigt"></div>
+
+    <div class="container">
+        <h1>Nos Engagements</h1>
+        <section class="grid-container">
+            <div class="grid-item">
+                <h2>Local</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Environnement</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, aliquid.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Local</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, repudiandae et minima.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Santé</h2>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Qualité</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="grid-item">
+                <h2>Santé</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+            </div>
+        </section>
+        <section class="leaf-section">
+            <div class="branche">
+                <div class="leaf histoire">
+                    <div class="content">
+                        <h2>Histoire</h2>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        </ul>
+                    </div>
+                    <div class="image">
+                        <img src="{{ asset('img/engagement/about/rectangle-36.png') }}" alt="">
+                    </div>
+                </div>
+                <div class="leaf actualite">
+                    <div class="image">
+                        <img src="{{ asset('img/engagement/about/rectangle-35.png') }}" alt="">
+                    </div>
+                    <div class="content">
+                        <h2>Actualité</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur. At libero mauris facilisi ornare. Imperdiet consectetur sodales dui blandit commodo id quam amet venenatis.</p>
+                    </div>
+                </div>
+                <div class="leaf avenir">
+                    <div class="content">
+                        <h2>L’avenir avec Naturalia, avec vous</h2>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                            <li>Lorem ipsum dolor sit amet consectetur.</li>
+                        </ul>
+                    </div>
+                    <div class="image">
+                        <img src="{{ asset('img/engagement/about/rectangle-34.png') }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
+
