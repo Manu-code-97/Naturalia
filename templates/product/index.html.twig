@@ -13,11 +13,11 @@
     <ul> 
     {% for product in products %} 
     <li> 
-    <div><img src="{{ product.image }}" alt=""></div> 
-    <div>{{ product.nom }}</div> 
-    <div>{{ product.description }}</div> 
-    <div>{{ product.poids }}</div> 
-    <div>{{ product.prix }} €</div> 
+    <div><img src="{{ product[0].image }}" alt=""></div> 
+    <div>{{ product[0].nom }}</div> 
+    <div>{{ product[0].description }}</div> 
+    <div>{{ product[0].poids }}</div> 
+    <div>{{ product[0].prix }} €</div> 
     </li> 
     {% else %} 
     <li>Aucun produit trouvé.</li>

@@ -58,7 +58,7 @@ public function findProductsByCategory($productCategory) {
     FROM App\Entity\Produit p 
     INNER JOIN App\Entity\SousCategorie as s 
     INNER JOIN App\Entity\Categorie as c
-    WHERE c.id=:productCategory
+    WHERE c.slug=:productCategory
     '; 
     
     $query = $this->getEntityManager()->createQuery($dql); 

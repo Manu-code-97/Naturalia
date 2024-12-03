@@ -39,14 +39,19 @@ class ProductController extends AbstractController
     }
 
     #[Route('/categorie/{category}', name: 'catProduits', priority:1)]
-    public function categoryProduit (ProduitRepository $repo , $category): Response{
+    public function categoryProduit (ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category): Response{
         $products = $repo -> findProductsByCategory($category);
         $productsPromos = $repo -> getProductsOnPromotion();
+        $category= $repoCat->showCategory($category);
+        $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
-        //dd ($products);
-        return $this->render('product/sousCatProducts.html.twig', 
+        // dd ($products);
+        return $this->render('product/index.html.twig', 
         [ 'products' => $products, 
-        'productsPromos' => $productsPromos,  ]); 
+        'productsPromos' => $productsPromos,
+        'category'=> $category[0],
+        'sousCategories'=> $sousCategoryList,
+    ]); 
     }
 
    

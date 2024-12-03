@@ -30,14 +30,14 @@ class CategorieRepository extends ServiceEntityRepository
     }
 
     /* Fonction pour appeller un produit */
-    public function showCategory(int $category) : array
+    public function showCategory(string $category) : array
     {
         
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT c
             FROM App\Entity\Categorie c
-            WHERE c.id = :categorie'
+            WHERE c.slug = :categorie'
         )->setParameter('categorie', $category) ;
     
         return $query->getResult();
