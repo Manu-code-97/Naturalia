@@ -1,39 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Hello CategoryController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    .ici {color: red;}
-</style>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+		.ici {
+			color: red;
+		}
+	</style>
 
-<div class="example-wrapper">
-    {# <h1>Hello {{ controller_name }}! ✅</h1> #}
+	<div class="example-wrapper">
+		{# <h1>Hello {{ controller_name }}! ✅</h1> #}
 
-    {# <div class="show-category">
-        <ul>
-        <li>
-        {% for category in category %}
-        <li>{{category.}}</li>
-        </li>
-        </ul>
-    </div> #}
+		{# <div class="show-category">
+		        <ul>
+		        <li>
+		        {% for category in category %}
+		        <li>{{category.}}</li>
+		        </li>
+		        </ul>
+		    </div> #}
+            <h1>{{category.nom}} zesqrzeqrzerzer
+				</h1>
 
+					<ul>
 
-        <h1>{{category.nom}}<h1>
-        
-    <ul>
-        
-        {% for  sousCategory  in  sousCategories %}
-        {% if(sousCategory.id == sousCategoryId) %}
-        <li class="ici">{{sousCategory.nom}}</li>
-        {% else %}
-        <li>{{sousCategory.nom}}</li>
-        {% endif %}
-        
-        {% endfor %}
-    </ul>
-</div>
-{% endblock %}
+						{% for  sousCategory  in  sousCategories %}
+							{% if(sousCategory.id == sousCategoryId) %}<li class="ici"> {{sousCategory.nom}}</li>
+						{% else %}
+							<li>{{sousCategory.nom}}</li>
+						{% endif %}
+
+					{% endfor %}
+				</ul>
+			</div>
+
+            <nav class="category container d-flex">
+                <div>
+                    <a href="">souscat</a>
+                </div>
+
+                <div>
+                    <a href="">souscat</a>
+                </div>
+
+                <div>
+                    <a href="">soucat</a>
+                </div>
+            </nav>
+
+			<div class="blockProduits row">
+				{% for produit in products %}
+                <div class="card card-group col-3">
+					<div class="card me-2" style="width: 15rem;">
+						<img src="{{produit.image}}" class="card-img-top" alt="">
+							<div class="card-body">
+								<h5 class="card-title">{{produit.nom}}</h5>
+								<p class="card-text">{{produit.description}}</p>
+								<button type="button">Ajouter<img src="/img/cart.png" alt=""></button>
+								</div>
+							</div>
+
+					</div>
+					{% endfor %}
+			
+                </div>
+            </div>
+	{% endblock %}

@@ -1,149 +1,154 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-    {% include'partials/header.html.twig' %}
-     {% endblock %}
+	{% include'partials/header.html.twig' %}
+{% endblock %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-<main id="main">
-    <article class="container d-flex" id="p-one">
-        <div>
-            <img src="{{ asset('img/sac-de-courses.png') }}" alt="Sac de courses">
-        </div>
+	<main id="main">
+		<article class="container d-flex" id="p-one">
+			<div>
+				<img src="{{ asset('img/sac-de-courses.png') }}" alt="Sac de courses">
+			</div>
 
 
-        <div id="title">
-            <h1>
-                C’est un choix de vivre <br> <span class="red">sain</span> et <span class="red">authentique</span>. 
-                <br> Votre choix.
-            </h1>
+			<div id="title">
+				<h1>
+					C’est un choix de vivre
+					<br>
+					<span class="red">sain</span>
+					et
+					<span class="red">authentique</span>.
+					<br>
+					Votre choix.
+				</h1>
 
-            <button>Je m'engage</button>
-        </div>
-    </article>
+				<button>Je m'engage</button>
+			</div>
+		</article>
 
-    <div class="carousel container">
+		<div class="carousel container">
 
-    <h3>Promotions</h3>
-        {{ include('/partials/carousel.html.twig') }}
-    </div>
+			<h3>Promotions</h3>
+			{{ include('/partials/carousel.html.twig', {'products': productsPromo}) }}
+		</div>
 
 
-    <article class="container" id="p-two">
-        <h3>Le Fournisseur du Moment</h3>
-        
-        <div class="d-flex">
-            <div>
-                <img src="https://picsum.photos/400/267/?blur" alt="Un fournisseur">
-            </div>
-    
-            <div class="resume">
-                <h6>Paul Legrand</h6>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, natus autem tempora ipsum facere quod molestias cum consectetur quam recusandae odio beatae aperiam expedita at iure dolores suscipit unde officiis aut fugit sapiente labore! Provident numquam sequi adipisci magnam dolorem voluptas incidunt voluptates velit tempora aliquam. Nostrum fugit nemo saepe.</p>
-                <button>Découvrir</button>
-            </div>
-        </div>
-    </article>
+		<article class="container" id="p-two">
+			<h3>Le Fournisseur du Moment</h3>
 
- 
+			<div class="d-flex">
+				<div>
+					<img src="https://picsum.photos/400/267/?blur" alt="Un fournisseur">
+				</div>
 
-    <article class="container" id="newsletter">
-        <div>
-            <div>
-                <h3>Newsletter</h3>
-                <p>Lorem ipsum dolor sit amet consectetur.</p>
-                <div>
-                    <form id="lk" action="">
-                        <div>
-                            <input type="email" id="email" placeholder="Email" for="email">
-                            <button type="submit"><img src="img/input/arrow.svg" alt=""></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            
-            
-        </div>
-       
-    </article>
+				<div class="resume">
+					<h6>Paul Legrand</h6>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, natus autem tempora ipsum facere quod molestias cum consectetur quam recusandae odio beatae aperiam expedita at iure dolores suscipit unde officiis aut fugit sapiente labore! Provident numquam sequi adipisci magnam dolorem voluptas incidunt voluptates velit tempora aliquam. Nostrum fugit nemo saepe.</p>
+					<button>Découvrir</button>
+				</div>
+			</div>
+		</article>
 
-    <section class="container">
-        <h3>Nos services</h3>
 
-        <div class="d-flex justify-content-around" id="services">
-            <div>
-                <div>
-                    <img src="{{ asset('img/card/cadenas.svg') }}" alt="?">
-                </div>
-                
-                <figcaption>
-                    <p>
-                        <strong>Paiement</strong>
-                        <br>
-                        100% sécurisé
-                    </p>
-                </figcaption>
-            </div>
+		<article class="container" id="newsletter">
+			<div>
+				<div>
+					<h3>Newsletter</h3>
+					<p>Lorem ipsum dolor sit amet consectetur.</p>
+					<div>
+						<form id="lk" action="">
+							<div>
+								<input type="email" id="email" placeholder="Email" for="email">
+								<button type="submit"><img src="img/input/arrow.svg" alt=""></button>
+							</div>
+						</form>
+					</div>
+				</div>
 
-           <div>
-                <div>
-                    <img src="{{ asset('img/card/camion.svg') }}" alt="?">
-                </div>
-    
-                  <figcaption>
-                    <p>
-                        <strong>Livraison gratuite</strong>
-                        <br>
-                        Dès 120€ d'achat
-                    </p>
-                </figcaption>
-           </div>
 
-            <div>
-                <div>
-                    <img src="{{ asset('img/card/balise.svg') }}" alt="?">
-                </div>
-    
-                  <figcaption>
-                    <p>
-                        <strong>Suivi de commande</strong>
-                        <br>
-                        100% sécurisé
-                    </p>
-                </figcaption>
-            </div>
+			</div>
 
-           <div>
-                <div>
-                    <img src="{{ asset('img/card/cube.svg') }}" alt="?">
-                </div>
-    
-                  <figcaption>
-                    <p>
-                        <strong>Retrait offert 1h</strong>
-                        <br>
-                        en magasin
-                    </p>
-                </figcaption>
-           </div>
+		</article>
 
-           <div>
-                <div>
-                    <img src="{{ asset('img/card/fleches.svg') }}" alt="?">
-                </div>
-    
-                  <figcaption>
-                    <p>
-                        <strong>Retours & échanges</strong>
-                        <br>
-                        offerts 365 jours
-                    </p>
-                </figcaption>
-           </div>
-        </div>
-    </section>
-</main>
+		<section class="container">
+			<h3>Nos services</h3>
+
+			<div class="d-flex justify-content-around" id="services">
+				<div>
+					<div>
+						<img src="{{ asset('img/card/cadenas.svg') }}" alt="?">
+					</div>
+
+					<figcaption>
+						<p>
+							<strong>Paiement</strong>
+							<br>
+							100% sécurisé
+						</p>
+					</figcaption>
+				</div>
+
+				<div>
+					<div>
+						<img src="{{ asset('img/card/camion.svg') }}" alt="?">
+					</div>
+
+					<figcaption>
+						<p>
+							<strong>Livraison gratuite</strong>
+							<br>
+							Dès 120€ d'achat
+						</p>
+					</figcaption>
+				</div>
+
+				<div>
+					<div>
+						<img src="{{ asset('img/card/balise.svg') }}" alt="?">
+					</div>
+
+					<figcaption>
+						<p>
+							<strong>Suivi de commande</strong>
+							<br>
+							100% sécurisé
+						</p>
+					</figcaption>
+				</div>
+
+				<div>
+					<div>
+						<img src="{{ asset('img/card/cube.svg') }}" alt="?">
+					</div>
+
+					<figcaption>
+						<p>
+							<strong>Retrait offert 1h</strong>
+							<br>
+							en magasin
+						</p>
+					</figcaption>
+				</div>
+
+				<div>
+					<div>
+						<img src="{{ asset('img/card/fleches.svg') }}" alt="?">
+					</div>
+
+					<figcaption>
+						<p>
+							<strong>Retours & échanges</strong>
+							<br>
+							offerts 365 jours
+						</p>
+					</figcaption>
+				</div>
+			</div>
+		</section>
+	</main>
 
 {% endblock %}
