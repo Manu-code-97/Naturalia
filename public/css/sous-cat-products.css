@@ -1,0 +1,29 @@
+#category {
+    --black-naturalia: #250C0E;
+    --white-naturalia: #FFFEFB;
+    --red-naturalia: #840000;
+    --yellow-naturalia: #FFF9F2;
+    --grey-naturalia: #EFEFEF;
+}
+
+#caategory .blockProduits{
+    background-color: var(--yellow-naturalia)
+    ;
+}
+
+.category{
+    background-color: var(--yellow-naturalia);
+}
+
+.category a {
+    color: var(--red-naturalia);
+    border: solid 1px var(--red-naturalia);
+    border-radius: 5px;
+    padding: 5px;
+    background-color: var(--yellow-naturalia);
+}
+
+.category a:hover{
+    color: var(--white-naturalia);
+    background-color: var(--red-naturalia);
+}
