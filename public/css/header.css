@@ -1,4 +1,4 @@
-header{
+header {
     --black-naturalia: #250C0E;
     --white-naturalia: #FFFEFB;
     --red-naturalia: #840000;
@@ -6,51 +6,52 @@ header{
     --grey-naturalia: #EFEFEF;
 }
 
-header{
-    background-color: #fff9e7;
+header {
+    background-color: var(--yellow-naturalia);
 }
-#header nav{
+
+#header nav {
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 10px;
     padding-bottom: 10px;
-    
+
 }
 
 
 
-#header form div input{
+#header form div input {
     border-radius: 50px;
     width: 400px;
     margin-top: 10px;
 }
 
-#header input::placeholder{
+#header input::placeholder {
     color: var(--black-naturalia);
-    
- }
 
-#header form div img{
+}
+
+#header form div img {
     position: relative;
     right: 50px;
 }
 
-#header form div img:hover{
+#header form div img:hover {
     transform: translate(3px);
     transform: scale(1.2)
- }
+}
 
 
-.circle{
+.circle {
     background-color: var(--red-naturalia);
     width: 54px;
     height: 54px;
     border-radius: 180px;
-    
-    
+
+
 }
 
-.content{
+.content {
     text-align: center;
     color: var(--red-naturalia);
     margin-right: 20px;
@@ -61,9 +62,16 @@ header{
     width: 28px;
 }
 
-.content:hover{
+.content:hover {
     transform: scale(1.5);
     animation-duration: 3s;
     animation-delay: 0.5s;
 }
 
+form{
+    background-color: var(--yellow-naturalia);
+}
+
+nav div{
+    background-color: var(--yellow-naturalia);
+}

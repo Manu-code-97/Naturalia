@@ -52,7 +52,7 @@ main{
 }
 
 main{
-    background-color: var(--yellow-naturalia);
+    background-color: var(--ye-naturalia);
     
 }
 
@@ -184,4 +184,6 @@ main .red{
     box-shadow: none;
 }
 
-
+div{
+    background-color: var(--yellow-naturalia);
+}
