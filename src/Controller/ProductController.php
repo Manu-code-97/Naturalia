@@ -21,22 +21,30 @@ class ProductController extends AbstractController
     //     [ 'products' => $products, ]); 
     // } 
     #[Route('/{category}/{sousCategory}/', name: 'sousCatProduits')]
-    public function sousCategory (ProduitRepository $repo , $sousCategory): Response{
+    public function sousCategory (ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, $sousCategory): Response{
         $products = $repo -> findProductsBySousCategory($sousCategory);
         $productsPromos = $repo -> getProductsOnPromotion();
+        
+        $category= $repoCat->showCategory($category);
+        $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
         //dd ($products);
         return $this->render('product/index.html.twig', 
         [ 'products' => $products, 
-        'productsPromos' => $productsPromos,  ]); 
+        'productsPromos' => $productsPromos,  
+        'sousCategories'=> $sousCategoryList,
+        'category'=> $category[0],
+        'sousCategoryId' => $sousCategory, // a changer quand on passera au slug
+
+    ]); 
     }
 
-    #[Route('/categorie/{category}', name: 'catProduits')]
+    #[Route('/categorie/{category}', name: 'catProduits', priority:1)]
     public function categoryProduit (ProduitRepository $repo , $category): Response{
         $products = $repo -> findProductsByCategory($category);
         $productsPromos = $repo -> getProductsOnPromotion();
 
         //dd ($products);
-        return $this->render('product/index.html.twig', 
+        return $this->render('product/sousCatProducts.html.twig', 
         [ 'products' => $products, 
         'productsPromos' => $productsPromos,  ]); 
     }
@@ -69,6 +77,13 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
         'pagination' => $pagination,
         ]);
+    }
+
+    function getSousCategoryName($sousCategory) : String {
+        
+        $sousCategoryName = $sousCategory[0]->getNom();
+        //dd($sousCategoryName);
+        return $sousCategoryName;
     }
 }
 
