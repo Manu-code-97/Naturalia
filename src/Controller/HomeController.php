@@ -17,11 +17,11 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(ProduitRepository $produitRepository,RecetteRepository $recetteRepository): Response
     {
-         /*affichage des produits en promotions, ainsi que les recettes du jour qui sont affichées de façon aleatoire selon le propriétaire (route commune (/)) et une fonction index avec deux parametres.*/
+        /*affichage des produits en promotions, ainsi que les recettes du jour qui sont affichées de façon aleatoire selon le propriétaire (route commune (/)) et une fonction index avec deux parametres.*/
 
         $productsPromo= $produitRepository->getProductsOnPromotion();
         $hasPromotion = !empty($productsPromo); // gerer le cas ou il ya pas eu de promotion
-       
+    
         // declarer une variable pour recuperer une recette au pif au faisant appele a ma fonction
         $listeRecettes = $recetteRepository->findRandomRecipe();
         $randomRecette = $listeRecettes[rand(0,count($listeRecettes)-1)];
@@ -41,7 +41,7 @@ class HomeController extends AbstractController
         function recetteUnique():Response
         {
 
-                  
+                
         return $this->render('home/recette/index.html.twig', [ ]);
   
 
