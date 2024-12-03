@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{productDetail.nom}}{% endblock %}
+
+{% block body %}
+
+
+    <div>
+        <div>
+            <img src="https://picsum.photos/300/300" alt="">
+        </div>
+        <div>
+            <img src="/img/favourite.png" alt="">
+        </div>
+    </div>
+        <div>
+            <h3>Produit</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+        <div>
+            <img src="/img/logo-nature-progres.png" alt="">
+            <img src="/img/logo-ecocert-colour.png" alt="">
+            <img src="/img/agribio.png" alt="">
+            <img src="/img/logobio.png" alt="">
+        </div>
+        <div>
+            <button id="ajouter">Ajouter<img src="/img/cart.png" alt=""></button>
+        </div>
+    <div>
+        <button id="btn">Origine</button>
+        <button id="btn">Marque</button>
+        <button id="btn">Ingrédient</button>
+        <button id="btn">Producteur</button>
+    </div>
+    <div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam fugiat adipisci doloribus suscipit pariatur, modi facilis delectus molestiae. Nemo nostrum earum voluptatibus debitis quisquam magni totam ut esse numquam ducimus.</p>
+    </div>
+    <div>
+        <h3>Découvrez nos sélections</h3>
+    </div>
+
+{% endblock %}
