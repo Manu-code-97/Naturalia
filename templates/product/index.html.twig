@@ -8,24 +8,37 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; } 
 </style>
 
-<div class="example-wrapper">
-    <h1>Liste des Produits</h1> 
-    <ul> 
-    {% for product in products %} 
-    <li> 
-    <div><img src="{{ product[0].image }}" alt=""></div> 
-    <div>{{ product[0].nom }}</div> 
-    <div>{{ product[0].description }}</div> 
-    <div>{{ product[0].poids }}</div> 
-    <div>{{ product[0].prix }} €</div> 
-    </li> 
-    {% else %} 
-    <li>Aucun produit trouvé.</li>
-    {% endfor %} 
-    </ul> 
-    {# <div class="pagination"> {{ knp_pagination_render(pagination) }} </div> #}
-</div>
+            <nav class="category container d-flex">
+                <div>
+                    <a href="">souscat</a>
+                </div>
 
+                <div>
+                    <a href="">souscat</a>
+                </div>
+
+                <div>
+                    <a href="">soucat</a>
+                </div>
+            </nav>
+
+			<div class="blockProduits row">
+				{% for produit in products %}
+                <div class="card card-group col-3">
+					<div class="card me-2" style="width: 15rem;">
+						<img src="{{produit[0].image}}" class="card-img-top" alt="">
+							<div class="card-body">
+								<h5 class="card-title">{{produit[0].nom}}</h5>
+								<p class="card-text">{{produit[0].description}}</p>
+								<button type="button">Ajouter<img src="{{ asset('/img/cart.png') }}" alt=""></button>
+								</div>
+							</div>
+
+					</div>
+					{% endfor %}
+			
+                </div>
+            </div>
 
 
 {% endblock %}
