@@ -25,7 +25,7 @@ class RecetteRepository extends ServiceEntityRepository
 
 // function pour Récupère un nombre défini de recettes aléatoires
   
-public function findRandomRecipe(): Array
+public function findRandomRecipe(): Recette
 {
     // Récupérer une recette aléatoire directement avec DQL
     $dql = 
@@ -34,14 +34,32 @@ public function findRandomRecipe(): Array
 
     $query = $this->getEntityManager()->createQuery($dql)->getResult();
 
+    $randomRecette = $query[rand(0,count($query)-1)];
+
+    return $randomRecette;
+}
+
+public function findProductsByRecetteId($recette_id)
+{
+    $recette_id=35;
+    $dql = '
+    SELECT p
+    FROM App\Entity\Produit p
+    INNER JOIN p.recettes r
+    WHERE r.id = :recette_id
+    ';
+    $query = $this->getEntityManager()->createQuery($dql)
+            ->setParameter('recette_id', $recette_id)
+            ->getResult();
+
+          /*   dd($query); */
     return $query;
 }
 
 
+
+
 // fonction pour afficher une recette en particulier 
-
-
-
 
     // en dessus ce qui est deja commenter en Amont
 

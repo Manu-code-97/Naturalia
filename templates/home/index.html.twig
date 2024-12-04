@@ -53,6 +53,38 @@
 			</div>
 		</article>
 
+		
+	<article id="recettes-du-moment">
+	<div class="container-recette">	
+		{# {% block title %}Recettes du jour{% endblock %} #}
+		<h1>Recette du Moment</h1>
+		{% if recetteDuJour %}
+			<div  class="card-group flex-nowrap flex-row" id="card">
+					<h3>{{ recetteDuJour.nom }}</h3>
+  					<img src="{{recetteDuJour.image}}" alt="test-img" >
+  					<div class="card-body">
+   				 	<h5 class="card-title">Produit</h5>
+    			<a href="#" class="btn btn-primary">Voir recette</a>
+  			</div>
+
+    
+		 <ul>
+        		{% for produit in produitsRecette %}
+            		<li>
+                	<strong>{{ produit.nom }}</strong> - {{ produit.prix }} €
+                <p>{{ produit.description }}</p>
+            		</li>
+        		{% else %}
+            <li>Aucun produit lié à cette recette.</li>
+        		{% endfor %}
+   		 </ul>
+   			{% else %}
+        		<p>Aucune recette disponible pour aujourd'hui.</p>
+    		{% endif %}
+
+			{# <a href=""><button class="bg-info-subtle " >Voir recette</button></a> #}
+	</div>
+		</article>
 
 		<article class="container yellow" id="newsletter">
 			<div class="yellow">
