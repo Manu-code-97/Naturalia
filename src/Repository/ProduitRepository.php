@@ -32,14 +32,17 @@ class ProduitRepository extends ServiceEntityRepository
     }
     
 
+    
+    /* Fonction pour trouver des produit par rappor a sa sous catégorie dans le product controller */
+
 public function findProductsBySousCategory($product) { 
 
     $dql = 
     '
     SELECT p , s.nom as nomSousCat
     FROM App\Entity\Produit p 
-    INNER JOIN p.sousCategorie s
-    WHERE s.slug = :sousCategory
+    INNER JOIN App\Entity\SousCategorie s
+    WHERE s.slug =:sousCategory
     '; 
     
     $query = $this->getEntityManager()->createQuery($dql); 
@@ -49,6 +52,8 @@ public function findProductsBySousCategory($product) {
 }
 
 
+    
+    /* Fonction pour trouver des produit par rappor a sa catégorie dans le product controller */
 
 public function findProductsByCategory($productCategory) { 
 
@@ -66,6 +71,91 @@ public function findProductsByCategory($productCategory) {
     
     return $query->getResult(); 
 }
+
+
+
+    /* Trouver un produit par son label */
+
+public function findProductByLabel($labelProduit){
+
+    $dql=
+    '
+    SELECT p 
+    FROM App\Entity\Produit p 
+    INNER JOIN p.label l 
+    WHERE l.id=:labelProduit
+    ';
+
+    $query = $this->getEntityManager()->createQuery($dql); 
+
+    $query->setParameter('labelProduit', $labelProduit); 
+    
+    return $query->getResult(); 
+    
+}
+
+
+    /* Trouver un produit en fonction de si il est local ou pas */
+
+public function localProduct($localProduit){
+
+    $dql=
+    '
+    SELECT p
+    FROM App\Entity\Produit p
+    WHERE p.local =:localProduit
+    ';
+
+    $query = $this->getEntityManager()->createQuery($dql);
+    $query->setParameter('localProduit', $localProduit);
+    
+    
+    return $query->getResult(); 
+}
+
+
+/* trier par prix et nom croissant  */
+public function priceCroissant($nomProduit){
+
+    $dql=
+    '
+    SELECT p
+    FROM App\Entity\Produit p
+    WHERE p.nom =:nomProduit
+    ORDER BY nom, prix 
+    
+    ';
+
+    $query = $this->getEntityManager()->createQuery($dql);
+    $query->setParameter('nomProduit', $nomProduit);
+    
+    return $query->getResult(); 
+}
+
+
+/* trier par prix et nom décroissant  */
+public function priceDesc($nomProduit){
+
+    $dql=
+    '
+    SELECT p
+    FROM App\Entity\Produit p
+    WHERE p.nom =:nomProduit
+    ORDER BY nom DESC, prix DESC
+    
+    ';
+
+    $query = $this->getEntityManager()->createQuery($dql);
+    $query->setParameter('nomProduit', $nomProduit);
+
+}
+
+
+
+/* SELECT * FROM produit as p INNER JOIN produit_label ON p.id=produit_id WHERE label_id={id};
+{id}=x */
+
+/* SELECT * FROM produit WHERE local=1; */
 
 /* SELECT p.*, s.nom, c.nom FROM produit as p INNER JOIN sous_categorie as s ON p.sous_categorie_id=s.id INNER JOIN categorie as c ON s.categorie_id=c.id WHERE c.id={id}; */
 

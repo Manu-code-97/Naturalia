@@ -29,7 +29,7 @@ class CategorieRepository extends ServiceEntityRepository
 
     }
 
-    /* Fonction pour appeller un produit */
+    /* Appel une catégorie en particulier */
     public function showCategory(string $category) : array
     {
         
@@ -41,7 +41,6 @@ class CategorieRepository extends ServiceEntityRepository
         )->setParameter('categorie', $category) ;
     
         return $query->getResult();
-        
 
     }
 
