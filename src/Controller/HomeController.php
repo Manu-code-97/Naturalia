@@ -23,35 +23,21 @@ class HomeController extends AbstractController
         $hasPromotion = !empty($productsPromo); // gerer le cas ou il ya pas eu de promotion
     
         // declarer une variable pour recuperer une recette au pif au faisant appele a ma fonction
-        $listeRecettes = $recetteRepository->findRandomRecipe();
-        $randomRecette = $listeRecettes[rand(0,count($listeRecettes)-1)];
-        //dd($randomRecette); //pour tester la'ffichage des produits en promo
-            
+        $randomRecette = $recetteRepository->findRandomRecipe();
+        //dd($randomRecette->getId()); //pour tester la'ffichage des produits en promo
+        $produitsRecette = $recetteRepository->findProductsByRecetteId($randomRecette->getId());
+        //dd($produitsRecette); //pour tester la'ffichage des produits en promo
+        
         return $this->render('home/index.html.twig', [
           // variable  A recuperer pour Afficher la vue des produits en  promotions 
             'productsPromo' => $productsPromo,   
             'hasPromotion' => $hasPromotion, // à gerer dans le twig
-            
+            'produitsRecette'=>$produitsRecette,
+           /*  dd($produitsRecette), */
         // afficher la liste des tous les produits qui sont promotions 
-            'recetteDuJour' => $randomRecette
+            'recetteDuJour' => $randomRecette,
+            // dd($randomRecette)
         ]);
 
-// route pour afficher la page d'une recette en particulier une fois afficher la recette  
-        #[Route('/recette', name: 'app_home_Onrecette')]
-        function recetteUnique():Response
-        {
-
-                
-        return $this->render('home/recette/index.html.twig', [ ]);
-  
-
-        }
     }
-
-
-
-
-
-
-
 }
