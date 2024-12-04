@@ -13,13 +13,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AbstractController 
 { 
-    // #[Route('/product', name: 'app_product')] 
+    // #[Route('/categorie', name: 'app_product')] 
     // public function showProduct(ProduitRepository $repo): Response { 
         
     //     $products = $repo->findAll(); 
     //     return $this->render('product/index.html.twig', 
     //     [ 'products' => $products, ]); 
     // } 
+
+
+    /* Route pour afficher une sous catégorie d'une catégorie */
     #[Route('/{category}/{sousCategory}/', name: 'sousCatProduits')]
     public function sousCategory (ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, $sousCategory): Response{
         $products = $repo -> findProductsBySousCategory($sousCategory);
@@ -38,6 +41,8 @@ class ProductController extends AbstractController
     ]); 
     }
 
+
+    /* Cette route affiche une catégorie spécifique avec son slug */
     #[Route('/categorie/{category}', name: 'catProduits', priority:1)]
     public function categoryProduit (ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category): Response{
         $products = $repo -> findProductsByCategory($category);
@@ -54,18 +59,28 @@ class ProductController extends AbstractController
     ]); 
     }
 
-   
+    
+    /* Cette route affiche un produit d'une sous catégorie */
     #[Route('/{category}/{sousCategory}/{product}', name: 'detailProduit')]
     public function detailProduit (ProduitRepository $repo , $product): Response{
-        $product = $repo -> find($product);
+        $product = $repo->find($product);
+
+        /* a voir pour label et local (pour linstant elles reste la) */
+        $label = $repo->findProductByLabel($labelProduct);
+        $local = $repo->localProduct($localProduit);
+        
+        
         // $productsSelection = $repo -> getProductsOnPromotion(); // a voir pour la selection
         //dd ($products);
         return $this->render('product/detail.html.twig', 
         [ 'productDetail' => $product, 
+        'labelProduit' => $label,
+        'local' => $local,
         //'productsPromos' => $productsPromos, 
-     ]); 
+    ]); 
     }
 
+    /* Affiche la liste des produit */
     #[Route('/products', name: 'product_list')]
     public function list(ProduitRepository $repo, PaginatorInterface $paginator, Request $request): Response 
     {
@@ -84,6 +99,9 @@ class ProductController extends AbstractController
         ]);
     }
 
+
+
+    /* Function qui sert à afficher le nom des sous catégorie */
     function getSousCategoryName($sousCategory) : String {
         
         $sousCategoryName = $sousCategory[0]->getNom();
