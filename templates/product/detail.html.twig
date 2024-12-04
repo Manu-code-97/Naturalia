@@ -5,35 +5,39 @@
 {% block body %}
 
 
-    <div>
-        <div>
-            <img src="https://picsum.photos/300/300" alt="">
+
+        <div id="produit" class="d-flex justify-content-evenly">
+            <div id="image">
+                <img src="https://picsum.photos/300/300" alt="">
+                <div id="favourite">
+                <img src="/img/favourite.png" alt="">
+                </div>
+            </div>
+
+            <div>
+                <div id="description">
+                    <h3>Produit</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </div>
+                <div id="label">
+                    <img src="/img/logo-nature-progres.png" alt="">
+                    <img src="/img/logo-ecocert-colour.png" alt="">
+                    <img src="/img/agribio.png" alt="">
+                    <img src="/img/logobio.png" alt="">
+                </div>
+                <div id="ajouter">
+                    <button>Ajouter<img src="/img/cart.png" alt=""></button>
+                </div>
+            </div>
         </div>
-        <div>
-            <img src="/img/favourite.png" alt="">
-        </div>
+    <div class="d-flex justify-content-center" id="btn">
+        <button>Origine</button>
+        <button>Marque</button>
+        <button>Ingrédient</button>
+        <button>Producteur</button>
     </div>
-        <div>
-            <h3>Produit</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        </div>
-        <div>
-            <img src="/img/logo-nature-progres.png" alt="">
-            <img src="/img/logo-ecocert-colour.png" alt="">
-            <img src="/img/agribio.png" alt="">
-            <img src="/img/logobio.png" alt="">
-        </div>
-        <div>
-            <button id="ajouter">Ajouter<img src="/img/cart.png" alt=""></button>
-        </div>
     <div>
-        <button id="btn">Origine</button>
-        <button id="btn">Marque</button>
-        <button id="btn">Ingrédient</button>
-        <button id="btn">Producteur</button>
-    </div>
-    <div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam fugiat adipisci doloribus suscipit pariatur, modi facilis delectus molestiae. Nemo nostrum earum voluptatibus debitis quisquam magni totam ut esse numquam ducimus.</p>
+        <p class="d-flex justify-content-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Quam fugiat adipisci doloribus suscipit pariatur, modi facilis delectus molestiae.</p>
     </div>
     <div>
         <h3>Découvrez nos sélections</h3>
