@@ -12,3 +12,104 @@
     color: black;
     margin-top: 6px;
 }
+
+.sub-menu-parent { 
+    position: relative; 
+}
+
+.sub-menu {
+    visibility: hidden; /* hides sub-menu */
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-2em);
+    z-index: -1;
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+
+
+/* Styles pour les sous-menus enfants */
+.sub-menu-enfant {
+    visibility: hidden; /* hides sub-menu-enfant */
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    transform: translateX(-2em);
+    z-index: -1;
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+
+.sub-menu,
+.sub-menu-enfant {
+    animation: fadeIn 0.3s ease-in-out;
+    background: transparent;
+    transition: all 0.3s ease-in-out;
+    background: #FFF9F2;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.sub-menu-parent:focus .sub-menu,
+.sub-menu-parent:focus-within .sub-menu,
+.sub-menu-parent:hover .sub-menu {
+    visibility: visible; /* shows sub-menu */
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(0%);
+    transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+
+.sub-menu li:hover > .sub-menu-enfant {
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+    transform: translateX(0%);
+    transition-delay: 0s, 0s, 0.3s;
+}
+
+/* presentational */
+.fody { padding: 2%; font: 18px/1.4 sans-serif; }
+
+nav a { color: black; display: block; padding: 0.5em 1em; text-decoration: none; }
+nav a:hover { color: green }
+nav ul,
+nav ul li { list-style-type: none; padding: 0; margin: 0; }
+
+nav > ul { background: white; text-align: center; }
+nav > ul > li { display: inline-block;  }
+nav > ul > li:first-child { border-left: none; }
+
+
+
+@media (max-width: 768px) {
+    nav > ul > li {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+    
+    .sub-menu {
+        position: relative;
+        transform: none;
+    }
+    
+    .sub-menu-enfant {
+        position: relative;
+        transform: none;
+    }
+}

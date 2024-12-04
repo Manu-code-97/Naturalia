@@ -1,23 +1,80 @@
 <nav id="nav">
-    <div class="d-flex justify-content-evenly container">
+    <div class=" justify-content-evenly container">
+        <ul class="fody row">
+            <li class="sub-menu-parent col-3" >
+                <a href="#">Nos rayons <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
+                
+                <ul class="sub-menu">
+                    <li>
+                        <a href="#">Fruits et Légumes</a>
+                        <ul class="sub-menu-enfant">
+                            <li><a href="#">Fruits de saison</a></li>
+                            <li><a href="#">Légumes racines</a></li>
+                            <li><a href="#">Aromates et herbes fraîches</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Épicerie Salée</a>
+                        <ul class="sub-menu-enfant">
+                            <li><a href="#">Céréales et légumineuses</a></li>
+                            <li><a href="#">Conserves bio</a></li>
+                            <li><a href="#">Produits secs</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Épicerie Sucrée</a>
+                        <ul class="sub-menu-enfant">
+                            <li><a href="#">Miels et confitures</a></li>
+                            <li><a href="#">Biscuits et snacks</a></li>
+                            <li><a href="#">Chocolats bio</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Produits Frais</a>
+                        <ul class="sub-menu-enfant">
+                            <li><a href="#">Produits laitiers</a></li>
+                            <li><a href="#">Produits végétaux frais</a></li>
+                            <li><a href="#">Charcuterie bio</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Boissons</a>
+                        <ul class="sub-menu-enfant">
+                            <li><a href="#">Jus de fruits et légumes</a></li>
+                            <li><a href="#">Boissons végétales</a></li>
+                            <li><a href="#">Thés et infusions</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="sub-menu-parent col-3" >
+                <a href="#">Mes favoris <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
+                
+                <ul class="sub-menu">
+                    <li><a href="#">Liste 1</a></li>
+                    <li><a href="#">Liste 2</a></li>
+                    <li><a href="#">Liste 3</a></li>
+                    <li><a href="#">Liste 4</a></li>
+                    <li><a href="#">Liste 5</a></li>
+                    <li><a href="#">Liste 6</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu-parent col-3">
+                <a href="#">Recettes bio <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
+                
+                <ul class="sub-menu">
+                    <li><a href="#">Recette du jour</a></li>
+                    <li><a href="#">Recette du mois</a></li>
+                    <li><a href="#">Recette de l'année</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu-parent col-3">
+                <a href="#">Nos engagements <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
 
-        <div>
-            <a href="">Nos rayons</a>
-            <img src="{{ asset('img/card/select.svg') }}" alt="?">
-        </div>
-
-        <div>
-            <a href=""> Mes favoris</a>
-            <img src="{{ asset('img/card/select.svg') }}" alt="?">
-        </div>
-
-        <div>
-            <a href="">Recettes bio</a>
-            <img src="{{ asset('img/card/select.svg') }}" alt="?">
-        </div>
-
-        <div>
-            <a href="">Mes engagements</a>
-        </div>
+                <ul class="sub-menu"></ul>
+            </li>
+        </ul>
     </div>
 </nav>
+
+
