@@ -23,7 +23,7 @@
 	<main id="category" class="">
 		
 			<section>
-				<div class="example-wrapper">
+				<div class="">
 					{# <h1>Hello {{ controller_name }}! ✅</h1> #}
 			
 					{# <div class="show-category">
@@ -34,10 +34,42 @@
 					        </li>
 					        </ul>
 					    </div> #}
-			            <h1 class="justify-content-around">{{category.nom}}</h1>
+			            <h1 class="">{{category.nom}}</h1>
+
+						<div class="container">
+							<nav>
+								<div class="d-flex justify-content-around">
+									<div>
+										<button class="none">Trier par <img src="{{ asset('img/card/select.svg') }}" alt=""></button>
+									</div>
+
+									<div class="d-flex justify">
+										<div>
+											<button class="none" type="menu">Trier par label <img src="{{ asset('img/card/select.svg') }}" alt=""></button>
+										</div>
+										
+										<div>
+											<form action="">
+												<div>
+													<label class="toggle-switch">
+  														<input type="checkbox">
+  														<div class="toggle-switch-background">
+    														<div class="toggle-switch-handle">
+															
+															</div>
+  														</div>
+													</label> 
+													<span>Choisr local</span>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</nav>
+						</div>
 		
 							<nav>
-							<ul class="category {# container #} d-flex justify-content-between">
+							<ul class="category container d-flex">
 			
 									{% for  sousCategory  in  sousCategories %}
 										{% if(sousCategory.id == sousCategoryId) %}<li class="ici"> {{sousCategory.nom}}</li>
@@ -53,13 +85,13 @@
 		
 		            
 		
-				<section>
+				<section class="container">
 						<div class="blockProduits row yellow">
 							{% for produit in products %}
-			                <div class="card card-group col-3 container">
-								<div class="yellow card me-2" style="width: 15rem;">
+			                <div class="card-group col-3 container">
+								<div class="yellow me-2 align-self-stretch" style="width: 15rem;">
 									<img src="{{produit[0].image}}" class="card-img-top" alt="">
-										<div class="card-body">
+										<div class="containercard-body">
 											<h5 class="card-title">{{produit[0].nom}}</h5>
 											<p class="card-text">{{produit[0].description}}</p>
 											<button type="button">Ajouter<img src="{{ asset('/img/cart.png') }}" alt=""></button>
