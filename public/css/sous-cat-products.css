@@ -92,4 +92,17 @@
 
 #category form div label{
     margin-top: 10px;
+    margin-left: 10px;
+   
 }
+
+.blockProduits p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: normal;
+}
+
