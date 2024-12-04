@@ -1,8 +1,47 @@
 body{
-    background-color: #ffedd5;
+    background-color: #fff9f2;
+}
+
+#image{
+    position: relative;
+}
+
+#image img{
+    border-radius: 20px;
+}
+
+#favourite{
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 32px;
+    height: 32px;
+}
+
+#favourite img{
+    width: 32px;
+    height: 32px;
+}
+#description {
+    margin-bottom: 50px;
+}
+#description div{
+    width: 505px;
+    height: 450px;
+    padding: 0px 8px;
+}
+
+#label{
+    margin-bottom: 28px;
+}
+
+#label div{
+    width: 505px;
+    padding: 16px 24px;
 }
 
 #ajouter button{
+    color: white;
     background-color: black;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
     border-radius: 20px;
