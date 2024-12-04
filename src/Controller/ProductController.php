@@ -27,8 +27,9 @@ class ProductController extends AbstractController
         
         $category= $repoCat->showCategory($category);
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
+        
         //dd ($products);
-        return $this->render('product/index.html.twig', 
+        return $this->render('product/sousCatProducts.html.twig', 
         [ 'products' => $products, 
         'productsPromos' => $productsPromos,  
         'sousCategories'=> $sousCategoryList,
@@ -45,12 +46,13 @@ class ProductController extends AbstractController
         $category= $repoCat->showCategory($category);
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
-        // dd ($products);
-        return $this->render('product/index.html.twig', 
+        //dd ($products);
+        return $this->render('product/sousCatProducts.html.twig', 
         [ 'products' => $products, 
         'productsPromos' => $productsPromos,
         'category'=> $category[0],
         'sousCategories'=> $sousCategoryList,
+        'sousCategoryId' => 0,
     ]); 
     }
 

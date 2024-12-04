@@ -36,7 +36,7 @@ public function findProductsBySousCategory($product) {
 
     $dql = 
     '
-    SELECT p 
+    SELECT p , s.nom as nomSousCat
     FROM App\Entity\Produit p 
     INNER JOIN p.sousCategorie s
     WHERE s.slug = :sousCategory
@@ -54,7 +54,7 @@ public function findProductsByCategory($productCategory) {
 
     $dql = 
     '
-    SELECT p , s.nom, c.nom
+    SELECT p , s.nom as nomSousCat, c.nom as nomCat
     FROM App\Entity\Produit p 
     INNER JOIN App\Entity\SousCategorie as s 
     INNER JOIN App\Entity\Categorie as c
