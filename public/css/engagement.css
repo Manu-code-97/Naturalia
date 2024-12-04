@@ -1,121 +1,101 @@
-body {
+#engagement body {
+    box-sizing: border-box;
+    outline: none;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    background-color: #fff;
+
 }
 
-.doigt {
-    width: 100%;
-    height: 100vh;
+#engagement {
+    background-color: white;
+}
+
+/* .doigt {
     background-image: url('../img/engagement/about/Rectangle-42.png');
-    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
+} */
 
-.container {
+#engagement .contain {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    
 }
 
-h1, h2 {
+#engagement h1, h2 {
     color: #2c3e50;
     text-align: center;
 }
 
-p, li {
+#engagement p, li {
     color: #34495e;
     margin-bottom: 10px;
 }
 
-h1 {
-    padding-bottom: 10px;
-    border-bottom: none;
-}
 
-.grid-container {
+#engagement .grid-contain {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-bottom: 30px;
 }
 
-.grid-item {
+#engagement .grid-items {
     padding: 20px;
     text-align: center;
 }
 
-.leaf-section {
+#engagement .leaf-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
 }
 
-.branche {
+#engagement .branche {
     background-image: url(../img/engagement/about/branche.png);
     background-repeat: no-repeat;
     background-position: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.leaf {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: none;
-}
-
-.leaf:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.leaf .content {
-    flex: 1;
-    padding: 20px;
-}
-
-.leaf .image {
-    flex: 1;
-    text-align: center;
-}
-
-.leaf .image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.histoire {
-    flex-direction: row-reverse;
-}
-
-.actualite {
     flex-direction: row;
 }
 
-.avenir {
+#engagement .histoire {
     flex-direction: row-reverse;
+    display: flex;
+    margin-left: 850px;
+    width: 609px;
+    height: 494px;
+    margin-bottom: 200px;
 }
 
-.histoire, .actualite, .avenir { 
+#engagement .content {
+    text-align: left;
+}
+
+#engagement .actualite {
+    flex-direction: row;
+    display: flex;
+
+    width: 609px;
+    height: 494px;
+    margin-bottom: 200px;
+}
+
+
+
+#engagement .avenir {
+    flex-direction: row-reverse;
+    display: flex;
+    margin-left: 850px;
+    margin-bottom: 800px;
+    width: 609px;
+    height: 494px;
+    margin-bottom: 200px;
+}
+
+#engagement .histoire, .actualite, .avenir { 
     border: none; 
     box-shadow: none;
     background-color: transparent;
@@ -124,7 +104,7 @@ h1 {
 /* Media Queries */
 
 /* Tablettes */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .grid-container {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -135,7 +115,7 @@ h1 {
 }
 
 /* Mobiles */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .grid-container {
         grid-template-columns: 1fr;
     }
@@ -151,4 +131,4 @@ h1 {
     p, li {
         font-size: 1em;
     }
-}
+} */ 
