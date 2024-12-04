@@ -66,8 +66,8 @@ class ProductController extends AbstractController
         $product = $repo->find($product);
 
         /* a voir pour label et local (pour linstant elles reste la) */
-        $label = $repo->findProductByLabel($labelProduct);
-        $local = $repo->localProduct($localProduit);
+        $label = $repo->findProductByLabel(10);
+        $local = $repo->localProduct(1);
         
         
         // $productsSelection = $repo -> getProductsOnPromotion(); // a voir pour la selection
@@ -107,6 +107,22 @@ class ProductController extends AbstractController
         $sousCategoryName = $sousCategory[0]->getNom();
         //dd($sousCategoryName);
         return $sousCategoryName;
+    }
+
+
+    /* En travaux formulaire filtre et trie */
+    public function getFiltre(Request $request){
+
+        
+        $task = new Task();
+        $task->setTask('Write a blog post');
+        $task->setDueDate(new \DateTimeImmutable('tomorrow'));
+
+        $form = $this->createFormBuilder($task)
+            ->add('task', TextType::class)
+            ->add('dueDate', DateType::class)
+            ->add('save', SubmitType::class, ['label' => 'Create Task'])
+            ->getForm();
     }
 }
 

@@ -76,21 +76,22 @@ public function findProductsByCategory($productCategory) {
 
     /* Trouver un produit par son label */
 
-public function findProductByLabel($labelProduct){
+public function findProductByLabel($labelProduit){
 
     $dql=
     '
     SELECT p 
     FROM App\Entity\Produit p 
-    INNER JOIN App\Entity\label as l 
-    WHERE l.slug=:labelProduit
+    INNER JOIN p.label l 
+    WHERE l.id=:labelProduit
     ';
 
     $query = $this->getEntityManager()->createQuery($dql); 
+
     $query->setParameter('labelProduit', $labelProduit); 
     
     return $query->getResult(); 
-
+    
 }
 
 
@@ -107,7 +108,9 @@ public function localProduct($localProduit){
 
     $query = $this->getEntityManager()->createQuery($dql);
     $query->setParameter('localProduit', $localProduit);
-
+    
+    
+    return $query->getResult(); 
 }
 
 
@@ -125,7 +128,8 @@ public function priceCroissant($nomProduit){
 
     $query = $this->getEntityManager()->createQuery($dql);
     $query->setParameter('nomProduit', $nomProduit);
-
+    
+    return $query->getResult(); 
 }
 
 
