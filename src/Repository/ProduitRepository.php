@@ -79,10 +79,10 @@ public function findProductsByCategory($productCategory) {
 
     $dql = 
     '
-    SELECT p , s.nom as nomSousCat, c.nom as nomCat
-    FROM App\Entity\Produit p 
-    INNER JOIN App\Entity\SousCategorie as s 
-    INNER JOIN App\Entity\Categorie as c
+    SELECT c,  p , s 
+    FROM  App\Entity\Categorie c
+    INNER JOIN c.sousCategories s 
+    INNER JOIN s.produit p
     WHERE c.slug=:productCategory
     '; 
     
@@ -191,7 +191,6 @@ public function aleatProducts(int $nbProducts) {
 
     shuffle($result);
 
-    //dd($query->getResult());
     return $result;
 }
 

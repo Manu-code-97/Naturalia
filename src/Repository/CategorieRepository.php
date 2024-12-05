@@ -22,7 +22,7 @@ class CategorieRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT c
             FROM App\Entity\Categorie c 
-            WHERE c.nom = :categorie'
+            WHERE c.slug = :categorie'
         )->setParameter('categorie', $category) ;
 
         return $query->getResult();
