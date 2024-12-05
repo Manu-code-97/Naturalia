@@ -22,9 +22,12 @@ body{
     width: 32px;
     height: 32px;
 }
+
 #description {
     margin-bottom: 50px;
+    margin-right: 5px;
 }
+
 #description div{
     width: 505px;
     height: 450px;
@@ -38,6 +41,11 @@ body{
 #label div{
     width: 505px;
     padding: 16px 24px;
+    margin: 16px;
+}
+
+#ajouter{
+    margin-bottom: 68px;
 }
 
 #ajouter button{
@@ -47,11 +55,24 @@ body{
     border-radius: 20px;
 }
 
+#btn{
+    margin-top: 28px;
+}
+
 #btn button{
+    color: #840000;
+    background-color: #fff9f2;
     border-radius: 20px;
     border: 1px solid var(--Brick-red, #840000);
+    padding: 10px 16px;
+    margin: 16px;
 }
 
 #btn button:hover{
+    color: #fff9f2;
     background-color: #840000;
+}
+
+#selection .container{
+    margin-left: 15px;
 }

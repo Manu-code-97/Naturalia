@@ -64,21 +64,21 @@ class ProductController extends AbstractController
     
     /* Cette route affiche un produit d'une sous catégorie */
     #[Route('/{category}/{sousCategory}/{product}', name: 'detailProduit')]
-    public function detailProduit (ProduitRepository $repo , $product): Response{
-        $product = $repo->find($product);
+    public function detailProduit (ProduitRepository $repo , $product, $category, $sousCategory): Response{
+        $productDetail = $repo->find($product);
 
         /* a voir pour label et local (pour linstant elles reste la) */
         $label = $repo->findProductByLabel(10);
         $local = $repo->localProduct(1);
         
         
-        // $productsSelection = $repo -> getProductsOnPromotion(); // a voir pour la selection
-        //dd ($products);
+        $productsSelection = $repo -> aleatProducts(20);
+        //dd ($productsSelection);
         return $this->render('product/detail.html.twig', 
-        [ 'productDetail' => $product, 
+        [ 'productDetail' => $productDetail, 
         'labelProduit' => $label,
         'local' => $local,
-        //'productsPromos' => $productsPromos, 
+        'productsSelection' => $productsSelection, 
     ]); 
     }
 
