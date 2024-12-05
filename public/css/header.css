@@ -60,7 +60,7 @@ header {
     width: 28px;
 }
 
-.content:hover {
+#header .content:hover {
     transform: scale(1.5);
     animation-duration: 3s;
     animation-delay: 0.5s;
