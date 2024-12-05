@@ -67,7 +67,7 @@ class ProductController extends AbstractController
     /* Cette route affiche un produit d'une sous catégorie */
     #[Route('/produit/{product}', name: 'detailProduit')]
     public function detailProduit (ProduitRepository $repo , $product): Response{
-        $product = $repo->find($product);
+        $productDetail = $repo->find($product);
 
         /* a voir pour label et local (pour linstant elles reste la) */
         $label = $repo->findProductByLabel(10);
