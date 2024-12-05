@@ -35,13 +35,13 @@ public function findRandomRecipe(): Recette
     $query = $this->getEntityManager()->createQuery($dql)->getResult();
 
     $randomRecette = $query[rand(0,count($query)-1)];
-
+    
     return $randomRecette;
 }
 
 public function findProductsByRecetteId($recette_id)
-{
-    $recette_id=35;
+{ 
+
     $dql = '
     SELECT p
     FROM App\Entity\Produit p
@@ -52,7 +52,7 @@ public function findProductsByRecetteId($recette_id)
             ->setParameter('recette_id', $recette_id)
             ->getResult();
 
-          /*   dd($query); */
+    // dd($query);
     return $query;
 }
 

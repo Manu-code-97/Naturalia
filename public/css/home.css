@@ -56,6 +56,24 @@ main{
     
 }
 
+/* css recette du jour Hamidou */
+
+#main .block-recette{
+    display: flex; 
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+    gap: 20px; /* Espacement entre les cartes */
+    justify-content: flex-start; /* Alignement horizontal (modifiez si nécessaire) */
+    align-items: flex-start; /* Alignement vertical en haut */
+    padding: 15px;
+    margin: 20px auto; /* Centrage du conteneur (optionnel) */
+    background-color: #f9f9f9; /* Arrière-plan optionnel pour mieux visualiser */
+}
+
+
+
+
+
+
 .red{
     color: #840000;            /* On met en rouge les mots du titre grâce à la classe Red */
     margin-top: 72px;

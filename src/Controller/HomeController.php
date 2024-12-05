@@ -35,7 +35,7 @@ class HomeController extends AbstractController
             'produitsRecette'=>$produitsRecette,
            /*  dd($produitsRecette), */
         // afficher la liste des tous les produits qui sont promotions 
-            'recetteDuJour' => $randomRecette,
+            'recetteDuMoment' => $randomRecette,
             // dd($randomRecette)
         ]);
 
