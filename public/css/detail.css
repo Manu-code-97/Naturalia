@@ -40,6 +40,10 @@ body{
     padding: 16px 24px;
 }
 
+#ajouter{
+    margin-bottom: 68px;
+}
+
 #ajouter button{
     color: white;
     background-color: black;
@@ -47,11 +51,20 @@ body{
     border-radius: 20px;
 }
 
+#btn{
+    margin-top: 68px;
+}
+
 #btn button{
+    color: #840000;
+    background-color: #fff9f2;
     border-radius: 20px;
     border: 1px solid var(--Brick-red, #840000);
+    gap: 16px;
+    
 }
 
 #btn button:hover{
+    color: #fff9f2;
     background-color: #840000;
 }

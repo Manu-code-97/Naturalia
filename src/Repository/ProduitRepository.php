@@ -182,20 +182,16 @@ public function aleatProducts(int $nbProducts) {
     INNER JOIN App\Entity\Categorie c
     '; 
 
-
-    
     $query = $this->getEntityManager()->createQuery($dql); 
     /* $query->setParameter('nbProducts', $nbProducts);  */
 
     $query->setMaxResults($nbProducts);
 
-    
-    
     $result = $query->getResult(); 
 
     shuffle($result);
 
-    dd($query->getResult());
+    //dd($query->getResult());
     return $result;
 }
 

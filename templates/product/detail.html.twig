@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{productDetail.nom}}{% endblock %}
+{# {% block title %}{{productDetail.nom}}{% endblock %} #}
 
 {% block body %}
 
@@ -13,7 +13,6 @@
                 <img src="/img/favourite.png" alt="">
                 </div>
             </div>
-
             <div>
                 <div id="description">
                     <h3>Produit</h3>
@@ -41,6 +40,9 @@
     </div>
     <div>
         <h3>Découvrez nos sélections</h3>
+    </div>
+    <div class="carousel container yellow">
+   {{ include('/partials/carousel.html.twig', {'products':productsSelection}) }}
     </div>
 
 {% endblock %}
