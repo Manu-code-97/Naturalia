@@ -38,11 +38,13 @@
     <div>
         <p class="d-flex justify-content-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Quam fugiat adipisci doloribus suscipit pariatur, modi facilis delectus molestiae.</p>
     </div>
-    <div>
-        <h3>Découvrez nos sélections</h3>
-    </div>
-    <div class="carousel container yellow">
-   {{ include('/partials/carousel.html.twig', {'products':productsSelection}) }}
-    </div>
+   <div id="selections">
+        <div class="container">
+            <h3>Découvrez nos sélections</h3>
+        </div>
+        <div class="carousel container yellow">
+       {{ include('/partials/carousel.html.twig', {'products':productsSelection}) }}
+        </div>
+   </div>
 
 {% endblock %}
