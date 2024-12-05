@@ -22,9 +22,11 @@ body{
     width: 32px;
     height: 32px;
 }
+
 #description {
     margin-bottom: 50px;
 }
+
 #description div{
     width: 505px;
     height: 450px;
@@ -52,7 +54,7 @@ body{
 }
 
 #btn{
-    margin-top: 68px;
+    margin-top: 28px;
 }
 
 #btn button{
@@ -60,8 +62,8 @@ body{
     background-color: #fff9f2;
     border-radius: 20px;
     border: 1px solid var(--Brick-red, #840000);
-    gap: 16px;
-    
+    padding: 10px 16px;
+    margin: 16px;
 }
 
 #btn button:hover{
