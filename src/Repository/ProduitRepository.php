@@ -52,6 +52,26 @@ public function findProductsBySousCategory($product) {
 }
 
 
+/* Afficher tout les produit d'une sous-catégorie */
+
+public function findProductsOfSousCategory($sousCategory) { 
+
+
+    $dql = 
+    ' 
+    SELECT sc , p 
+    FROM App\Entity\SousCategorie sc
+    INNER JOIN sc.produit p
+    WHERE sc.slug =:sousCategory
+    ';
+    $query = $this->getEntityManager()->createQuery($dql); 
+    $query->setParameter('sousCategory', $sousCategory); 
+    
+    /* dd($query->getResult()); */
+    return $query->getResult(); 
+}
+
+
     
     /* Fonction pour trouver des produit par rappor a sa catégorie dans le product controller */
 
@@ -69,9 +89,9 @@ public function findProductsByCategory($productCategory) {
     $query = $this->getEntityManager()->createQuery($dql); 
     $query->setParameter('productCategory', $productCategory); 
     
+    dd($query->getResult());
     return $query->getResult(); 
 }
-
 
 
     /* Trouver un produit par son label */
@@ -150,6 +170,34 @@ public function priceDesc($nomProduit){
 
 }
 
+
+/* choisir 20 produit aléatoirement  */
+
+public function aleatProducts(int $nbProducts) { 
+
+    $dql = 
+    '
+    SELECT p  
+    FROM App\Entity\Produit p 
+    INNER JOIN App\Entity\Categorie c
+    '; 
+
+
+    
+    $query = $this->getEntityManager()->createQuery($dql); 
+    /* $query->setParameter('nbProducts', $nbProducts);  */
+
+    $query->setMaxResults($nbProducts);
+
+    
+    
+    $result = $query->getResult(); 
+
+    shuffle($result);
+
+    dd($query->getResult());
+    return $result;
+}
 
 
 /* SELECT * FROM produit as p INNER JOIN produit_label ON p.id=produit_id WHERE label_id={id};
