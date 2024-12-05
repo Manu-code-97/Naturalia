@@ -3,21 +3,24 @@
 {# {% block title %}Hello RecetteDuMomentController!{% endblock %} #}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-{# faire une boucle pour les recettes #}
-    <h1>Hello{{recette.nom}}</h1>
-    <h1>Hello{{produits}}</h1>
+<div class="block-affiche-r">
 
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/moussaillon/Documents/GitHub/Naturalia/src/Controller/RecetteDuMomentController.php</code></li>
-        <li>Your template at <code>/Users/moussaillon/Documents/GitHub/Naturalia/templates/recette_du_moment/index.html.twig</code></li>
-    </ul>
+    <div>
+            <h3>Recette: {{ recette.nom }}</h3>
+            <img src="{{recette.image}}" alt="">
+    </div>
+   
+    <div>
+        <p>description recette: {{ recette.description }}</p>
+        <h2>Produits associés :</h2>
+        {% if produits is not empty %}
+        
+        {% else %}
+             <p>Aucun produit associé à cette recette.</p>
+        {% endif %}
+    
+            {{ include("partials/carousel.html.twig",{"products":produits}) }}	
+    </div>
 </div>
 {% endblock %}
