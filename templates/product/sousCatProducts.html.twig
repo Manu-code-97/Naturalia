@@ -4,105 +4,127 @@
 {% endblock %}
 
 {% block body %}
-	{# <style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-		.ici {
-			color: red;
-		}
-	</style>
- #}
+
+
 	<main id="category" class="">
-		
-			<section>
-				<div class="">
-					{# <h1>Hello {{ controller_name }}! ✅</h1> #}
-			
-					{# <div class="show-category">
-					        <ul>
-					        <li>
-					        {% for category in category %}
-					        <li>{{category.}}</li>
-					        </li>
-					        </ul>
-					    </div> #}
-			            <h1 class="">{{category.nom}}</h1>
 
-						<div class="container">
-							<nav>
-								<div class="d-flex justify-content-around">
-									<div>
-										<button class="none">Trier par <img src="{{ asset('img/card/select.svg') }}" alt=""></button>
-									</div>
+		<section>
+			<div class="">
 
-									<div class="d-flex justify">
+				<h1 class="">{{category.nom}}</h1>
+
+				<div class="container">
+					<nav>
+						<div class="d-flex justify-content-around">
+							<div>
+								<button class="none">Trier par
+									<img src="{{ asset('img/card/select.svg') }}" alt=""></button>
+							</div>
+
+							<div class="d-flex justify">
+								<div>
+									<button class="none" type="menu">T rier par label
+										<img src="{{ asset('img/card/select.svg') }}" alt=""></button>
+								</div>
+
+								<div>
+									<form action="">
 										<div>
-											<button class="none" type="menu">Trier par label <img src="{{ asset('img/card/select.svg') }}" alt=""></button>
-										</div>
-										
-										<div>
-											<form action="">
-												<div>
-													<label class="toggle-switch">
-  														<input type="checkbox">
-  														<div class="toggle-switch-background">
-    														<div class="toggle-switch-handle">
-															
-															</div>
-  														</div>
-													</label> 
-													<span>Choisr local</span>
+											<label class="toggle-switch">
+												<input type="checkbox">
+												<div class="toggle-switch-background">
+													<div class="toggle-switch-handle"></div>
 												</div>
-											</form>
+											</label>
+											<span>Choisr local</span>
 										</div>
-									</div>
+									</form>
 								</div>
-							</nav>
+							</div>
 						</div>
-		
-							<nav>
-							<ul class="category container d-flex">
-			
-									{% for  sousCategory  in  sousCategories %}
-										{% if(sousCategory.id == sousCategoryId) %}<li class="ici"> {{sousCategory.nom}}</li>
-									{% else %}
-										<li class=""><a href="{{ path('sousCatProduits', {'category':category.slug, 'sousCategory':sousCategory.slug}) }}">{{sousCategory.nom}}</a></li>
-									{% endif %}
-			
-								{% endfor %}
-							</ul>
-			            </nav>
+					</nav>
 				</div>
-			</section>
-		
-		            
-		
-				<section class="container">
-						<div class="blockProduits row yellow">
-							{% for produit in products %}
-			                <div class="card-group col-3 container">
-								<div class="yellow me-2 align-self-stretch" style="width: 15rem;">
-									<img src="{{produit[0].image}}" class="card-img-top" alt="">
-										<div class="containercard-body">
-											<h5 class="card-title">{{produit[0].nom}}</h5>
-											<p class="card-text">{{produit[0].description}}</p>
-											<button type="button">Ajouter<img src="{{ asset('/img/cart.png') }}" alt=""></button>
-											</div>
-										</div>
-								</div>
-								{% endfor %}
-						
-			                </div>
-			            </div>
-				</section>
-	
+
+
+				<nav>
+					<ul class="category container d-flex">
+
+						{% for  sousCategory  in  sousCategories %}
+							{% if(sousCategory.id == sousCategoryId) %}
+								<li class="ici">
+									{{sousCategory.nom}}</li>
+							{% else %}
+								<li class="">
+									<a href="{{ path('sousCatProduits', {'category':category.slug, 'sousCategory':sousCategory.slug}) }}">{{sousCategory.nom}}</a>
+								</li>
+							{% endif %}
+
+						{% endfor %}
+					</ul>
+				</nav>
+			</div>
+		</section>
+
+		<article>
+			<div class="d-flex container justify-content-around">
+				<div class="promo">
+					<div class="d-flex">
+						<div class="image">
+							<img src="https://picsum.photos/seed/picsum/400/480" style="border-radius: 20px;" alt="">
+						</div>
+
+						<div class="circle">
+							<p>Promo</p>
+						</div>
+					</div>
+					<div class="descriptif">
+						<h3 class="">Lorem, ipsum.</h3>
+						<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+						<p class="card-text">9€</p>
+						<button class="" type="button">Ajouter
+							<img src="{{ asset('/img/cart.png') }}" alt=""></button>
+					</div>
+				</div>
+
+				<div class="promo">
+					<div class="d-flex">
+						<div class="image">
+							<img src="https://picsum.photos/seed/picsum/400/480" style="border-radius: 20px;" alt="">
+						</div>
+
+						<div class="circle">
+							<p>Promo</p>
+						</div>
+					</div>
+					<div class="descriptif">
+						<h3 class="">Lorem, ipsum.</h3>
+						<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+						<p class="card-text">9€</p>
+						<button class="" type="button">Ajouter
+							<img src="{{ asset('/img/cart.png') }}" alt=""></button>
+					</div>
+				</div>
+			</div>
+		</article>
+
+		<section class="container">
+			<div class="blockProduits row yellow">
+				{% for produit in products %}
+					<div class="card-group col-3">
+						<div class="yellow me-2 align-self-stretch" style="width: 15rem;">
+							<img src="{{produit[0].image}}" class="card-img-top" alt="">
+							<div class="card-body">
+								<h5 class="card-title">{{produit[0].nom}}</h5>
+								<p class="card-text block-text">{{produit[0].description}}</p>
+								<p class="card-text">{{produit[0].prix}}</p>
+								<button type="button">Ajouter
+									<img src="{{ asset('/img/cart.png') }}" alt=""></button>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+
 	</main>
-	{% endblock %}
+{% endblock %}
