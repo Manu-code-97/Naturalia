@@ -9,192 +9,197 @@
 {% endblock %}
 
 {% block body %}
-<main	id="main"	class="yellow">
-	<article	class="container d-flex"	id="p-one">
-		<div	class="yellow">
-			<img	src="{{ asset('img/sac-de-courses.png') }}"	alt="Sac de courses"></div>
+	<main id="main" class="yellow">
+		<article class="container d-flex" id="p-one">
+			<div class="yellow">
+				<img src="{{ asset('img/sac-de-courses.png') }}" alt="Sac de courses"></div>
 
-			<div	id="title"	class="yellow">
-				<h1	class="yellow">
+			<div id="title" class="yellow">
+				<h1 class="yellow">
 					C’est un choix de vivre
 					<br>
-						<span	class="red">
-							sain
-						</span>
-						et
-						<span	class="red">
-							authentique
-						</span>
-						.
-						<br>
-							Votre choix.
-						</h1>
+					<span class="red">
+						sain
+					</span>
+					et
+					<span class="red">
+						authentique
+					</span>
+					.
+					<br>
+					Votre choix.
+				</h1>
 
-						<button>
-							Je m'engage
-						</button>
+				<button>
+					Je m'engage
+				</button>
+			</div>
+		</article>
+
+		<div class="carousel container yellow">
+
+			<h3>
+				Promotions
+			</h3>
+			{{ include('/partials/carousel.html.twig', {'products': productsPromo}) }}
+		</div>
+
+		<article class="container yellow" id="p-two">
+			<h3>
+				Le Fournisseur du Moment
+			</h3>
+
+			<div class="d-flex yellow">
+				<div>
+					<img src="https://picsum.photos/400/267/?blur" alt="Un fournisseur"></div>
+
+				<div class="resume yellow">
+					<h6 class="yellow">
+						Paul Legrand
+					</h6>
+					<p class="yellow">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, natus autem tempora ipsum facere quod molestias cum consectetur quam recusandae odio beatae aperiam expedita at iure dolores suscipit unde officiis aut fugit sapiente labore! Provident numquam sequi adipisci magnam dolorem voluptas incidunt voluptates velit tempora aliquam. Nostrum fugit nemo saepe.
+					</p>
+					<button>
+						Découvrir
+					</button>
+				</div>
+			</div>
+		</article>
+
+		<article id="recettes-du-moment">
+			<h3>Recette du Moment</h3>
+			<div class="block-recette">
+
+				<div class="block-imgRecette">
+					<div class="recette-img-div">
+						<img src="{{recetteDuMoment.image}}" alt="recette-image">
+
 					</div>
-				</article>
-
-				<div	class="carousel container yellow">
-
-					<h3>
-						Promotions
-					</h3>
-					{{ include('/partials/carousel.html.twig', {'products': productsPromo}) }}
+					<div>
+						<div class="d-flex justify-content-center">
+							{# <h3>{{recetteDuMoment.nom}}</h3> #}
+							<h3>NOM Recette</h3>
+						</div>
+						<div id="lien-button" class="d-flex justify-content-center">
+							<a href="" id="lien-recetteMomment">Voir la recette</a>
+						</div>
+					</div>
 				</div>
 
-				<article	class="container yellow"	id="p-two">
+
+				<div class="d-flex justify-content-center" id="ingredients">
+					{{ include("partials/carousel.html.twig",{"products":recetteDuMoment.getProduit}) }}
+				</div>
+			</div>
+		</article>
+
+		<article class="container yellow" id="newsletter">
+			<div class="yellow">
+				<div class="yellow">
 					<h3>
-						Le Fournisseur du Moment
+						Newsletter
 					</h3>
-
-					<div	class="d-flex yellow">
-						<div>
-							<img	src="https://picsum.photos/400/267/?blur"	alt="Un fournisseur"></div>
-
-							<div	class="resume yellow">
-								<h6	class="yellow">
-									Paul Legrand
-								</h6>
-								<p	class="yellow">
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, natus autem tempora ipsum facere quod molestias cum consectetur quam recusandae odio beatae aperiam expedita at iure dolores suscipit unde officiis aut fugit sapiente labore! Provident numquam sequi adipisci magnam dolorem voluptas incidunt voluptates velit tempora aliquam. Nostrum fugit nemo saepe.
-								</p>
-								<button>
-									Découvrir
-								</button>
+					<p>
+						Lorem ipsum dolor sit amet consectetur.
+					</p>
+					<div class="yellow">
+						<form id="lk" action="">
+							<div class="yellow">
+								<input type="email" id="email" placeholder="Email" for="email">
+								<button type="submit">
+									<img src="img/input/arrow.svg" alt=""></button>
 							</div>
-						</div>
-					</article>
+						</form>
+					</div>
+				</div>
 
-					<article	id="recettes-du-moment">
-							<h1>Recette du Moment</h1>
-						<div class="block-recette">
-							<div class="recette_j">
-								<div>
-									<img src="{{recetteDuMoment.image}}" alt="">
-								</div>
-								<div class="lien-buton">
-									<a href="{{ path('allRecettes', {'recette':recetteDuMoment.slug}) }}" class="btn btn-dark mt-3">Voir recette</a>
-								<h4>Produits associés :</h4>
-								</div>
-							</div>
-							<div class="produit-recette_j">
-						
-									{{ include("partials/carousel.html.twig",{"products":recetteDuMoment.getProduit}) }}	
-							</div>
+			</div>
 
-						</div>	
-							
-					</article>
+		</article>
 
-								<article	class="container yellow"	id="newsletter">
-									<div	class="yellow">
-										<div	class="yellow">
-											<h3>
-												Newsletter
-											</h3>
-											<p>
-												Lorem ipsum dolor sit amet consectetur.
-											</p>
-											<div	class="yellow">
-												<form	id="lk"	action="">
-													<div	class="yellow">
-														<input	type="email"	id="email"	placeholder="Email"	for="email">
-															<button	type="submit">
-																<img	src="img/input/arrow.svg"	alt=""></button>
-															</div>
-														</form>
-													</div>
-												</div>
+		<section class="container yellow">
+			<h3 class="yellow">
+				Nos services
+			</h3>
 
-											</div>
+			<div class="d-flex justify-content-around yellow" id="services">
+				<div class="yellow">
+					<div>
+						<img src="{{ asset('img/card/cadenas.svg') }}" alt="?"></div>
 
-										</article>
+					<figcaption>
+						<p>
+							<strong>
+								Paiement
+							</strong>
+							<br>
+							100% sécurisé
+						</p>
+					</figcaption>
+				</div>
 
-										<section	class="container yellow">
-											<h3	class="yellow">
-												Nos services
-											</h3>
+				<div>
+					<div>
+						<img src="{{ asset('img/card/camion.svg') }}" alt="?"></div>
 
-											<div	class="d-flex justify-content-around yellow"	id="services">
-												<div	class="yellow">
-													<div>
-														<img	src="{{ asset('img/card/cadenas.svg') }}"	alt="?"></div>
+					<figcaption>
+						<p>
+							<strong>
+								Livraison gratuite
+							</strong>
+							<br>
+							Dès 120€ d'achat
+						</p>
+					</figcaption>
+				</div>
 
-														<figcaption>
-															<p>
-																<strong>
-																	Paiement
-																</strong>
-																<br>
-																	100% sécurisé
-																</p>
-															</figcaption>
-														</div>
+				<div>
+					<div>
+						<img src="{{ asset('img/card/balise.svg') }}" alt="?"></div>
 
-														<div>
-															<div>
-																<img	src="{{ asset('img/card/camion.svg') }}"	alt="?"></div>
+					<figcaption>
+						<p>
+							<strong>
+								Suivi de commande
+							</strong>
+							<br>
+							100% sécurisé
+						</p>
+					</figcaption>
+				</div>
 
-																<figcaption>
-																	<p>
-																		<strong>
-																			Livraison gratuite
-																		</strong>
-																		<br>
-																			Dès 120€ d'achat
-																		</p>
-																	</figcaption>
-																</div>
+				<div>
+					<div>
+						<img src="{{ asset('img/card/cube.svg') }}" alt="?"></div>
 
-																<div>
-																	<div>
-																		<img	src="{{ asset('img/card/balise.svg') }}"	alt="?"></div>
+					<figcaption>
+						<p>
+							<strong>
+								Retrait offert 1h
+							</strong>
+							<br>
+							en magasin
+						</p>
+					</figcaption>
+				</div>
 
-																		<figcaption>
-																			<p>
-																				<strong>
-																					Suivi de commande
-																				</strong>
-																				<br>
-																					100% sécurisé
-																				</p>
-																			</figcaption>
-																		</div>
+				<div>
+					<div>
+						<img src="{{ asset('img/card/fleches.svg') }}" alt="?"></div>
 
-																		<div>
-																			<div>
-																				<img	src="{{ asset('img/card/cube.svg') }}"	alt="?"></div>
+					<figcaption>
+						<p>
+							<strong>
+								Retours & échanges
+							</strong>
+							<br>
+							offerts 365 jours
+						</p>
+					</figcaption>
+				</div>
+			</div>
+		</section>
+	</main>
 
-																				<figcaption>
-																					<p>
-																						<strong>
-																							Retrait offert 1h
-																						</strong>
-																						<br>
-																							en magasin
-																						</p>
-																					</figcaption>
-																				</div>
-
-																				<div>
-																					<div>
-																						<img	src="{{ asset('img/card/fleches.svg') }}"	alt="?"></div>
-
-																						<figcaption>
-																							<p>
-																								<strong>
-																									Retours & échanges
-																								</strong>
-																								<br>
-																									offerts 365 jours
-																								</p>
-																							</figcaption>
-																						</div>
-																					</div>
-																				</section>
-																			</main>
-
-																		{% endblock %}
-																		
+{% endblock %}
