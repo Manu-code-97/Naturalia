@@ -16,6 +16,29 @@ class FournisseurRepository extends ServiceEntityRepository
         parent::__construct($registry, Fournisseur::class);
     }
 
+    //fonction pour afficher un fournisseur aleatoirement. 
+    
+    public function findRandomFournisseur(): Fournisseur
+    {
+        // Récupérer tous les fournisseurs avec DQL
+        $dql = 'SELECT f FROM App\Entity\Fournisseur f';
+        $query = $this->getEntityManager()->createQuery($dql)->getResult();
+    
+        // Choisir un fournisseur aléatoire
+        $randomFournisseur = $query[rand(0, count($query) - 1)];
+    
+        return $randomFournisseur;
+    }
+    
+
+
+
+
+
+
+
+
+
     //    /**
     //     * @return Fournisseur[] Returns an array of Fournisseur objects
     //     */
