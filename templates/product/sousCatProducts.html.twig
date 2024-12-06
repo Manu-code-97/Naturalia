@@ -90,10 +90,10 @@
 							{% for produit in products %}
 			                <div class="card-group col-3 container">
 								<div class="yellow me-2 align-self-stretch" style="width: 15rem;">
-									<img src="{{produit[0].image}}" class="card-img-top" alt="">
+									<img src="{{produit.image}}" class="card-img-top" alt="">
 										<div class="containercard-body">
-											<h5 class="card-title">{{produit[0].nom}}</h5>
-											<p class="card-text">{{produit[0].description}}</p>
+											<h5 class="card-title">{{produit.nom}}</h5>
+											<p class="card-text">{{produit.description}}</p>
 											<button type="button">Ajouter<img src="{{ asset('/img/cart.png') }}" alt=""></button>
 											</div>
 										</div>

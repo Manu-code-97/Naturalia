@@ -16,18 +16,28 @@ class CategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, Categorie::class);
     }
 
-    public function categoryAll($category) : array
-    {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT c
-            FROM App\Entity\Categorie c 
-            WHERE c.nom = :categorie'
-        )->setParameter('categorie', $category) ;
+    // public function categoryAll() : array
+    // {
+    //     $entityManager = $this->getEntityManager();
+    //     $query = $entityManager->createQuery(
+    //         'SELECT c, sc
+    //         FROM App\Entity\Categorie c 
+    //         left JOIN c.sousCategories sc
+    //         '
+    //     ); 
 
-        return $query->getResult();
+    //     return $query->getResult();
 
-    }
+    // }
+
+    public function categoryAll(): array
+{
+    return $this->createQueryBuilder('c')
+        ->leftJoin('c.sousCategories', 'sc')
+        ->addSelect('sc') // Indique de charger également les sous-catégories
+        ->getQuery()
+        ->getResult();
+}
 
     /* Appel une catégorie en particulier */
     public function showCategory(string $category) : array

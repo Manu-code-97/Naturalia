@@ -89,7 +89,6 @@ public function findProductsByCategory($productCategory) {
     $query = $this->getEntityManager()->createQuery($dql); 
     $query->setParameter('productCategory', $productCategory); 
     
-    dd($query->getResult());
     return $query->getResult(); 
 }
 
@@ -171,32 +170,48 @@ public function priceDesc($nomProduit){
 }
 
 
-/* choisir 20 produit aléatoirement  */
-
-public function aleatProducts(int $nbProducts) { 
-
-    $dql = 
-    '
-    SELECT p  
-    FROM App\Entity\Produit p 
-    INNER JOIN App\Entity\Categorie c
-    '; 
+    public function findByQuery(string $query): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.name LIKE :query OR p.description LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->getQuery()
+            ->getResult();
+    }
 
 
-    
-    $query = $this->getEntityManager()->createQuery($dql); 
-    /* $query->setParameter('nbProducts', $nbProducts);  */
 
-    $query->setMaxResults($nbProducts);
 
-    
-    
-    $result = $query->getResult(); 
+    /* choisir 20 produit aléatoirement  */
 
-    shuffle($result);
+    public function aleatProducts(int $nbProducts) { 
 
-    return $result;
+        $dql = 
+        '
+        SELECT p  
+        FROM App\Entity\Produit p 
+        INNER JOIN App\Entity\Categorie c
+        '; 
+
+
+        
+        $query = $this->getEntityManager()->createQuery($dql); 
+        /* $query->setParameter('nbProducts', $nbProducts);  */
+
+        $query->setMaxResults($nbProducts);
+
+        
+        
+        $result = $query->getResult(); 
+
+        shuffle($result);
+
+        return $result;
+    }
+
 }
+
+
 
 
 /* SELECT * FROM produit as p INNER JOIN produit_label ON p.id=produit_id WHERE label_id={id};
@@ -256,4 +271,4 @@ public function aleatProducts(int $nbProducts) {
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}
+

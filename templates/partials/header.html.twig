@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-             <div class="content">
+            <div class="content">
                 <div class="circle">
                     <img src="{{ asset('img/card/profil.svg') }}" alt="?">
                 </div>
@@ -45,5 +45,5 @@
             </div>
         </div>
     </nav>
-    {{ include('partials/menu.html.twig') }}
+    {{ include('partials/menu.html.twig', {'categories':categoriesMenu}) }}
 </header>

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route; 
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use App\Helper\CategoryHelper;
+use App\Form\SearchType;
 
 class ProductController extends AbstractController 
 { 
@@ -51,14 +53,17 @@ class ProductController extends AbstractController
         $category= $repoCat->showCategory($category);
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
-        //dd ($products);
+        $categoriesMenu = CategoryHelper::showMenu($repoCat);
+/* dd($categoriesMenu); */
+        // dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
-        [ 'products' => $products, 
+        [ 'products' => $products[0], 
         'productsPromos' => $productsPromos,
         'category'=> $category[0],
         'sousCategories'=> $sousCategoryList,
         'sousCategoryId' => 0,
-    ]); 
+        'categoriesMenu' => $categoriesMenu,
+        ]); 
     }
 
     
@@ -126,5 +131,34 @@ class ProductController extends AbstractController
             ->add('save', SubmitType::class, ['label' => 'Create Task'])
             ->getForm();
     }
-}
 
+    
+    // public function showMenu(CategorieRepository $categoryRepository): Response 
+    // { 
+    //     $categories = $categoryRepository->findAll(); 
+    //     $formattedCategories = CategoryHelper::formatCategories($categories); 
+        
+    //     return $this->render('partials/menu.html.twig', [ 
+    //         'categories' => $formattedCategories, 
+    //     ]);
+    // }
+
+
+    public function search(Request $request, ProduitRepository $productRepository): Response
+    {
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+
+        $products = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $query = $form->get('query')->getData();
+            $products = $productRepository->findByQuery($query);
+        }
+
+        return $this->render('partials/header.html.twig', [
+            'form' => $form->createView(),
+            'products' => $products,
+        ]);
+    }
+}

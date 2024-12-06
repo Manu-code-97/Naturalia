@@ -1,50 +1,19 @@
-<nav id="nav">
+{# <nav id="nav">
     <div class=" justify-content-evenly container">
         <ul class="fody row">
             <li class="sub-menu-parent col-3" >
                 <a href="#">Nos rayons <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
-                
-                <ul class="sub-menu">
-                    <li>
-                        <a href="#">Fruits et Légumes</a>
-                        <ul class="sub-menu-enfant">
-                            <li><a href="#">Fruits de saison</a></li>
-                            <li><a href="#">Légumes racines</a></li>
-                            <li><a href="#">Aromates et herbes fraîches</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Épicerie Salée</a>
-                        <ul class="sub-menu-enfant">
-                            <li><a href="#">Céréales et légumineuses</a></li>
-                            <li><a href="#">Conserves bio</a></li>
-                            <li><a href="#">Produits secs</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Épicerie Sucrée</a>
-                        <ul class="sub-menu-enfant">
-                            <li><a href="#">Miels et confitures</a></li>
-                            <li><a href="#">Biscuits et snacks</a></li>
-                            <li><a href="#">Chocolats bio</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Produits Frais</a>
-                        <ul class="sub-menu-enfant">
-                            <li><a href="#">Produits laitiers</a></li>
-                            <li><a href="#">Produits végétaux frais</a></li>
-                            <li><a href="#">Charcuterie bio</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Boissons</a>
-                        <ul class="sub-menu-enfant">
-                            <li><a href="#">Jus de fruits et légumes</a></li>
-                            <li><a href="#">Boissons végétales</a></li>
-                            <li><a href="#">Thés et infusions</a></li>
-                        </ul>
-                    </li>
+                <ul class="sub-menu"> 
+                    {% for category in categoriesMenu %} 
+                        <li> 
+                            <a href="{{ path('catProduits',{'category':category.slug}) }}">{{ category.nom }}</a> 
+                            <ul class="sub-menu-enfant"> 
+                            {% for child in category.sousCategories %} 
+                                <li><a href="{{ path('sousCatProduits',{'category':category.slug,'sousCategory':child.slug}) }}">{{ child.nom }}</a></li> 
+                            {% endfor %} 
+                            </ul> 
+                        </li> 
+                    {% endfor %} 
                 </ul>
             </li>
             <li class="sub-menu-parent col-3" >
@@ -76,5 +45,56 @@
         </ul>
     </div>
 </nav>
+ #}
 
+<nav id="nav">
+    <div class="container justify-content-evenly">
+        <ul class="fody row" role="menu">
+            <li class="sub-menu-parent col-3" role="menuitem">
+                <a href="#">Nos rayons <img src="{{ asset('img/card/select.svg') }}" alt="Menu"></a>
+                <ul class="sub-menu" role="menu">
+                    {% for category in categoriesMenu %}
+                        <li role="menuitem">
+                            <a href="{{ path('catProduits', {'category': category.slug}) }}">{{ category.nom }}</a>
+                            <ul class="sub-menu-enfant" role="menu">
+                                {% for child in category.sousCategories %}
+                                    <li role="menuitem">
+                                        <a href="{{ path('sousCatProduits', {'category': category.slug, 'sousCategory': child.slug}) }}">{{ child.nom }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            </li>
+            <li class="sub-menu-parent col-3" >
+                <a href="#">Mes favoris <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
+                
+                <ul class="sub-menu">
+                    <li><a href="#">Liste 1</a></li>
+                    <li><a href="#">Liste 2</a></li>
+                    <li><a href="#">Liste 3</a></li>
+                    <li><a href="#">Liste 4</a></li>
+                    <li><a href="#">Liste 5</a></li>
+                    <li><a href="#">Liste 6</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu-parent col-3">
+                <a href="#">Recettes bio <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
+                
+                <ul class="sub-menu">
+                    <li><a href="#">Recette du jour</a></li>
+                    <li><a href="#">Recette du mois</a></li>
+                    <li><a href="#">Recette de l'année</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu-parent col-3">
+                <a href="#">Nos engagements <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
+
+                <ul class="sub-menu"></ul>
+            </li>
+        </ul>
+    </div>
+</nav>
 
