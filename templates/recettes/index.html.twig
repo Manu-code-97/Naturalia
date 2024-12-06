@@ -5,22 +5,27 @@
 {% block body %}
 
 <div class="block-affiche-r">
+ 
+    <div class="recetteunique-block">
+        <h3 class="recette-title">Recette: {{ recette.nom }}</h3>
+            <div class="image-wrapper">
+                <img src="{{ recette.image }}" alt="Image de la recette : {{ recette.nom }}" class="recette-image">
+            </div>
+            <p>description recette: {{ recette.description }}</p>
+            <h2>Produits associés :</h2>
+    </div>
 
     <div>
-            <h3>Recette: {{ recette.nom }}</h3>
-            <img src="{{recette.image}}" alt="">
-    </div>
-   
-    <div>
-        <p>description recette: {{ recette.description }}</p>
-        <h2>Produits associés :</h2>
-        {% if produits is not empty %}
-        
+    
+
+  {#  {% if produits is not empty %}
+    
         {% else %}
              <p>Aucun produit associé à cette recette.</p>
-        {% endif %}
-    
-            {{ include("partials/carousel.html.twig",{"products":produits}) }}	
+        {% endif %} 
+     
+ #}
+             {{  include("partials/carousel.html.twig",{"products":produits}) }}	 
     </div>
 </div>
 {% endblock %}
