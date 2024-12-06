@@ -58,18 +58,24 @@ class ProductController extends AbstractController
         $localForm = $request->query->get('localForm', null); 
         $produits = $repo->localForm($localForm);
         
-        
 
+
+        /* Affichage filtre de produit par label */
+        $labelIds = $request->query->all('labelForm'); // Récupère un tableau, même si une seule valeur
+        $labelIds = $repo->labelForm($labelIds);
+
+        
         //dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
         [ 'sousproduct' => $sousProduct, 
-        'productsPromos' => $productsPromos,  
+        'productsPromos' => $productsPromos, 
+        'label' => $labelIds,
         'produits' => $produits,
         /* 'sousCategories'=> $sousCategoryList, */
         'category'=> $category[0],
-        'sousCategoryId' => $sousCategory, // a changer quand on passera au slug
+        'sousCategory' => $sousCategory, // a changer quand on passera au slug
 
-    ]); 
+        ]); 
     }
 
 
