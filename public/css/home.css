@@ -58,19 +58,84 @@ main{
 
 /* css recette du jour Hamidou */
 
-#main .block-recette{
-    display: flex; 
-    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
-    gap: 20px; /* Espacement entre les cartes */
-    justify-content: flex-start; /* Alignement horizontal (modifiez si nécessaire) */
-    align-items: flex-start; /* Alignement vertical en haut */
-    padding: 15px;
-    margin: 20px auto; /* Centrage du conteneur (optionnel) */
-    background-color: #f9f9f9; /* Arrière-plan optionnel pour mieux visualiser */
+#recettes-du-moment{
+margin-bottom: 300px;
+
 }
 
+#main .block-recette{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    /* height: 400px; */
+    /* overflow: hidden; */
+    /* border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+     /* Permet aux éléments de passer à la ligne si nécessaire */
+    gap: 20px; /* Espacement entre les cartes */
+     /* Alignement horizontal (modifiez si nécessaire) */
+     /* Alignement vertical en haut */
+   /*  padding: 15px; */
+/* Centrage du conteneur (optionnel) */
+    background-color: #FFF9F2; /* Arrière-plan optionnel pour mieux visualiser */
+
+}
+.recettes-du-moment {
+    margin-bottom: 200px;
+}
+
+/* 
+article .recette-img-div img{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    align-self: stretch;
+}
+ */
+
+ article .recette-img-div{
+    flex: 0 1 60%; 
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 0;
+   
+
+ }
+ article .recette-img-div img{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    height: 395px;
+    
+}
+
+ 
 
 
+
+#ingredients{
+    margin: 20px;
+    margin-top: 24px;
+}
+
+#lien-recetteMomment {
+    display: block;
+    color: var(--White, #FFFEFB);
+    background-color: black;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 17px;
+    width: 190px;
+    padding: 0px 10px;
+    height: 44px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+}
 
 
 
