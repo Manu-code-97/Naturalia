@@ -115,10 +115,12 @@ public function findProductByLabel($labelProduit){
 }
 
 
+
     /* Trouver un produit en fonction de si il est local ou pas */
 
 public function localProduct($localProduit){
 
+    
     $dql=
     '
     SELECT p
@@ -132,6 +134,25 @@ public function localProduct($localProduit){
     
     return $query->getResult(); 
 }
+
+
+
+/* function pour trier avec local (si le produit est local ou affiche tout) */
+
+public function localForm($localForm){
+
+    $qb = $this->createQueryBuilder('p');
+    
+    if ($localForm == 1) {
+        $qb->where('p.local = :localProduit')
+        ->setParameter('localProduit', $localForm);
+    }
+    
+    dd($qb->getQuery()->getResult());
+
+    return $qb->getQuery()->getResult();
+}
+
 
 
 /* trier par prix et nom croissant  */
@@ -193,6 +214,9 @@ public function aleatProducts(int $nbProducts) {
 
     return $result;
 }
+
+
+
 
 
 /* SELECT * FROM produit as p INNER JOIN produit_label ON p.id=produit_id WHERE label_id={id};

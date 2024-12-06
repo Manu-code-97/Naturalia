@@ -45,17 +45,26 @@ class ProductController extends AbstractController
 
     /* Route pour afficher une sous catégorie d'une catégorie */
     #[Route('/categorie/{category}/{sousCategory}/', name: 'sousCatProduits')]
-    public function sousCategory (ProduitRepository $repo, CategorieRepository $repoCat, $category, $sousCategory): Response{
+    public function sousCategory (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, $category, $sousCategory): Response{
         $sousProduct = $repo->findProductsOfSousCategory($sousCategory); 
         $productsPromos = $repo -> getProductsOnPromotion();
         
         $category= $repoCat->showCategory($category);
         /* $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId()); */
+
+
+
+        /* Affichage trie local ou afficher tout les produit */
+        $localForm = $request->query->get('localForm', null); 
+        $produits = $repo->localForm($localForm);
         
+        
+
         //dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
         [ 'sousproduct' => $sousProduct, 
         'productsPromos' => $productsPromos,  
+        'produits' => $produits,
         /* 'sousCategories'=> $sousCategoryList, */
         'category'=> $category[0],
         'sousCategoryId' => $sousCategory, // a changer quand on passera au slug
