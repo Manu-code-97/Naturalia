@@ -119,6 +119,8 @@ class Product extends Fixture
             $fournisseur->setTelephone($fakerFR->serviceNumber());
             $fournisseur->setEmail($fakerFR->safeEmail());
             $fournisseur->setSlug($slugger->slug($fournisseur->getNom().'-'.$fournisseur->getPrenom())->lower());
+            $fournisseur->setImage('https://picsum.photos/id/'.$faker->numberBetween(0, 300).'/200');
+            $fournisseur->setDescription($faker->paragraph(6));
 
             $manager->persist($fournisseur);
             array_push($this->fournisseurs, $fournisseur);
