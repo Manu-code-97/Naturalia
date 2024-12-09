@@ -89,11 +89,14 @@ public function findProductsByCategory($productCategory) {
     $query = $this->getEntityManager()->createQuery($dql); 
     $query->setParameter('productCategory', $productCategory); 
     
+    
     return $query->getResult(); 
 }
 
 
-    /* Trouver un produit par son label */
+
+
+    /* Trouver un produit par son label(ne filtre pas!) */
 
 public function findProductByLabel($labelProduit){
 
@@ -114,10 +117,30 @@ public function findProductByLabel($labelProduit){
 }
 
 
-    /* Trouver un produit en fonction de si il est local ou pas */
+
+/* Function pour filtrer par label */
+public function labelForm(array $labelIds){
+
+    $qb = $this->createQueryBuilder('p') // Requête sur l'entité Produit.
+        ->join('p.label', 'l')          // Jointure avec la table des labels.
+        ->where('l.id IN (:labelIds)')   // Filtre les labels par liste d'IDs.
+        ->setParameter('labelIds', $labelIds)
+        ->groupBy('p.id')                // Regroupe par produit.
+        ->having('COUNT(DISTINCT l.id) = :nbLabels') // Vérifie que le produit a tous les labels.
+        ->setParameter('nbLabels', count($labelIds)); // Nombre exact de labels attendus.
+        ;
+        // dd($qb->getQuery()->getResult());
+    return $qb->getQuery()->getResult();
+
+}
+
+
+
+    /* Trouver un produit en fonction de si il est local ou pas(ne trie pas!) */
 
 public function localProduct($localProduit){
 
+    
     $dql=
     '
     SELECT p
@@ -131,6 +154,25 @@ public function localProduct($localProduit){
     
     return $query->getResult(); 
 }
+
+
+
+
+/* function pour trier avec local (si le produit est local ou affiche tout) */
+
+public function localForm($localForm){
+
+    $qb = $this->createQueryBuilder('p');
+    
+    if ($localForm == 1) {
+        $qb->where('p.local = :localProduit')
+        ->setParameter('localProduit', $localForm);
+    }
+
+    return $qb->getQuery()->getResult();
+}
+
+
 
 
 /* trier par prix et nom croissant  */
@@ -170,19 +212,22 @@ public function priceDesc($nomProduit){
 }
 
 
-    public function findByQuery(string $query): array
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.name LIKE :query OR p.description LIKE :query')
-            ->setParameter('query', '%'.$query.'%')
-            ->getQuery()
-            ->getResult();
-    }
+/* choisir 20 produit aléatoirement pour les catégorie  */
+
+public function aleatProducts(int $nbProducts) { 
+
+    $dql = 
+    '
+    SELECT p  
+    FROM App\Entity\Produit p 
+    INNER JOIN App\Entity\Categorie c
+    '; 
+
+    $query = $this->getEntityManager()->createQuery($dql); 
+    /* $query->setParameter('nbProducts', $nbProducts);  */
 
 
-
-
-    /* choisir 20 produit aléatoirement  */
+    $result = $query->getResult(); 
 
     public function aleatProducts(int $nbProducts) { 
 

@@ -18,7 +18,7 @@ class SousCategorieRepository extends ServiceEntityRepository
 
 
 
-     /* Fonction pour appeller un produit */
+      /* appel les sous catégorie */
      public function showSousCategory(int $sousCategory) : array
      {
          
@@ -26,7 +26,7 @@ class SousCategorieRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT s
             FROM App\Entity\SousCategorie s
-            WHERE s.id = :sousCategorie'
+            WHERE s.slug = :sousCategorie'
         )->setParameter('sousCategorie', $sousCategory) ;
      
         return $query->getResult();
@@ -35,7 +35,7 @@ class SousCategorieRepository extends ServiceEntityRepository
      }
 
 
-          /* Fonction pour appeller un produit */
+        /* appel les sous categorie d'une catégorie */
         public function getSousCategoriesFromCategory(int $category) : array
         {
 

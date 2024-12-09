@@ -4,120 +4,135 @@
 	{% include'partials/header.html.twig' %}
 {% endblock %}
 
-{% block title %}Hello HomeController!
+{% block title %}
+	Hello HomeController!
 {% endblock %}
 
 {% block body %}
 	<main id="main" class="yellow">
 		<article class="container d-flex" id="p-one">
 			<div class="yellow">
-				<img src="{{ asset('img/sac-de-courses.png') }}" alt="Sac de courses">
-			</div>
-
+				<img src="{{ asset('img/sac-de-courses.png') }}" alt="Sac de courses"></div>
 
 			<div id="title" class="yellow">
 				<h1 class="yellow">
 					C’est un choix de vivre
 					<br>
-					<span class="red">sain</span>
+					<span class="red">
+						sain
+					</span>
 					et
-					<span class="red">authentique</span>.
+					<span class="red">
+						authentique
+					</span>
+					.
 					<br>
 					Votre choix.
 				</h1>
 
-				<button>Je m'engage</button>
+				<button>
+					Je m'engage
+				</button>
 			</div>
 		</article>
 
 		<div class="carousel container yellow">
 
-			<h3>Promotions</h3>
+			<h3>
+				Promotions
+			</h3>
 			{{ include('/partials/carousel.html.twig', {'products': productsPromo}) }}
 		</div>
 
-
 		<article class="container yellow" id="p-two">
-			<h3>Le Fournisseur du Moment</h3>
+			<h3>
+				Le Fournisseur du Moment
+			</h3>
 
 			<div class="d-flex yellow">
 				<div>
-					<img src="https://picsum.photos/400/267/?blur" alt="Un fournisseur">
-				</div>
+					<img src="https://picsum.photos/400/267/?blur" alt="Un fournisseur"></div>
 
 				<div class="resume yellow">
-					<h6 class="yellow">Paul Legrand</h6>
-					<p class="yellow">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, natus autem tempora ipsum facere quod molestias cum consectetur quam recusandae odio beatae aperiam expedita at iure dolores suscipit unde officiis aut fugit sapiente labore! Provident numquam sequi adipisci magnam dolorem voluptas incidunt voluptates velit tempora aliquam. Nostrum fugit nemo saepe.</p>
-					<button>Découvrir</button>
+					<h6 class="yellow">
+						Paul Legrand
+					</h6>
+					<p class="yellow">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, natus autem tempora ipsum facere quod molestias cum consectetur quam recusandae odio beatae aperiam expedita at iure dolores suscipit unde officiis aut fugit sapiente labore! Provident numquam sequi adipisci magnam dolorem voluptas incidunt voluptates velit tempora aliquam. Nostrum fugit nemo saepe.
+					</p>
+					<button>
+						Découvrir
+					</button>
 				</div>
 			</div>
 		</article>
 
-		
-	<article id="recettes-du-moment">
-	<div class="container-recette">	
-		{# {% block title %}Recettes du jour{% endblock %} #}
-		<h1>Recette du Moment</h1>
-		{% if recetteDuJour %}
-			<div  class="card-group flex-nowrap flex-row" id="card">
-					<h3>{{ recetteDuJour.nom }}</h3>
-  					<img src="{{recetteDuJour.image}}" alt="test-img" >
-  					<div class="card-body">
-   				 	<h5 class="card-title">Produit</h5>
-    			<a href="#" class="btn btn-primary">Voir recette</a>
-  			</div>
+		<article id="recettes-du-moment">
+			<h3>Recette du Moment</h3>
+			<div class="block-recette">
 
-    
-		 <ul>
-        		{% for produit in produitsRecette %}
-            		<li>
-                	<strong>{{ produit.nom }}</strong> - {{ produit.prix }} €
-                <p>{{ produit.description }}</p>
-            		</li>
-        		{% else %}
-            <li>Aucun produit lié à cette recette.</li>
-        		{% endfor %}
-   		 </ul>
-   			{% else %}
-        		<p>Aucune recette disponible pour aujourd'hui.</p>
-    		{% endif %}
+				<div class="block-imgRecette">
+					<div class="recette-img-div">
+						<img src="{{recetteDuMoment.image}}" alt="recette-image">
 
-			{# <a href=""><button class="bg-info-subtle " >Voir recette</button></a> #}
-	</div>
+					</div>
+					<div>
+						<div class="d-flex justify-content-center">
+							{# <h3>{{recetteDuMoment.nom}}</h3> #}
+							<h3>NOM Recette</h3>
+						</div>
+						<div id="lien-button" class="d-flex justify-content-center">
+							<a href="" id="lien-recetteMomment">Voir la recette</a>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="d-flex justify-content-center" id="ingredients">
+					{{ include("partials/carousel.html.twig",{"products":recetteDuMoment.getProduit}) }}
+				</div>
+			</div>
 		</article>
 
 		<article class="container yellow" id="newsletter">
 			<div class="yellow">
 				<div class="yellow">
-					<h3>Newsletter</h3>
-					<p>Lorem ipsum dolor sit amet consectetur.</p>
+					<h3>
+						Newsletter
+					</h3>
+					<p>
+						Lorem ipsum dolor sit amet consectetur.
+					</p>
 					<div class="yellow">
 						<form id="lk" action="">
 							<div class="yellow">
 								<input type="email" id="email" placeholder="Email" for="email">
-								<button type="submit"><img src="img/input/arrow.svg" alt=""></button>
+								<button type="submit">
+									<img src="img/input/arrow.svg" alt=""></button>
 							</div>
 						</form>
 					</div>
 				</div>
-
 
 			</div>
 
 		</article>
 
 		<section class="container yellow">
-			<h3 class="yellow">Nos services</h3>
+			<h3 class="yellow">
+				Nos services
+			</h3>
 
 			<div class="d-flex justify-content-around yellow" id="services">
 				<div class="yellow">
 					<div>
-						<img src="{{ asset('img/card/cadenas.svg') }}" alt="?">
-					</div>
+						<img src="{{ asset('img/card/cadenas.svg') }}" alt="?"></div>
 
 					<figcaption>
 						<p>
-							<strong>Paiement</strong>
+							<strong>
+								Paiement
+							</strong>
 							<br>
 							100% sécurisé
 						</p>
@@ -126,12 +141,13 @@
 
 				<div>
 					<div>
-						<img src="{{ asset('img/card/camion.svg') }}" alt="?">
-					</div>
+						<img src="{{ asset('img/card/camion.svg') }}" alt="?"></div>
 
 					<figcaption>
 						<p>
-							<strong>Livraison gratuite</strong>
+							<strong>
+								Livraison gratuite
+							</strong>
 							<br>
 							Dès 120€ d'achat
 						</p>
@@ -140,12 +156,13 @@
 
 				<div>
 					<div>
-						<img src="{{ asset('img/card/balise.svg') }}" alt="?">
-					</div>
+						<img src="{{ asset('img/card/balise.svg') }}" alt="?"></div>
 
 					<figcaption>
 						<p>
-							<strong>Suivi de commande</strong>
+							<strong>
+								Suivi de commande
+							</strong>
 							<br>
 							100% sécurisé
 						</p>
@@ -154,12 +171,13 @@
 
 				<div>
 					<div>
-						<img src="{{ asset('img/card/cube.svg') }}" alt="?">
-					</div>
+						<img src="{{ asset('img/card/cube.svg') }}" alt="?"></div>
 
 					<figcaption>
 						<p>
-							<strong>Retrait offert 1h</strong>
+							<strong>
+								Retrait offert 1h
+							</strong>
 							<br>
 							en magasin
 						</p>
@@ -168,12 +186,13 @@
 
 				<div>
 					<div>
-						<img src="{{ asset('img/card/fleches.svg') }}" alt="?">
-					</div>
+						<img src="{{ asset('img/card/fleches.svg') }}" alt="?"></div>
 
 					<figcaption>
 						<p>
-							<strong>Retours & échanges</strong>
+							<strong>
+								Retours & échanges
+							</strong>
 							<br>
 							offerts 365 jours
 						</p>
