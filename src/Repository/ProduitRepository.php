@@ -229,29 +229,23 @@ public function aleatProducts(int $nbProducts) {
 
     $result = $query->getResult(); 
 
-    public function aleatProducts(int $nbProducts) { 
-
-        $dql = 
-        '
-        SELECT p  
-        FROM App\Entity\Produit p 
-        INNER JOIN App\Entity\Categorie c
-        '; 
-
-
-        
-        $query = $this->getEntityManager()->createQuery($dql); 
-        /* $query->setParameter('nbProducts', $nbProducts);  */
-
-        $query->setMaxResults($nbProducts);
-
-        
-        
-        $result = $query->getResult(); 
-
         shuffle($result);
 
         return $result;
+    }
+
+    public function findByQuery(string $query)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.nom LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->getQuery()
+            ->getResult();
+
+            dd($results);
+
+            return $results;
+
     }
 
 }

@@ -1,0 +1,8 @@
+<div>
+    {{ form_start(form, {'attr': {'class': 'd-flex'}}) }}
+        <div>
+            {{ form_widget(form.query, {'attr': {'class': 'form-control', 'placeholder': 'Rechercher un produit...'}}) }}
+            <img src="{{ asset('img/input/loupe.svg') }}" alt="?" onclick="document.getElementById('searchBox').form.submit();">
+        </div>
+    {{ form_end(form) }}
+</div>
