@@ -16,6 +16,8 @@ class CheckOutController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/panier', name: 'app_panier_paiement')]
     public function panier(): Response
     {
@@ -24,10 +26,22 @@ class CheckOutController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/panier/paiement', name: 'app_panier_paiement')]
     public function panierPaiement(): Response
     {
-        return $this->render('checkout/paiementDelivery.html.twig', [
+        return $this->render('checkout/delivery.html.twig', [
+            'controller_name' => 'CheckOutController',
+        ]);
+    }
+
+
+    
+    #[Route('/confirmation', name: 'app_confirmation')]
+    public function confirmation(): Response
+    {
+        return $this->render('checkout/confirmation.html.twig', [
             'controller_name' => 'CheckOutController',
         ]);
     }
