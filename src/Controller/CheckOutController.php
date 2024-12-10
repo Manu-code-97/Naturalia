@@ -15,4 +15,20 @@ class CheckOutController extends AbstractController
             'controller_name' => 'CheckOutController',
         ]);
     }
+
+    #[Route('/panier', name: 'app_panier_paiement')]
+    public function panier(): Response
+    {
+        return $this->render('panier/index.html.twig', [
+            'controller_name' => 'CheckOutController',
+        ]);
+    }
+
+    #[Route('/panier/paiement', name: 'app_panier_paiement')]
+    public function panierPaiement(): Response
+    {
+        return $this->render('checkout/paiementDelivery.html.twig', [
+            'controller_name' => 'CheckOutController',
+        ]);
+    }
 }
