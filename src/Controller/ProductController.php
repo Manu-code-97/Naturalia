@@ -32,7 +32,7 @@ class ProductController extends AbstractController
         $category= $repoCat->showCategory($category);
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
-        $categoriesMenu = CategoryHelper::showMenu($repoCat);
+        
 /* dd($categoriesMenu); */
         // dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
@@ -42,7 +42,6 @@ class ProductController extends AbstractController
         'category'=> $category[0],
         'sousCategories'=> $sousCategoryList,
         'sousCategoryId' => 0,
-        'categoriesMenu' => $categoriesMenu,
         ]); 
     }
 
@@ -135,7 +134,7 @@ class ProductController extends AbstractController
     }
 
 
-}
+
 
     
     // public function showMenu(CategorieRepository $categoryRepository): Response 

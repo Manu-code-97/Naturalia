@@ -24,19 +24,19 @@ class CategorieRepository extends ServiceEntityRepository
             FROM App\Entity\Categorie c 
             WHERE c.slug = :categorie'
         )->setParameter('categorie', $category) ;
-
+    }
     //     return $query->getResult();
 
     // }
 
-    public function categoryAll(): array
-{
+    /* public function categoryAll(): array
+    {
     return $this->createQueryBuilder('c')
         ->leftJoin('c.sousCategories', 'sc')
         ->addSelect('sc') // Indique de charger également les sous-catégories
         ->getQuery()
         ->getResult();
-}
+    } */
 
     /* Appel une catégorie en particulier */
     public function showCategory(string $category) : array
@@ -52,7 +52,7 @@ class CategorieRepository extends ServiceEntityRepository
         return $query->getResult();
 
     }
-
+}
 
 
 
@@ -80,4 +80,4 @@ class CategorieRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}
+

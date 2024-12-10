@@ -1,57 +1,67 @@
-#carousel{
+#carousel {
     --black-naturalia: #250C0E;
     --white-naturalia: #FFFEFB;
     --red-naturalia: #840000;
     --yellow-naturalia: #FFF9F2;
     --grey-naturalia: #EFEFEF;
+    --transition-duration: 0.3s;
+    --border-radius: 10px;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-#nav a{
+/* Styles généraux pour les liens de navigation */
+#nav a {
     text-decoration: none;
-    color: black;
+    color: var(--red-naturalia);
     margin-top: 6px;
+    font-weight: bold;
+    transition: color var(--transition-duration);
 }
 
-.sub-menu-parent { 
-    position: relative; 
+#nav a:hover {
+    color: var(--black-naturalia);
 }
 
+/* Styles pour les éléments de menu parent */
+.sub-menu-parent {
+    position: relative;
+}
+
+/* Styles pour les sous-menus */
 .sub-menu {
-    visibility: hidden; /* hides sub-menu */
+    visibility: hidden; /* Cache le sous-menu */
     opacity: 0;
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
-    transform: translateY(-2em);
+    width: 200px;
+    background-color: var(--white-naturalia);
+    box-shadow: var(--box-shadow);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    transform: translateY(-10px);
     z-index: -1;
-    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+    transition: all var(--transition-duration) ease-in-out, visibility 0s linear var(--transition-duration), z-index 0s linear 0.01s;
 }
-
 
 /* Styles pour les sous-menus enfants */
 .sub-menu-enfant {
-    visibility: hidden; /* hides sub-menu-enfant */
+    visibility: hidden; /* Cache le sous-menu enfant */
     opacity: 0;
     position: absolute;
     top: 0;
     left: 100%;
-    width: 100%;
-    transform: translateX(-2em);
+    width: 200px;
+    background-color: var(--white-naturalia);
+    box-shadow: var(--box-shadow);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    transform: translateX(-10px);
     z-index: -1;
-    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+    transition: all var(--transition-duration) ease-in-out, visibility 0s linear var(--transition-duration), z-index 0s linear 0.01s;
 }
 
-.sub-menu,
-.sub-menu-enfant {
-    animation: fadeIn 0.3s ease-in-out;
-    background: transparent;
-    transition: all 0.3s ease-in-out;
-    background: #FFF9F2;
-}
-
-
+/* Animation pour les sous-menus */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -63,51 +73,82 @@
     }
 }
 
+/* Applique l'animation fadeIn aux sous-menus */
+.sub-menu,
+.sub-menu-enfant {
+    animation: fadeIn var(--transition-duration) ease-in-out;
+}
 
+/* Affiche le sous-menu au survol du parent */
 .sub-menu-parent:focus .sub-menu,
 .sub-menu-parent:focus-within .sub-menu,
 .sub-menu-parent:hover .sub-menu {
-    visibility: visible; /* shows sub-menu */
+    visibility: visible;
     opacity: 1;
     z-index: 1;
-    transform: translateY(0%);
-    transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+    transform: translateY(0);
+    transition-delay: 0s, 0s, var(--transition-duration);
 }
 
+/* Affiche le sous-menu enfant au survol */
 .sub-menu li:hover > .sub-menu-enfant {
     visibility: visible;
     opacity: 1;
     z-index: 1;
-    transform: translateX(0%);
-    transition-delay: 0s, 0s, 0.3s;
+    transform: translateX(0);
+    transition-delay: 0s, 0s, var(--transition-duration);
 }
 
-/* presentational */
-.fody { padding: 2%; font: 18px/1.4 sans-serif; }
+/* Styles de présentation */
+.fody {
+    padding: 2%;
+    font: 18px/1.4 sans-serif;
+}
 
-nav a { color: black; display: block; padding: 0.5em 1em; text-decoration: none; }
-nav a:hover { color: green }
+nav a {
+    color: black;
+    display: block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: var(--grey-naturalia);
+}
+
 nav ul,
-nav ul li { list-style-type: none; padding: 0; margin: 0; }
+nav ul li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
-nav > ul { background: white; text-align: center; }
-nav > ul > li { display: inline-block;  }
-nav > ul > li:first-child { border-left: none; }
+nav > ul {
+    background: white;
+    text-align: center;
+}
 
+nav > ul > li {
+    display: inline-block;
+}
 
+nav > ul > li:first-child {
+    border-left: none;
+}
 
+/* Styles pour les petits écrans */
 @media (max-width: 768px) {
     nav > ul > li {
         display: block;
         width: 100%;
         text-align: left;
     }
-    
+
     .sub-menu {
         position: relative;
         transform: none;
     }
-    
+
     .sub-menu-enfant {
         position: relative;
         transform: none;
