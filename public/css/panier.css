@@ -1,0 +1,122 @@
+#livraison{
+    img{
+        margin-right: 5px;
+    }
+
+    .top-button{
+        width: 295px;
+        color: var(--Moody-gray, #675F5F);
+        border: solid 2px #675F5F;
+        
+        border-radius: 12px;
+        padding: 8px 10px;
+        
+    }
+
+    section{
+        margin-bottom: 72px;
+    }
+
+    .small-input{
+        width: 340px;
+        background: var(--Light-gray, #EFEFEF);
+        color: var(--Moody-gray, #675F5F);
+        border: 1.5px solid var(--Moody-gray, #675F5F);
+        border-radius: 12px; 
+        padding: 10px 16px;
+        margin-bottom: 19px;
+    }
+
+    .large-input{
+        width: 716px;
+        background: var(--Light-gray, #EFEFEF);
+        color: var(--Moody-gray, #675F5F);
+        border: 1.5px solid var(--Moody-gray, #675F5F);
+        border-radius: 12px;
+        padding: 10px 16px;
+        margin-bottom: 19px;
+    }
+
+    .circle{
+        background: var(--Light-gray, #EFEFEF);
+        color: var(--Moody-gray, #675F5F);
+            p{
+                padding: 14px;
+                text-align: center;
+            }
+    }
+
+    .timeslot{
+        width: 190px;
+        border: 1px solid var(--Black, #250C0E);
+        border-radius: 12px;
+        margin-bottom: 17px;
+            p{
+                text-align: center;
+                margin-top: 17px;
+            }
+    }
+
+    .bottom-button{
+        background: var(--moody-gray, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #868686);
+        padding: 15px 10px;
+        border: 1px solid var(--moody-gray, #868686);
+        color: var(--white, #F6F6F6);
+        border-radius: 12px;
+        margin-bottom: 160px;
+    }
+
+    nav{
+        padding: 10px 16px;
+        margin-top: 25px;
+        margin-bottom: 80px;
+         div{
+                background: #EFEFEF;
+                border-radius: 50px;
+                border: 1px solid #868686;
+                
+                color: #000;
+                
+                
+                div{
+                    
+                    border: none;
+                    
+                    p{
+                        padding: 10px;
+                        margin-top: 8px;
+                    }
+
+                    p:hover{
+                        background: var(--White, #FFFEFB);
+                        box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.25);
+                        border-radius: 20px;
+                        
+                    }
+                }
+         }
+    }
+    #collect{
+        .magasin{
+            color: var(--Moody-gray, #675F5F);
+            border-radius: 24px;
+            padding: 24px 20px;
+            margin-bottom: 31px;
+            border: 1.5px solid var(--Moody-gray, #675F5F);
+            background-color: var(--Light-gray, #EFEFEF);
+        }
+        .relative{
+            position: relative;
+        }
+        .loupe{
+            position: relative;
+            right: 700px;
+        }
+        .large-input{
+            padding-left: 136px;
+        }
+    }
+}
+
+
+
