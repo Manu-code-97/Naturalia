@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+<div id="detaiLivraison">
+    <h5>Adresse de livraison</h5>
+    <h5>Horaires:</h5>
+    <h4>Détails de livraison</h4>
+</div>
+<div>
+    <h3>Paiement</h3>
+    <p>Sélectionnez un mode de paiement</p>
+</div>
+<div id="modePaiement" class="">
+    <input type="radio" name="CB" id="cb"><img src="/img/PaymentCB.png" alt="">
+    <input type="radio" name="Visa" id="visa"><img src="/img/paymentVisa.png" alt="">
+    <input type="radio" name="Mastercard" id="mastercard"><img src="/img/paymentMastercard.png" alt="">
+</div>
+<p>Ajouter une carte</p>
+<div id="ajoutCarte" class="">
+    <form action="">
+        <input type="text" name="CardNumber" id="cardNumber" placeholder="Numéro de carte"><img src="/img/input-card-order.png" alt="">
+        <input type="date" name="DateValidité" id="dateValidité" placeholder="MM/AA">
+        <input type="text" name="CVV" id="cvv" placeholder="CVV">
+    </form>
+    <input type="checkbox" name="sauvegardeCarte" id="SaveCard">
+    <a href="#">Où est ma CVV ?</a>
+</div>
+<div id="facturation" class="">
+    <input type="checkbox" name="adresseFacturation" id="adresseFacturation">
+    <form action="">
+        <input type="text" name="prenom" id="FirstName" placeholder="Prénom">
+        <input type="text" name="nom" id="LastName" placeholder="Nom">
+        <input type="text" name="adresse" id="Adresse" placeholder="Adresse">
+        <input type="email" name="email" id="Email" placeholder="E-mail">
+        <input type="text" name="telephone" id="phoneNumber" placeholder="Numéro de téléphone">
+    </form>
+    <button type="submit">Confirmer</button>
+</div>
+{% endblock %}
