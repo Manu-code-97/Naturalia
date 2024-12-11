@@ -95,7 +95,7 @@ public function findProductsByCategory($productCategory)
 
 
 /* Function pour filtrer par label et local */
-public function filterByLabelAndLocal($localForm , $labelIds, $sousCategoryId , $categoryId )
+public function filterByLabelAndLocal($localForm , $labelIds, $categoryId = null, $sousCategoryId = null)
 {
     $qb = $this->createQueryBuilder('p');
 
@@ -122,14 +122,14 @@ public function filterByLabelAndLocal($localForm , $labelIds, $sousCategoryId , 
             ->setParameter('sousCategorySlug', $sousCategoryId);
     }
     
-    if (!empty($categoryIds)) {
+    if (!empty($categoryId)) {
         $qb->join('p.sousCategorie', 'cat')
-            ->andWhere('cat.categorie IN (:categoryIds)')
-            ->setParameter('categoryIds', $categoryIds);
+            ->andWhere('cat.categorie IN (:categoryId)')
+            ->setParameter('categoryId', $categoryId);
     }
 
     
-    dd($qb->getQuery()->getResult());          
+    // dd($qb->getQuery()->getResult());          
 
     // Exécution de la requête
     return $qb->getQuery()->getResult();
