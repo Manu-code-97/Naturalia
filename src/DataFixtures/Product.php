@@ -19,6 +19,7 @@ use App\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use phpDocumentor\Reflection\PseudoTypes\True_;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class Product extends Fixture
@@ -74,6 +75,14 @@ class Product extends Fixture
     private array $commandes = [];
 
     private array $codeReductions = [];
+
+    private UserPasswordHasherInterface $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
 
     public function load(ObjectManager $manager): void
     {
@@ -181,7 +190,7 @@ class Product extends Fixture
         }
 
         // UTILISATEURS
-        for ($i=0; $i < 150; $i++) { 
+        for ($i=0; $i < 50; $i++) { 
             $utilisateur = new Utilisateur();
             $utilisateur->setNom($fakerBE->lastName());
             $utilisateur->setPrenom($faker->firstNameMale());
@@ -190,8 +199,11 @@ class Product extends Fixture
             $utilisateur->setAdresse($fakerFR->departmentNumber().' '.$this->adresse[rand(0,2)].' '.$fakerFR->region());
             $utilisateur->setCodePostal($faker->randomNumber(5, true));
             $utilisateur->setVille($fakerFR->departmentName());
+            $utilisateur->setPassword($this->hasher->hashPassword($utilisateur,'welovemanu'));
             // LIAISON FAVORIS
-            if (rand(0,2)!==0) {
+            if (rand(0,1)!==0) {
+                $utilisateur->addFavori($this->produits[rand(0,count($this->produits)-1)]);
+                $utilisateur->addFavori($this->produits[rand(0,count($this->produits)-1)]);
                 $utilisateur->addFavori($this->produits[rand(0,count($this->produits)-1)]);
                 $utilisateur->addFavori($this->produits[rand(0,count($this->produits)-1)]);
                 $utilisateur->addFavori($this->produits[rand(0,count($this->produits)-1)]);
