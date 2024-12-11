@@ -16,9 +16,7 @@ class CheckOutController extends AbstractController
         ]);
     }
 
-
-
-    #[Route('/panier', name: 'app_panier_paiement')]
+    #[Route('/panier', name: 'app_panier')]
     public function panier(): Response
     {
         return $this->render('panier/index.html.twig', [
