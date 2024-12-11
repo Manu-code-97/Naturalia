@@ -24,6 +24,9 @@ class CategorieRepository extends ServiceEntityRepository
             FROM App\Entity\Categorie c 
             WHERE c.slug = :categorie'
         )->setParameter('categorie', $category) ;
+
+        return $query->getResult();                                                                     
+
     }
     //     return $query->getResult();
 

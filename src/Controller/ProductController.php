@@ -26,18 +26,30 @@ class ProductController extends AbstractController
 
     /* Cette route affiche une catégorie ainsi que ces produits */
     #[Route('/categorie/{category}', name: 'catProduits', priority:1)]
-    public function categoryProduit (ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category): Response{
-        $products = $repo -> findProductsByCategory($category);
+    public function categoryProduit (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category): Response{
+      
+         $products = $repo -> findProductsByCategory($category);
         $productsPromos = $repo -> getProductsOnPromotion();
         $category= $repoCat->showCategory($category);
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
+
+         /* Affichage filtre de produit par label et local */
+        $localForm = $request->query->get('local', null); 
+        $labelIds = $request->query->all('label'); 
+        $sousCategoryId = $request->query->get('sousCategorie');
+        $categoryIds = $request->query->get('Categorie'); 
+
+
+         // Appel de la méthode avec les bons paramètres
+        $labelLocal = $repo->filterByLabelAndLocalCategory($localForm, $labelIds,  $sousCategoryId , $categoryIds  );
+
+
         
-/* dd($categoriesMenu); */
-        // dd ($products);
+        //dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
-        [ 
-        'products'=>$products,
+        [ 'products' => $products, 
+        'labelLocal' => $labelLocal,
         'productsPromos' => $productsPromos,
         'category'=> $category[0],
         'sousCategories'=> $sousCategoryList,
@@ -47,40 +59,44 @@ class ProductController extends AbstractController
 
 
 
+
     /* Route pour afficher une sous catégorie d'une catégorie */
     #[Route('/categorie/{category}/{sousCategory}/', name: 'sousCatProduits')]
     public function sousCategory (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, $category, $sousCategory): Response{
-        $sousProduct = $repo->findProductsOfSousCategory($sousCategory); 
-        $productsPromos = $repo -> getProductsOnPromotion();
         
-        $category= $repoCat->showCategory($category);
-        /* $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId()); */
-
-
-
-        /* Affichage trie local ou afficher tout les produit */
-        $localForm = $request->query->get('localForm', null); 
-        $produits = $repo->localForm($localForm);
+         // Charger la catégorie principale
+    $category = $repoCat->showCategory($category);
         
+    
+        // Charger les produits de la sous-catégorie
+    $sousProduct = $repo->findProductsOfSousCategory($sousCategory);
 
 
-        /* Affichage filtre de produit par label */
-        $labelIds = $request->query->all('labelForm'); // Récupère un tableau, même si une seule valeur
-        $labelIds = $repo->labelForm($labelIds);
+    // Produits en promotion
+    $productsPromos = $repo->getProductsOnPromotion();
 
-        
-        //dd ($products);
-        return $this->render('product/sousCatProducts.html.twig', 
-        [ 'sousproduct' => $sousProduct, 
+
+    // Récupérer les filtres depuis la requête
+    $localForm = $request->query->get('local', null); 
+    $labelIds = $request->query->all('label'); 
+
+    $sousCategoryId = $sousCategory; 
+    $categoryId = $category[0]->getId(); 
+
+    // Appel de la méthode de filtrage par label et local
+    $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, $sousCategoryId, [$categoryId]);
+
+    // Afficher la vue
+    return $this->render('product/sousCatProducts.html.twig', [
+        'sousproduct' => $sousProduct, 
         'productsPromos' => $productsPromos, 
-        'label' => $labelIds,
-        'produits' => $produits,
-        /* 'sousCategories'=> $sousCategoryList, */
-        'category'=> $category[0],
-        'sousCategory' => $sousCategory, // a changer quand on passera au slug
-
-        ]); 
+        'labelLocal' => $labelLocal,
+        'category' => $category[0],
+        'sousCategory' => $sousCategory,
+    ]);
     }
+    
+
 
 
     /* Cette route affiche un produit d'une sous catégorie */
@@ -90,19 +106,19 @@ class ProductController extends AbstractController
 
         /* Affichage filtre de produit par label et local */
         $localForm = $request->query->get('local', null); 
-        $labelIds = $request->query->all('label');
+        $labelIds = $request->query->all('label');  
         $categoryIds = $request->query->get('Categorie');
         $sousCategoryId = $request->query->get('sousCategorie');
 
         // Appel de la méthode avec les bons paramètres
         $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, $sousCategoryId , $categoryIds );
-
+        
         $productsSelection = $repo -> aleatProducts(20);
         //dd ($productsSelection);
         return $this->render('product/detail.html.twig', 
         [ 'productDetail' => $productDetail, 
         'labelLocal' => $labelLocal , 
-        'productsSelection' => $productsSelection,
+        'productsSelection' => $productsSelection, 
     ]); 
     }
 
