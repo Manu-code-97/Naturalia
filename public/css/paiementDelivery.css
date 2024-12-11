@@ -1,0 +1,56 @@
+#modePaiement{
+    display: flex;
+    width: 183px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+#ajoutCarte{
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    gap: 37px;
+}
+
+#ajoutCarte input{
+    border-radius: 12px;
+    border: 1px solid var(--Black, #250C0E);
+}
+
+#ajoutCarte img{
+    /* display: flex;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0; */
+}
+
+#ajoutCarte a{
+    color: var(--Black, #250C0E);
+}
+
+#facturation{
+    display: flex;
+    width: 716px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 19px;
+}
+
+#facturation input{
+    border-radius: 12px;
+    border: 1.5px solid var(--Moody-gray, #675F5F);
+    background: var(--Light-gray, #EFEFEF);
+    
+}
+
+#facturation button{
+    border-radius: 12px;
+    border: 1px solid var(--moody-gray, #868686);
+    background: var(--moody-gray, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #868686);
+    color: var(--white, #F6F6F6);
+}
