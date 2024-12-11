@@ -75,23 +75,24 @@ public function findProductsOfSousCategory($sousCategory) {
     
     /* Fonction pour trouver des produit par rappor a sa catégorie dans le product controller */
 
-public function findProductsByCategory($productCategory) { 
 
-    $dql = 
-    '
-    SELECT c,  p , s 
-    FROM  App\Entity\Categorie c
-    INNER JOIN c.sousCategories s 
-    INNER JOIN s.produit p
-    WHERE c.slug=:productCategory
-    '; 
-    
-    $query = $this->getEntityManager()->createQuery($dql); 
-    $query->setParameter('productCategory', $productCategory); 
-    
-    
-    return $query->getResult(); 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!! ne retourne pas des produits !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+public function findProductsByCategory($productCategory)
+{
+    $dql = '
+        SELECT p
+        FROM App\Entity\Produit p
+        INNER JOIN p.sousCategorie s
+        INNER JOIN s.categorie c
+        WHERE c.slug = :productCategory
+    ';
+
+    $query = $this->getEntityManager()->createQuery($dql);
+    $query->setParameter('productCategory', $productCategory);
+
+    return $query->getResult();
 }
+
 
 
 
