@@ -22,23 +22,30 @@
                 </div>
             </nav>
 
-			<div class="blockProduits container row">
-				{% for produit in products %}
-                <div class="card card-group col-3">
-					<div class="card me-2" style="width: 15rem;">
-						<img src="{{produit[0].image}}" class="card-img-top" alt="">
-							<div class="card-body">
-								<h5 class="card-title">{{produit[0].nom}}</h5>
-								<p class="card-text">{{produit[0].description}}</p>
-								<button type="button">Ajouter<img src="{{ asset('/img/cart.png') }}" alt=""></button>
-								</div>
-							</div>
-
-					</div>
-					{% endfor %}
-			
+            <div class="row">
+            {% for produit in products %}
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100" style="width: 100%;">
+                        <img src="{{ produit.image }}" 
+                             alt="Image de {{ produit.nom }}" 
+                             class="card-img-top rounded" 
+                             style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ produit.nom }}</h5>
+                            <p class="card-text text-muted">{{ produit.description }}</p>
+                            <p class="card-text font-weight-bold">{{ produit.prix }} €</p>
+                            <button type="button" class="btn btn-dark btn-sm w-100">
+                                Ajouter au panier
+                                <img src="{{ asset('/img/cart.png') }}" alt="Panier" style="width: 16px; margin-left: 5px;">
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            {% else %}
+                <p class="text-center text-muted">Aucun produit disponible dans cette catégorie.</p>
+            {% endfor %}
+        </div>
+        
 
 
 {% endblock %}
