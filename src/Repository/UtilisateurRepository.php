@@ -56,4 +56,45 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+
+    /* Function pour afficher les produit de l'utilisateur en favoris */
+    public function productInFavoris()
+    {
+    
+        
+
+
+    }
+
+
+    /* Function pour afficher l'historique d'achat du client */
+    public function productInHistorique($utilisateur)
+    {
+        $dql=
+        '
+        SELECT p
+        FROM App\Entity\produit p
+        INNER JOIN App\Entity\Commande c 
+        inner join App\Entity\Utilisateur u
+        WHERE u.id =:utilisateur
+        ORDER BY p.id ASC
+        
+        ';
+
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameter('utilisateur', $utilisateur);
+    
+    dd($query->getResult());
+    return $query->getResult(); 
+
+        
+    }
 }
+
+
+/* SELECT * FROM produit as p 
+INNER JOIN commande_produit as cp ON p.id=produit_id
+INNER JOIN commande as c ON commande_id=c.id
+WHERE utilisateur_id=1062
+ORDER BY p.id ASC; */
