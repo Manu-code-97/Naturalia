@@ -106,25 +106,8 @@ class ProductController extends AbstractController
     ]); 
     }
 
-    /* Affiche la liste des produit un (test) */
-   // #[Route('/{sousCategory}', name: 'product_list')]
-    //public function list($sousCategory, ProduitRepository $repo , PaginatorInterface $paginator, Request $request): Response 
-    //{
-        //$queryBuilder = $repo->createQueryBuilder('p');
-        
 
-        //$pagination = $paginator->paginate(
-            //$queryBuilder,
-            //$products,
-            //$request->query->getInt('page ', 1 ),
-            //10
-        //);
-        /* dump($pagination);
-        return $this->render('product/index.html.twig', [
-        'pagination' => $pagination,
-        'sousProduct' => $sousProduct,
-        ]);
-    } */
+     
 
 
 

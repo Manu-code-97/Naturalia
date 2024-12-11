@@ -4,17 +4,13 @@
             <a href=""><img src="{{ asset('img/logo.png') }}" alt=""></a>
         </div>
 
-        
-            <div>
-                <form action="">
-                    <div>
-                        {{ render(controller('App\\Controller\\SearchboxController::searchBox')) }}
-                        {# <input type="text" id="searchBox" placeholder="Rechercher un produit...">
-                        <img src="{{ asset('img/input/loupe.svg') }}" alt="?"> #}
-                    </div>
-                </form>
-            </div>
-        
+        <div>
+            <form action="">
+                <div>
+                    {{ render(controller('App\\Controller\\SearchboxController::searchBox')) }}
+                </div>
+            </form>
+        </div>
 
         <div id="menu" class="d-flex justify-content-between">
             <div class="content">
@@ -45,5 +41,5 @@
             </div>
         </div>
     </nav>
-    {{render(controller('App\\Controller\\MenuController::menu'))}}
+    {{ render(controller('App\\Controller\\MenuController::menu')) }}
 </header>

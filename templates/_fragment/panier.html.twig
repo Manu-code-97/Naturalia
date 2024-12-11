@@ -1,0 +1,30 @@
+<h1>Votre panier</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for productId, quantity in cart %}
+            <tr>
+                <td>{{ productId }}</td>
+                <td>{{ quantity }}</td>
+                <td>
+                    <a href="{{ path('cart_remove', { id: productId }) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Votre panier est vide.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('cart_clear') }}">Vider le panier</a>
+
+

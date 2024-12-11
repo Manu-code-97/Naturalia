@@ -9,6 +9,7 @@
     --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
 /* Styles généraux pour les liens de navigation */
 #nav a {
     text-decoration: none;
@@ -16,6 +17,7 @@
     margin-top: 6px;
     font-weight: bold;
     transition: color var(--transition-duration);
+    
 }
 
 #nav a:hover {
@@ -38,10 +40,10 @@
     background-color: var(--white-naturalia);
     box-shadow: var(--box-shadow);
     padding: 10px;
-    border-radius: var(--border-radius);
+    border-radius: 15px;
     transform: translateY(-10px);
     z-index: -1;
-    transition: all var(--transition-duration) ease-in-out, visibility 0s linear var(--transition-duration), z-index 0s linear 0.01s;
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
 }
 
 /* Styles pour les sous-menus enfants */
@@ -55,10 +57,10 @@
     background-color: var(--white-naturalia);
     box-shadow: var(--box-shadow);
     padding: 10px;
-    border-radius: var(--border-radius);
+    border-radius: 15px;
     transform: translateX(-10px);
     z-index: -1;
-    transition: all var(--transition-duration) ease-in-out, visibility 0s linear var(--transition-duration), z-index 0s linear 0.01s;
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
 }
 
 /* Animation pour les sous-menus */
@@ -87,11 +89,12 @@
     opacity: 1;
     z-index: 1;
     transform: translateY(0);
-    transition-delay: 0s, 0s, var(--transition-duration);
+    transition-delay: 0s, 0s, 0.3s;
 }
 
 /* Affiche le sous-menu enfant au survol */
-.sub-menu li:hover > .sub-menu-enfant {
+.sub-menu li:hover > .sub-menu-enfant
+.sub-menu li:focus-within > .sub-menu-enfant {
     visibility: visible;
     opacity: 1;
     z-index: 1;
