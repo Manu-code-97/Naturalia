@@ -1,0 +1,41 @@
+#bill{
+    background: #EFEFEF;
+    width: 400px;
+    padding: 36px 24px;
+    border-radius: 40px;
+    margin-left: 300;
+    margin-left: 200px;
+    
+        div{
+            #title{
+                padding: 10px 16px;
+            }
+            
+            button{
+               width: 352px;
+               background: var(--Black, #250C0E);
+               border-radius: 20px;
+               color: var(--White, #FFFEFB);
+               box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+               padding: 10px;
+               margin-top: 31px;
+            }
+
+            #bill-content{
+                .border-grey{
+                    border-top: #868686 solid 2px;
+                    border-bottom: #868686 solid 2px 
+                }
+
+                .margin-top{
+                    margin-top: 15px;
+                }
+                div{
+                    div{
+                        
+                        
+                    }
+                }
+            }
+        }
+}

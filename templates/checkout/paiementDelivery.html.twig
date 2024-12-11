@@ -1,41 +1,146 @@
 {% extends 'base.html.twig' %}
 
 
-
 {% block body %}
-<div id="detaiLivraison">
-    <h5>Adresse de livraison</h5>
-    <h5>Horaires:</h5>
-    <h4>Détails de livraison</h4>
-</div>
-<div>
-    <h3>Paiement</h3>
-    <p>Sélectionnez un mode de paiement</p>
-</div>
-<div id="modePaiement" class="">
-    <input type="radio" name="CB" id="cb"><img src="/img/PaymentCB.png" alt="">
-    <input type="radio" name="Visa" id="visa"><img src="/img/paymentVisa.png" alt="">
-    <input type="radio" name="Mastercard" id="mastercard"><img src="/img/paymentMastercard.png" alt="">
-</div>
-<p>Ajouter une carte</p>
-<div id="ajoutCarte" class="">
-    <form action="">
-        <input type="text" name="CardNumber" id="cardNumber" placeholder="Numéro de carte"><img src="/img/input-card-order.png" alt="">
-        <input type="date" name="DateValidité" id="dateValidité" placeholder="MM/AA">
-        <input type="text" name="CVV" id="cvv" placeholder="CVV">
-    </form>
-    <input type="checkbox" name="sauvegardeCarte" id="SaveCard">
-    <a href="#">Où est ma CVV ?</a>
-</div>
-<div id="facturation" class="">
-    <input type="checkbox" name="adresseFacturation" id="adresseFacturation">
-    <form action="">
-        <input type="text" name="prenom" id="FirstName" placeholder="Prénom">
-        <input type="text" name="nom" id="LastName" placeholder="Nom">
-        <input type="text" name="adresse" id="Adresse" placeholder="Adresse">
-        <input type="email" name="email" id="Email" placeholder="E-mail">
-        <input type="text" name="telephone" id="phoneNumber" placeholder="Numéro de téléphone">
-    </form>
-    <button type="submit">Confirmer</button>
-</div>
-{% endblock %}
+	<main id="paiement" class="d-flex container">
+		<section>
+			<article>
+				<div>
+					<div>
+						<h6>Adresse de livraison</h6>
+						<p>Catherine</p>
+					</div>
+
+					<div>
+						<p>Horaires</p>
+						<p>Dim.: 11:00 - 21:00</p>
+						<p>Lun. - Sam.: 10:30 - 12:00, 15:30 - 21:00</p>
+					</div>
+
+					<div>
+						<h5>Détails de livraison</h5>
+					</div>
+				</div>
+			</article>
+
+			<article>
+				<div>
+					<div>
+						<h3>Paiement</h3>
+					</div>
+
+					<div>
+						<div>
+							<h6>Sélectionnez un mode de paiement</h6>
+						</div>
+
+						<div>
+							<form action="post">
+
+								<div id="chooseCardType">
+									<div>
+										<input class="form-check-input" type="radio" name="cb" id="cb">
+										<label class="form-check-label" for="cb">
+											CB
+										</label>
+										<img src="{{ asset('img/paymentCB.png') }}" alt="">
+									</div>
+
+									<div>
+										<input class="form-check-input" type="radio" name="visa" id="visa">
+										<label class="form-check-label" for="visa">
+											Visa
+										</label>
+										<img src="{{ asset('img/paymentMastercard.png') }}" alt="">
+									</div>
+
+									<div>
+										<input class="form-check-input" type="radio" name="mastercard" id="mastercard">
+										<label class="form-check-label" for="mastercard">
+											Mastercard
+										</label>
+										<img src="{{ asset('img/paymentVisa.png') }}" alt="">
+									</div>
+								</div>
+
+								<div>
+									<div class="d-flex justify-content-start">
+										<div>
+											<h6>Ajouter un carte</h6>
+										</div>
+									</div>
+
+									<div id="credit-card">
+										<div class="d-flex justify-content-around">
+											<div>
+												<input class="medium-input" type="text" id="card-number" placeholder="Numéro de carte">
+												<img src="" alt="">
+											</div>
+
+											<div>
+												<input class="x-small-input" type="text" id="expiration" placeholder="MM/AA">
+											</div>
+
+											<div>
+												<input class="x-small-input" type="text" id="cvv" placeholder="CVV">
+											</div>
+										</div>
+
+										<div class="d-flex justify-content-around">
+											<div>
+												<input type="checkbox" id="save" name="save">
+												<label for="save">Enregistrer la carte de crédit pour les achats ultérieurs</label>
+											</div>
+
+											<div>
+												<p>
+													<strong>Où est ma CVV?</strong>
+												</p>
+											</div>
+										</div>
+
+										<div>
+											<div>
+                                                <input type="checkbox" id="yes" name="yes">
+                                                <label for="yes">Adresse de facturation idsentique à l'adresse de livraison</label>
+                                            </div>
+
+											<div>
+												<div class="d-flex justify-content-between">
+													<div>
+														<input class="small-input" type="text" required placeholder="Prénom">
+													</div>
+
+													<div>
+														<input class="small-input" type="text" required placeholder="Nom">
+													</div>
+												</div>
+
+												<div>
+													<div>
+														<input class="large-input" type="text" required id="address" for="address" placeholder="Adresse">
+													</div>
+												</div>
+
+												<div class="d-flex justify-content-between">
+													<div>
+														<input class="small-input" type="email" placeholder="E-mail" required for="email" id="email">
+													</div>
+
+													<div>
+														<input class="small-input" type="phone" placeholder="Numéro de téléphone" id="phone" for="phone">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</article>
+			</section>
+
+			<section></section>
+		</main>
+	{% endblock %}

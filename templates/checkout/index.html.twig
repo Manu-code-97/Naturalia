@@ -3,5 +3,75 @@
 {% block title %}Checkout{% endblock %}
 
 {% block body %}
-   
+   <main id="check-out" class="container">
+    <section class="d-flex">
+            <article>
+                <div id="product-checkout">
+                    <h3>Panier</h3>
+        
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-start">
+                            <div>
+                                <img src="https://picsum.photos/190/174" alt="">
+                            </div>
+                            <div>
+                                <div>
+                                    <h4>6,20</h4>
+                                    <p>Clémentine</p>
+                                    <span>100g</span> <span>6,26/kg</span>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="d-flex justify-content-end">
+                            <div>
+                                <button>-     1     +</button> <img src="" alt="?">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="replace-product">
+                    <div>
+                        <div>
+                            <h3>Remplacement produit</h3>
+                        </div>
+
+                        <div>
+                            <form action="method">
+                                <div class="d-flex">
+                                    <div>
+                                        <input type="checkbox" id="remplacement">
+                                    </div>
+                                    <div>
+                                        <label for="remplacement">
+                                            En cas d’indisponibilité du produit, j’autorise le magasin à me proposer un produit équivalent sans augmentation de prix.
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="comment-section">
+                    <div>
+                        <h3>Commentaire client</h3>
+                    </div>
+
+                    <div>
+                        <form action="post">
+                            <div>
+                                <input type="textarea" name="comment" id="comment" placeholder="Si vous souhaitez, vous pouvez laisser un commentaire pour nous aider à préparer votre commande.">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </article> 
+       
+    </section>
+
+    <section>
+    </section>
+   </main>
 {% endblock %}
