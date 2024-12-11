@@ -110,15 +110,16 @@
 		<section class="container">
 			<div class="blockProduits row yellow">
 				{% for produit in products %}
+				
 					<div class="card-group col-3">
 						<div class="yellow me-2 align-self-stretch" style="width: 15rem;">
-							<img src="{{produit[0].image}}" class="card-img-top" alt="">
+							 <img src="{{produit.image}}" class="card-img-top" alt=""> 
 							<div class="card-body">
-								<h5 class="card-title">{{produit[0].nom}}</h5>
-								<p class="card-text block-text">{{produit[0].description}}</p>
-								<p class="card-text">{{produit[0].prix}}</p>
+								<h5 class="card-title">{{produit.nom}}</h5>
+								 <p class="card-text block-text">{{produit.description}}</p> 
+								<p class="card-text">{{produit.prix}} €</p> 
 								<button type="button">Ajouter
-									<img src="{{ asset('/img/cart.png') }}" alt=""></button>
+								<img src="{{ asset('/img/cart.png') }}" alt=""></button>
 							</div>
 						</div>
 					</div>
