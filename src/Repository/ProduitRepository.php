@@ -178,24 +178,27 @@ public function priceDesc($nomProduit){
 
 public function aleatProducts(int $nbProducts) { 
 
-    $dql = 
-    '
-    SELECT p  
-
-    FROM App\Entity\Produit p 
-    INNER JOIN App\Entity\Categorie c
-    '; 
-
-    $query = $this->getEntityManager()->createQuery($dql); 
-    /* $query->setParameter('nbProducts', $nbProducts);  */
+    $dql = '
+    SELECT p
+    FROM App\Entity\Produit p
+'; 
 
 
-    $result = $query->getResult(); 
+        $query = $this->getEntityManager()->createQuery($dql);
+
+        $result = $query->getResult();
 
         shuffle($result);
 
-        return $result;
+        $randomProducts = array_slice($result, 0, $nbProducts);
+        
+        
+        dd($randomProducts);
+
+        return $randomProducts;
     }
+
+
 
     public function findByQuery(string $query)
     {
