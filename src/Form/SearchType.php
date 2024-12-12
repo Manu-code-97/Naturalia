@@ -14,7 +14,8 @@ class SearchType extends AbstractType
             ->add('query', SymfonySearchType::class, [
                 'label' => 'Recherche',
                 'attr' => [
-                    'placeholder' => 'Recherchez un produit...'
+                    'placeholder' => 'Recherchez un produit...',
+                    'name'=> 'search'
                 ],
             ]);
     }

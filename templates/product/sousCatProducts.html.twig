@@ -1,131 +1,100 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!
-{% endblock %}
+{% block title %}Hello CategoryController!{% endblock %}
 
 {% block body %}
-
-
-	<main id="category" class="">
-
-		<section>
-			<div class="">
-
-				<h1 class="">{{category.nom}}</h1>
-
-				<div class="container">
-					<nav>
-						<div class="d-flex justify-content-around">
-							<div>
-								<button class="none">Trier par
-									<img src="{{ asset('img/card/select.svg') }}" alt=""></button>
-							</div>
-
-							<div class="d-flex justify">
-								<div>
-									<button class="none" type="menu">T rier par label
-										<img src="{{ asset('img/card/select.svg') }}" alt=""></button>
-								</div>
-
-								<div>
-									<form action="">
-										<div>
-											<label class="toggle-switch">
-												<input type="checkbox">
-												<div class="toggle-switch-background">
-													<div class="toggle-switch-handle"></div>
-												</div>
-											</label>
-											<span>Choisr local</span>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</nav>
-				</div>
-
-
-				<nav>
-					<ul class="category container d-flex">
-
-						{% for  sousCategory  in  sousCategories %}
-							{% if(sousCategory.id == sousCategoryId) %}
-								<li class="ici">
-									{{sousCategory.nom}}</li>
-							{% else %}
-								<li class="">
-									<a href="{{ path('sousCatProduits', {'category':category.slug, 'sousCategory':sousCategory.slug}) }}">{{sousCategory.nom}}</a>
-								</li>
-							{% endif %}
-
-						{% endfor %}
-					</ul>
-				</nav>
-			</div>
-		</section>
-
-		<article>
-			<div class="d-flex container justify-content-around">
-				<div class="promo">
-					<div class="d-flex">
-						<div class="image">
-							<img src="https://picsum.photos/seed/picsum/400/480" style="border-radius: 20px;" alt="">
-						</div>
-
-						<div class="circle">
-							<p>Promo</p>
-						</div>
-					</div>
-					<div class="descriptif">
-						<h3 class="">Lorem, ipsum.</h3>
-						<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p class="card-text">9€</p>
-						<button class="" type="button">Ajouter
-							<img src="{{ asset('/img/cart.png') }}" alt=""></button>
-					</div>
-				</div>
-
-				<div class="promo">
-					<div class="d-flex">
-						<div class="image">
-							<img src="https://picsum.photos/seed/picsum/400/480" style="border-radius: 20px;" alt="">
-						</div>
-
-						<div class="circle">
-							<p>Promo</p>
-						</div>
-					</div>
-					<div class="descriptif">
-						<h3 class="">Lorem, ipsum.</h3>
-						<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-						<p class="card-text">9€</p>
-						<button class="" type="button">Ajouter
-							<img src="{{ asset('/img/cart.png') }}" alt=""></button>
-					</div>
-				</div>
-			</div>
-		</article>
-
-		<section class="container">
-			<div class="blockProduits row yellow">
-				{% for produit in products %}
-				
-					<div class="card-group col-3">
-						<div class="yellow me-2 align-self-stretch" style="width: 15rem;">
-							 <img src="{{produit.image}}" class="card-img-top" alt=""> 
-							<div class="card-body">
-								<h5 class="card-title">{{produit.nom}}</h5>
-								 <p class="card-text block-text">{{produit.description}}</p> 
-								<p class="card-text">{{produit.prix}} €</p> 
-								<button type="button">Ajouter
-								<img src="{{ asset('/img/cart.png') }}" alt=""></button>
-							</div>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		</section>
-
-	</main>
+<main id="category" class="">
+    <section>
+        <div class="">
+            <h1 class="">{{category.nom}}</h1>
+            <div class="container">
+                <nav>
+                    <div class="d-flex justify-content-around">
+                        <div>
+                            <button class="none">Trier par
+                                <img src="{{ asset('img/card/select.svg') }}" alt="">
+                            </button>
+                        </div>
+                        <div class="d-flex justify">
+                            <div>
+                                <button class="none" type="menu">Trier par label
+                                    <img src="{{ asset('img/card/select.svg') }}" alt="">
+                                </button>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox">
+                                            <div class="toggle-switch-background">
+                                                <div class="toggle-switch-handle"></div>
+                                            </div>
+                                        </label>
+                                        <span>Choisir local</span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <nav>
+                <ul class="category container d-flex">
+                    {% for sousCategory in sousCategories %}
+                        {% if sousCategory.id == sousCategoryId %}
+                            <li class="ici">{{ sousCategory.nom }}</li>
+                        {% else %}
+                            <li class="">
+                                <a href="{{ path('sousCatProduits', {'category': category.slug, 'sousCategory': sousCategory.slug}) }}">{{ sousCategory.nom }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </section>
+    <article>
+        <div class="d-flex container justify-content-around">
+            {% for produit in products %}
+                <div class="promo">
+                    <div class="d-flex">
+                        <div class="image">
+                            <img src="{{ produit.image }}" style="border-radius: 20px;" alt="{{ produit.nom }}">
+                        </div>
+                        <div class="circle">
+                            <p>Promo</p>
+                        </div>
+                    </div>
+                    <div class="descriptif">
+                        <h3 class="">{{ produit.nom }}</h3>
+                        <p class="card-text">{{ produit.description }}</p>
+                        <p class="card-text">{{ produit.prix }}€</p>
+                        <button class="add-to-cart" data-id="{{ produit.id }}">Ajouter au panier
+                            <img src="{{ asset('img/cart.png') }}" alt="Ajouter au panier">
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </article>
+    <section class="container">
+        <div class="blockProduits row yellow">
+            {% for produit in products %}
+                <div class="card-group col-3">
+                    <div class="yellow me-2 align-self-stretch" style="width: 15rem;">
+                        <img src="{{ produit.image }}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produit.nom }}</h5>
+                            <p class="card-text block-text">{{ produit.description }}</p>
+                            <p class="card-text">{{ produit.prix }} €</p>
+                            <button id="ishaana"><a href="{{ path('cart_add', { id: produit.id }) }}">Ajouter
+                                <img src="/img/cart.png" alt=""></a></button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+</main>
 {% endblock %}

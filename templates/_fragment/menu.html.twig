@@ -33,7 +33,6 @@
             </li>
             <li class="sub-menu-parent col-3">
                 <a href="#">Recettes bio <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
-                
                 <ul class="sub-menu">
                     <li><a href="#">Recette du jour</a></li>
                     <li><a href="#">Recette du mois</a></li>
@@ -42,9 +41,50 @@
             </li>
             <li class="sub-menu-parent col-3">
                 <a href="#">Nos engagements <img src="{{ asset('img/card/select.svg') }}" alt="?"></a>
-
                 <ul class="sub-menu"></ul>
             </li>
         </ul>
     </div>
 </nav>
+
+<script>
+    document.querySelectorAll('.sub-menu-parent').forEach(parent => {
+        parent.addEventListener('mouseover', () => {
+            const subMenu = parent.querySelector('.sub-menu');
+            if (subMenu) {
+                subMenu.style.visibility = 'visible';
+                subMenu.style.opacity = '1';
+                subMenu.style.transform = 'translateY(0)';
+            }
+        });
+
+        parent.addEventListener('mouseout', () => {
+            const subMenu = parent.querySelector('.sub-menu');
+            if (subMenu) {
+                subMenu.style.visibility = 'hidden';
+                subMenu.style.opacity = '0';
+                subMenu.style.transform = 'translateY(-10px)';
+            }
+        });
+    });
+
+    document.querySelectorAll('.sub-menu li').forEach(child => {
+        child.addEventListener('mouseover', () => {
+            const subMenuEnfant = child.querySelector('.sub-menu-enfant');
+            if (subMenuEnfant) {
+                subMenuEnfant.style.visibility = 'visible';
+                subMenuEnfant.style.opacity = '1';
+                subMenuEnfant.style.transform = 'translateX(0)';
+            }
+        });
+
+        child.addEventListener('mouseout', () => {
+            const subMenuEnfant = child.querySelector('.sub-menu-enfant');
+            if (subMenuEnfant) {
+                subMenuEnfant.style.visibility = 'hidden';
+                subMenuEnfant.style.opacity = '0';
+                subMenuEnfant.style.transform = 'translateX(-10px)';
+            }
+        });
+    });
+</script>
