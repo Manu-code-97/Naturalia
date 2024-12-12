@@ -34,6 +34,18 @@ class SousCategorieRepository extends ServiceEntityRepository
  
      }
 
+        /* public function findProductsBySousCategoryWithPagination(string $sousCategory, int $offset, int $limit)
+        {
+            return $this->createQueryBuilder('p')
+                ->innerJoin('p.sousCategorie', 's')
+                ->andWhere('s.slug = :sousCategory')
+                ->setParameter('sousCategory', $sousCategory)
+                ->orderBy('p.id', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->getResult();
+        } */
 
         /* appel les sous categorie d'une catégorie */
         public function getSousCategoriesFromCategory(int $category) : array

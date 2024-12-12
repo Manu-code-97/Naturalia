@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\ProduitRepository;
+use App\Service\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -9,11 +11,30 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CheckOutController extends AbstractController
 {
-    #[Route('/panier', name: 'app_check_out')]
-    public function index(): Response
+    private CartService $cartService;
+
+    public function __construct(CartService $cartService)
     {
+        $this->cartService = $cartService;
+    }
+
+    #[Route('/panier', name: 'app_check_out')]
+    public function index(ProduitRepository $repo/* , $product */): Response
+    {
+
+        // $productDetail = $repo->find($product);
+        // $productsSelection = $repo -> aleatProducts(20);
+
+        $items = $this->cartService->getCart();
+        /* dd($items); */
+        $total = $this->cartService->getTotal();
+
+            
         return $this->render('checkout/index.html.twig', [
             'controller_name' => 'CheckOutController',
+            'items' => $items,
+            'total' => $total,
+            // 'productsSelection' => $productsSelection, 
         ]);
     }
     

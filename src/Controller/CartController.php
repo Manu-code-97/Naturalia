@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Service\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,37 +19,64 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart', name: 'cart_show')]
-    public function show(): Response
+    public function showCart(): Response
     {
-        $cart = $this->cartService->getCart();
 
-        return $this->render('_fragment/panier.html.twig', [
-            'cart' => $cart,
+
+        $items = $this->cartService->getCart();
+        
+        $total = $this->cartService->getTotal();
+
+        return $this->render('checkout/index.html.twig', [
+            'items' => $items,
+            'total' => $total,
+            
         ]);
     }
 
-    #[Route('/cart/add/{id}', name: 'cart_add')]
-    public function add(int $id): Response
+    #[Route('/cart/add/{id}', name: 'cart_add', methods: ['POST'])]
+    public function addToCart($id): JsonResponse
     {
-        $this->cartService->addItem($id);
+        $this->cartService->add($id);
+        $items = $this->cartService->getCart();
+        $total = $this->cartService->getTotal();
 
-        return $this->redirectToRoute('cart_show');
+        return new JsonResponse([
+            'items' => $items,
+            'total' => $total,
+        ]);
     }
 
-    #[Route('/cart/remove/{id}', name: 'cart_remove')]
-    public function remove(int $id): Response
+    #[Route('/cart/update/{id}', name: 'cart_update', methods: ['POST'])]
+    public function updateCart($id, Request $request): JsonResponse
     {
-        $this->cartService->removeItem($id);
+        $data = json_decode($request->getContent(), true);
 
-        return $this->redirectToRoute('cart_show');
+        if ($data['action'] === 'increase') {
+            $this->cartService->add($id);
+        } elseif ($data['action'] === 'decrease') {
+            $this->cartService->decrease($id);
+        }
+        $items = $this->cartService->getCart();
+        $total = $this->cartService->getTotal();
+
+        return new JsonResponse([
+            'items' => $items,
+            'total' => $total,
+        ]);
     }
 
-    #[Route('/cart/clear', name: 'cart_clear')]
-    public function clear(): Response
+    #[Route('/cart/remove/{id}', name: 'cart_remove', methods: ['POST'])]
+    public function removeFromCart($id): JsonResponse
     {
-        $this->cartService->clearCart();
+        $this->cartService->remove($id);
+        $items = $this->cartService->getCart();
+        $total = $this->cartService->getTotal();
 
-        return $this->redirectToRoute('cart_show');
+        return new JsonResponse([
+            'items' => $items,
+            'total' => $total,
+        ]);
     }
 }
 

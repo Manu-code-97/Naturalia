@@ -1,0 +1,27 @@
+<h1>Liste des produits</h1>
+
+<ul>
+    {% for product in products %}
+        <li>{{ product.nom }}</li>
+    {% else %}
+        <li>Aucun produit trouvé.</li>
+    {% endfor %}
+</ul>
+
+<div class="pagination">
+    {% if currentPage > 1 %}
+        <a href="{{ path('product_list', { page: currentPage - 1 }) }}">Précédent</a>
+    {% endif %}
+
+    {% for page in 1..totalPages %}
+        {% if page == currentPage %}
+            <span>{{ page }}</span>
+        {% else %}
+            <a href="{{ path('product_list', { page: page }) }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if currentPage < totalPages %}
+        <a href="{{ path('product_list', { page: currentPage + 1 }) }}">Suivant</a>
+    {% endif %}
+</div>

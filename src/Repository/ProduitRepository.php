@@ -72,6 +72,33 @@ public function findProductsOfSousCategory($sousCategory) {
     return $query->getResult(); 
 }
 
+/* Fonction pour trouver des produit par rappor a sa catégorie dans le product controller */
+public function findProductsByCategoryWithPagination(string $category, int $offset, int $limit)
+{
+    return $this->createQueryBuilder('p')
+        ->innerJoin('p.sousCategorie', 's')
+        ->innerJoin('s.categorie', 'c')
+        ->andWhere('c.slug = :category')
+        ->setParameter('category', $category)
+        ->orderBy('p.id', 'DESC')
+        ->setFirstResult($offset)
+        ->setMaxResults($limit)
+        ->getQuery()
+        ->getResult();
+}
+
+public function findProductsBySousCategoryWithPagination(string $sousCategory, int $offset, int $limit)
+        {
+            return $this->createQueryBuilder('p')
+                ->innerJoin('p.sousCategorie', 's')
+                ->andWhere('s.slug = :sousCategory')
+                ->setParameter('sousCategory', $sousCategory)
+                ->orderBy('p.id', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->getResult();
+        }
 
     
     /* Fonction pour trouver des produit par rappor a sa catégorie dans le product controller */
@@ -213,6 +240,8 @@ public function aleatProducts(int $nbProducts) {
             return $results;
 
     }
+
+
 
 }
 
