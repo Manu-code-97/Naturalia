@@ -55,46 +55,46 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
     //            ->getQuery()
     //            ->getOneOrNullResult()
     //        ;
-    //    }
 
 
-    /* Function pour afficher les produit de l'utilisateur en favoris */
-    public function productInFavoris()
+
+    /* Function pour afficher l'historique produit de l'utilisateur  */
+    public function productInHistorique($utilisateurHistorique)
     {
     
-        
+        $dql = '
+        SELECT p
+        FROM App\Entity\Produit p
+        INNER JOIN p.commandes c
+        INNER JOIN c.utilisateur u
+        WHERE u.id = :utilisateurHistorique
+        ';
+        $query = $this->getEntityManager()->createQuery($dql)
+                ->setParameter('utilisateurHistorique', $utilisateurHistorique)
+                ->getResult();
+
+        return $query;
 
 
     }
 
 
-    /* Function pour afficher l'historique d'achat du client */
-    public function productInHistorique($utilisateur)
+    /* Function pour afficher les produit favoris des client */
+    public function productInFavoris($utilisateurFavoris)
     {
-        $dql=
-        '
-        SELECT p
-        FROM App\Entity\produit p
-        INNER JOIN App\Entity\Commande c 
-        inner join App\Entity\Utilisateur u
-        WHERE u.id =:utilisateur
-        ORDER BY p.id ASC
         
-        ';
+    $dql = '
+    SELECT p
+    FROM App\Entity\Produit p
+    INNER JOIN p.utilisateurs u
+    WHERE u.id = :utilisateurFavoris
+    ';
+    $query = $this->getEntityManager()->createQuery($dql)
+            ->setParameter('utilisateurFavoris', $utilisateurFavoris)
+            ->getResult();
 
-        $query = $this->getEntityManager()->createQuery($dql);
-        $query->setParameter('utilisateur', $utilisateur);
-    
-    dd($query->getResult());
-    return $query->getResult(); 
+    // dd($query);
+    return $query;
 
-        
     }
 }
-
-
-/* SELECT * FROM produit as p 
-INNER JOIN commande_produit as cp ON p.id=produit_id
-INNER JOIN commande as c ON commande_id=c.id
-WHERE utilisateur_id=1062
-ORDER BY p.id ASC; */
