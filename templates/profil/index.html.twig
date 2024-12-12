@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfilController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row align-items-start">
+        <div id="navigationProfil" class="col">
+            <a href="#">Tableau de bord</a>
+            <a href="#">Mes avantages<br>fidélité</a>
+            <a href="#">Ma wallet</a>
+            <a href="#">Mon historique</a>
+            <a href="#">Mon profil</a>
+        </div>
+        <section id="global" class="col">
+            <div id="profil">
+                <h3>Nom</h3>
+                <p>statut: Lorem ipsum dolor, sit amet consectetur.</p>
+                <p>statut: Lorem ipsum dolor, sit amet consectetur.</p>
+            </div>
+                <div class="d-flex flex-row mb-3">
+                    <div class="card p-2" style="width: 18rem;">
+                        <h4 class="card-title">Mon impact social</h4>
+                        <div class="card-body">
+                            <img src="/img/pourcentage.png" class="card-img-top" alt="...">
+                            <p class="card-text">78%</p>
+                        </div>
+                    </div>
+                    <div class="card p-2" style="width: 18rem;">
+                        <h5 class="card-title">Mes points Naturalia</h5>
+                        <div class="card-body">
+                            <p class="card-text"><span>120</span></p>
+                            <p class="card-text">points</p>
+                        </div>
+                    </div>
+                    <div class="card p-2" style="width: 18rem;">
+                        <h5 class="card-title">Mon magasin favori</h5>
+                        <div class="card-body">
+                            <img src="https://picsum.photos/200" class="card-img-top" alt="...">
+                            <p class="card-text">lorem</p>
+                        </div>
+                    </div>
+                </div>
+            <div>
+                <h3>Mon historique</h3>
+                {{ include('/partials/carousel.html.twig', {'products':productsSelection})}}
+            </div>
+            <div>
+                <h3>Mes coups de coeurs</h3>
+                {{ include('/partials/carousel.html.twig', {'products':productsSelection})}}
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
