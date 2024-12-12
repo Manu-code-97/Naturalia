@@ -213,7 +213,39 @@
                                             <p>lun - ven 10h-12h</p>
                                         </div>
                                     </div>
-                                </article>      
+                                </article> 
+
+                                <article>
+                                    <div>
+                                        <div>
+                                            <h2>Saisissez vos coordonnées pour le retrait</h2>
+                                        </div>
+
+                                        <div>
+                                            <form action="">
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <input class="small-input" type="text" id="name" placeholder="Prénom">
+                                                    </div>
+
+                                                    <div>
+                                                        <input class="small-input" type="text" id="l-name" placeholder="Nom">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <input class="small-input" type="email" id="email" placeholder="E-mail">
+                                                    </div>
+
+                                                    <div>
+                                                        <input class="small-input" type="text" id="phone" placeholder="Numéro de téléphone">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </article>     
                         </div>
                     </section>
                     
@@ -228,6 +260,7 @@
         </main>
 
         <main>
+        {{ include("partials/bill.html.twig") }}
         </main>
    </main>
 {% endblock %}
