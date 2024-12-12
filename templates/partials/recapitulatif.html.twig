@@ -1,0 +1,12 @@
+<div class="container">
+    {% for produit in products %}
+    <div class="overflow-y-auto">
+        <div id="achat">
+            <img src="{{produit.image}}" alt="">
+            <h5>{{produit.nom}}</h5>
+            <p>{{produit.description}}</p>
+            <p>{{produit.prix}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
