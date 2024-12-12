@@ -33,18 +33,49 @@
             </div>
 
             <!-- Button Login -->
-        <button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
+        <button class="btn btn-lg btn-primary" name="login" type="submit">Se connecter</button>
         </form>
     </div>
 
     <!-- Ligne de séparation avec "OU" -->
     <div class="d-flex flex-column justify-content-center align-items-center mx-3">
         <div class="border-right" style="height: 50%; width: 1px; background-color: #ccc;"></div>
-        <span class="px-2 bg-white">OU</span>
+        <span class="px-2">OU</span>
     <div class="border-right" style="height: 50%; width: 1px; background-color: #ccc;"></div>
     </div>
 
     <!-- Bloc pour S'inscrire -->
+    {# {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>Register</h1>
+
+    {{ form_errors(registrationForm) }} #}
+
+    {# {{ form_start(registrationForm, {'action': path('app_register'), 'method': 'POST'}) }} #}
+    {# {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.password.first)}}
+        {{ form_row(registrationForm.password.second)}}
+        {{ form_row(registrationForm.agreeTerms) }}
+        <button type="submit" name="register" class="btn">Register</button>
+    {{ form_end(registrationForm) }} #}
+{# 
+{% if registrationErrorMessages %}
+    {{dump(registrationErrorMessages)}}
+{% endif %} #}
+
+
+
+    {% for message in app.flashes('registrationErrorMessages') %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                <li>{{message}}</li>
+            </ul>
+        </div>
+    {% endfor %}
+
     <div class="form-block flex-fill p-3">
         <form action="/register" method="POST" class="BlockSignUp">
             <h1 class="h3 mb-3 font-weight-normal">Veuillez vous inscrire</h1>
@@ -65,7 +96,7 @@
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
             <!-- Button Register -->
-        <button class="btn btn-lg btn-primary mt-3" type="submit">S'inscrire</button>
+        <button formnovalidate class="btn btn-lg btn-primary mt-3" type="submit">S'inscrire</button>
         </form>
     </div>
 </article>
