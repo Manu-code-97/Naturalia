@@ -93,16 +93,8 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
             ->setParameter('utilisateurFavoris', $utilisateurFavoris)
             ->getResult();
 
-<<<<<<< Updated upstream
     // dd($query);
     return $query;
-=======
-        $query = $this->getEntityManager()->createQuery($dql);
-        $query->setParameter('utilisateur', $utilisateur);
-    
-    // dd($query->getResult());
-    return $query->getResult(); 
->>>>>>> Stashed changes
 
     }
 }
