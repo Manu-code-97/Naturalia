@@ -15,7 +15,7 @@
                                 <img src="https://picsum.photos/190/174" alt="">
                             </div>
                             <div>
-                                <div>
+                                <div class="product-description">
                                     <h4>6,20</h4>
                                     <p>Clémentine</p>
                                     <span>100g</span> <span>6,26/kg</span>
@@ -25,7 +25,7 @@
         
                         <div class="d-flex justify-content-end">
                             <div>
-                                <button>-     1     +</button> <img src="" alt="?">
+                                <button>1</button> <img src="{{ asset('img/bin.svg') }}" alt="?">
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                 <div id="replace-product">
                     <div>
                         <div>
-                            <h3>Remplacement produit</h3>
+                            <h3 c≈>Remplacement produit</h3>
                         </div>
 
                         <div>
@@ -68,10 +68,15 @@
                     </div>
                 </div>
             </article> 
+
+            <div> 
+                {{ include("partials/bill.html.twig") }}
+            </div>
        
     </section>
-
-    <section>
+        
+    <section id="panier-carousel">
+        {{ include('/partials/carousel.html.twig', {'products':productsSelection}) }}
     </section>
    </main>
 {% endblock %}
