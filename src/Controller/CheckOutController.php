@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,20 +18,34 @@ class CheckOutController extends AbstractController
         ]);
     }
     
-    #[Route('/panier/livraison', name: 'app_panier_paiement')]
-    public function panierlivraison(): Response
+    #[Route('/panier/livraison', name: 'app_panier_livraison')]
+    public function panierlivraison(ProduitRepository $repo  ): Response
     {
+
+        //$products = $repo->findProductsOfSousCategory($livraison);
+        $products = $repo->createQueryBuilder('p')
+        ->getQuery()
+        ->getResult();
+
+        // dd($products);
+       
         return $this->render('checkout/delivery.html.twig', [
-            'controller_name' => 'CheckOutController',
+            'products' => $products,
         ]);
     }
 
     #[Route('/panier/paiement', name: 'app_panier_paiement')]
     #[IsGranted('ROLE_USER')]
-    public function panierPaiement(): Response
+    public function panierPaiement(ProduitRepository $repo): Response
     {
+        //$products = $repo->findProductsOfSousCategory($livraison);
+        $products = $repo->createQueryBuilder('p')
+        ->getQuery()
+        ->getResult();
+
         return $this->render('checkout/paiementDelivery.html.twig', [
             'controller_name' => 'CheckOutController',
+            'products' => $products,
         ]);
     }
 
