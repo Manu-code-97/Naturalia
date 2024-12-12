@@ -65,7 +65,8 @@ public function findProductsOfSousCategory($sousCategory) {
     WHERE sc.slug =:sousCategory
     ';
     $query = $this->getEntityManager()->createQuery($dql); 
-    $query->setParameter('sousCategory', $sousCategory); 
+    $query->setParameter('sousCategory', $sousCategory);  
+
     
     /* dd($query->getResult()); */
     return $query->getResult(); 
@@ -74,8 +75,6 @@ public function findProductsOfSousCategory($sousCategory) {
 
     
     /* Fonction pour trouver des produit par rappor a sa catégorie dans le product controller */
-
-
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! ne retourne pas des produits !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 public function findProductsByCategory($productCategory)
 {
@@ -95,84 +94,46 @@ public function findProductsByCategory($productCategory)
 
 
 
-
-
-    /* Trouver un produit par son label(ne filtre pas!) */
-
-public function findProductByLabel($labelProduit){
-
-    $dql=
-    '
-    SELECT p 
-    FROM App\Entity\Produit p 
-    INNER JOIN p.label l 
-    WHERE l.id=:labelProduit
-    ';
-
-    $query = $this->getEntityManager()->createQuery($dql); 
-
-    $query->setParameter('labelProduit', $labelProduit); 
-    
-    return $query->getResult(); 
-    
-}
-
-
-
-/* Function pour filtrer par label */
-public function labelForm(array $labelIds){
-
-    $qb = $this->createQueryBuilder('p') // Requête sur l'entité Produit.
-        ->join('p.label', 'l')          // Jointure avec la table des labels.
-        ->where('l.id IN (:labelIds)')   // Filtre les labels par liste d'IDs.
-        ->setParameter('labelIds', $labelIds)
-        ->groupBy('p.id')                // Regroupe par produit.
-        ->having('COUNT(DISTINCT l.id) = :nbLabels') // Vérifie que le produit a tous les labels.
-        ->setParameter('nbLabels', count($labelIds)); // Nombre exact de labels attendus.
-        ;
-        // dd($qb->getQuery()->getResult());
-    return $qb->getQuery()->getResult();
-
-}
-
-
-
-    /* Trouver un produit en fonction de si il est local ou pas(ne trie pas!) */
-
-public function localProduct($localProduit){
-
-    
-    $dql=
-    '
-    SELECT p
-    FROM App\Entity\Produit p
-    WHERE p.local =:localProduit
-    ';
-
-    $query = $this->getEntityManager()->createQuery($dql);
-    $query->setParameter('localProduit', $localProduit);
-    
-    
-    return $query->getResult(); 
-}
-
-
-
-
-/* function pour trier avec local (si le produit est local ou affiche tout) */
-
-public function localForm($localForm){
-
+/* Function pour filtrer par label et local */
+public function filterByLabelAndLocal($localForm , $labelIds, $categoryId = null, $sousCategoryId = null)
+{
     $qb = $this->createQueryBuilder('p');
-    
+
+    // Filtrage local
     if ($localForm == 1) {
-        $qb->where('p.local = :localProduit')
-        ->setParameter('localProduit', $localForm);
+        $qb->andWhere('p.local = :localProduit')
+            ->setParameter('localProduit', $localForm);
     }
 
+    // Filtrage par labels
+    if (!empty($labelIds)) {
+        $qb->join('p.label', 'l')
+            ->andWhere('l.id IN (:labelIds)')
+            ->setParameter('labelIds', $labelIds)
+            ->groupBy('p.id')
+            ->having('COUNT(DISTINCT l.id) = :nbLabels')
+            ->setParameter('nbLabels', count($labelIds));
+    }
+
+    // Filtrage par sous-catégorie ou catégorie principale
+    if ($sousCategoryId) {
+        $qb->join('p.sousCategorie', 'sc')
+            ->andWhere('sc.slug = :sousCategorySlug')
+            ->setParameter('sousCategorySlug', $sousCategoryId);
+    }
+    
+    if (!empty($categoryId)) {
+        $qb->join('p.sousCategorie', 'cat')
+            ->andWhere('cat.categorie IN (:categoryId)')
+            ->setParameter('categoryId', $categoryId);
+    }
+
+    
+    // dd($qb->getQuery()->getResult());          
+
+    // Exécution de la requête
     return $qb->getQuery()->getResult();
 }
-
 
 
 
@@ -213,13 +174,14 @@ public function priceDesc($nomProduit){
 }
 
 
-/* choisir 20 produit aléatoirement pour les catégorie  */
+/* choisir 20 produit aléatoirement pour les catégorie non utiliser pour le moment  */
 
 public function aleatProducts(int $nbProducts) { 
 
     $dql = 
     '
     SELECT p  
+
     FROM App\Entity\Produit p 
     INNER JOIN App\Entity\Categorie c
     '; 
