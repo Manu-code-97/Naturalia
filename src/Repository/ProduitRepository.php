@@ -193,7 +193,7 @@ public function aleatProducts(int $nbProducts) {
         $randomProducts = array_slice($result, 0, $nbProducts);
         
         
-        dd($randomProducts);
+        // dd($randomProducts);
 
         return $randomProducts;
     }
