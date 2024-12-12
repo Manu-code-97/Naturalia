@@ -50,6 +50,22 @@ class SousCategorieRepository extends ServiceEntityRepository
 
     
         }
+
+         /* appel les sous categorie d'une catégorie */
+         public function getSousCategoriesId(string $sousCategory) : array
+         {
+ 
+             $entityManager = $this->getEntityManager();
+             $query = $entityManager->createQuery(
+                 'SELECT s.id
+                 FROM App\Entity\SousCategorie s
+                 WHERE s.slug = :sousCategory'
+             )->setParameter('sousCategory', $sousCategory) ;
+         
+             return $query->getResult();
+ 
+     
+         }
     
     //    /**
     //     * @return SousCategorie[] Returns an array of SousCategorie objects

@@ -34,7 +34,7 @@ class ProductController extends AbstractController
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
         // $sousProduct = $repo->findProductsOfSousCategory($sousCategory);
-        // $sousCategoryId = $sousCategory; 
+        $sousCategoryId = 0; 
 
     
     
@@ -55,6 +55,7 @@ class ProductController extends AbstractController
         'productsPromos' => $productsPromos,
         'category'=> $category[0],
         'sousCategories'=> $sousCategoryList,
+        'sousCategoryId'=>$sousCategoryId,
         'sousCategory' => [],
         'sousproduct' => [], 
         ]); 
@@ -65,25 +66,27 @@ class ProductController extends AbstractController
 
     /* Route pour afficher une sous catégorie d'une catégorie */
     #[Route('/categorie/{category}/{sousCategory}/', name: 'sousCatProduits')]
-    public function sousCategory (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, $category, $sousCategory): Response{
+    public function sousCategory (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, $sousCategory): Response{
         
          // Charger la catégorie principale
     $category = $repoCat->showCategory($category);
         
     
         // Charger les produits de la sous-catégorie
-    $sousProduct = $repo->findProductsOfSousCategory($sousCategory);
-
+    $products = $repo->findProductsOfSousCategory($sousCategory);
+// dd($products[0]->getProduit());
 
     // Produits en promotion
     $productsPromos = $repo->getProductsOnPromotion();
 
+    $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
     // Récupérer les filtres depuis la requête
     $localForm = $request->query->get('local', null); 
     $labelIds = $request->query->all('label'); 
 
-    $sousCategoryId = $sousCategory; 
+    $sousCategoryId = $repoSCat->getSousCategoriesId($sousCategory); 
+    //dd($sousCategoryId);
     $categoryId = $category[0]->getId(); 
 
     // Appel de la méthode de filtrage par label et local
@@ -91,11 +94,13 @@ class ProductController extends AbstractController
 
     // Afficher la vue
     return $this->render('product/sousCatProducts.html.twig', [
-        'sousproduct' => $sousProduct, 
+       // 'sousproduct' => $sousProduct, 
         'productsPromos' => $productsPromos, 
         'labelLocal' => $labelLocal,
         'category' => $category[0],
-        'sousCategory' => $sousCategory,
+        'products' => $products[0]->getProduit(),
+        'sousCategories'=> $sousCategoryList,
+        'sousCategoryId'=>$sousCategoryId[0]['id'],
     ]);
     }
     
