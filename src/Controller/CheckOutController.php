@@ -6,18 +6,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Repository\ProduitRepository;
 
 class CheckOutController extends AbstractController
 {
     #[Route('/panier', name: 'app_check_out')]
-    public function index(): Response
+    public function index(ProduitRepository $repo ): Response
     {
+
+        $productsSelection = $repo -> aleatProducts(20);
+ 
+        ;
+
         return $this->render('checkout/index.html.twig', [
             'controller_name' => 'CheckOutController',
+        
+        'productsSelection' => $productsSelection, 
+
         ]);
     }
     
-    #[Route('/panier/livraison', name: 'app_panier_paiement')]
+    #[Route('/panier/livraison', name: 'app_panier_livraison')]
     public function panierlivraison(): Response
     {
         return $this->render('checkout/delivery.html.twig', [
