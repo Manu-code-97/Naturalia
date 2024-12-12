@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\MagasinRepository;
+use App\Repository\CalculDistanceMag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,11 +19,15 @@ class CheckOutController extends AbstractController
         ]);
     }
     
-    #[Route('/panier/livraison', name: 'app_panier_paiement')]
-    public function panierlivraison(): Response
-    {
+    #[Route('/panier/livraison/{cp}', name: 'app_panier_livraison')]
+    public function panierlivraison(MagasinRepository $repo, CalculDistanceMag $calc, $cp): Response
+    {   
+        $magasinsDB = $repo->getAllStores();
+        // dd($magasins);
+        $magasins = $calc->calculDistance($magasinsDB, $cp);
+
         return $this->render('checkout/delivery.html.twig', [
-            'controller_name' => 'CheckOutController',
+            'magasins' => $magasins
         ]);
     }
 
