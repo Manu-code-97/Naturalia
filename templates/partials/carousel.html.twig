@@ -10,7 +10,8 @@
 					<h5 class="card-title">{{produit.nom}}</h5>
 					<p class="card-text block-text">{{produit.description}}</p>
           <p class="card-text">{{produit.prix}}</p>
-		  			<button id="ishaana"><a href="{{ path('cart_add', { id: produit.id }) }}">Ajouter au panier<img src="/img/cart.png" alt=""></a></button>
+		  			<button class="add-to-cart" data-product-id="{{ produit.id }}">Ajouter
+                                <img src="/img/cart.png" alt=""></button>
 					{# <button type="button">Ajouter</button> #}
 				</div>
 			</div>

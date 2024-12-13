@@ -15,10 +15,7 @@ header {
     padding-right: 40px;
     padding-top: 10px;
     padding-bottom: 10px;
-
 }
-
-
 
 #header form div input {
     border-radius: 50px;
@@ -28,7 +25,6 @@ header {
 
 #header input::placeholder {
     color: var(--black-naturalia);
-
 }
 
 #header form div img {
@@ -38,15 +34,14 @@ header {
 
 #header form div img:hover {
     transform: translate(3px);
-    transform: scale(1.2)
+    transform: scale(1.2);
 }
-
 
 .circle {
     background-color: var(--red-naturalia);
     width: 54px;
     height: 54px;
-    border-radius: 180px;
+    border-radius: 50%;
 }
 
 .content {
@@ -66,10 +61,20 @@ header {
     animation-delay: 0.5s;
 }
 
-form{
+form {
     background-color: var(--yellow-naturalia);
 }
 
-nav div{
+nav div {
     background-color: var(--yellow-naturalia);
+}
+
+a.d-flex {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.d-flex:hover {
+    text-decoration: none;
+    color: inherit;
 }

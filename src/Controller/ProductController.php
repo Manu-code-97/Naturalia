@@ -26,7 +26,7 @@ class ProductController extends AbstractController
 
     /* Cette route affiche une catégorie ainsi que ces produits */
     #[Route('/categorie/{category}', name: 'catProduits', requirements: ['page' => '\d+'], defaults: ['page' => 1])]
-    public function categoryProduit (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, int $page ): Response{
+    public function categoryProduit (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, int $page = 1 ): Response{
         $limit = 20; // Nombre de produits par page
         $offset = ($page - 1) * $limit; // Calcul de l'offset
 
@@ -63,6 +63,9 @@ class ProductController extends AbstractController
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
         // $sousProduct = $repo->findProductsOfSousCategory($sousCategory);
+        $sousCategoryId = 0; 
+
+        
     
         // Récupérer les filtres depuis la requête
         $localForm = $request->query->get('local', null); 
@@ -86,7 +89,7 @@ class ProductController extends AbstractController
         'sousCategory' => [],
         'sousproduct' => [], 
         'currentPage' => $page,
-        'totalPages' => $totalPages,
+        'totalPages' => min($totalPages, 3), // Limiter à 3 pages
         ]); 
     }
 
@@ -159,9 +162,9 @@ class ProductController extends AbstractController
         'sousCategories'=> $sousCategoryList,
         'sousCategoryId'=>$sousCategoryId[0]['id'],
         'currentPage' => $page,
-        'totalPages' => $totalPages,
         'namePrice'=> $nameTrie,
         'piceTrie' => $priceTrie,
+        'totalPages' => min($totalPages, 3), // Limiter à 3 pages
     ]);
     }
     

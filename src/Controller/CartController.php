@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ProduitRepository;
 use App\Service\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,16 +22,9 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'cart_show')]
     public function showCart(): Response
     {
-
-
-        $items = $this->cartService->getCart();
-        
-        $total = $this->cartService->getTotal();
-
         return $this->render('checkout/index.html.twig', [
-            'items' => $items,
-            'total' => $total,
-            
+            'items' => $this->cartService->getCart(),
+            'total' => $this->cartService->getTotal(),
         ]);
     }
 
@@ -38,10 +32,23 @@ class CartController extends AbstractController
     public function addToCart($id): JsonResponse
     {
         $this->cartService->add($id);
+
+        return new JsonResponse([
+            'items' => $this->cartService->getCart(),
+            'total' => $this->cartService->getTotal(),
+        ]);
+    }
+
+    #[Route('/bill', name: 'app_bill')]
+    public function showBill(ProduitRepository $produitRepository): Response
+    {
+        // Récupérer les produits (vous pouvez ajuster cette logique selon vos besoins)
+        /* $products = $produitRepository->findAll(); */
         $items = $this->cartService->getCart();
         $total = $this->cartService->getTotal();
 
-        return new JsonResponse([
+        return $this->render('bill.html.twig', [
+            /* 'products' => $products, */
             'items' => $items,
             'total' => $total,
         ]);
@@ -57,12 +64,10 @@ class CartController extends AbstractController
         } elseif ($data['action'] === 'decrease') {
             $this->cartService->decrease($id);
         }
-        $items = $this->cartService->getCart();
-        $total = $this->cartService->getTotal();
 
         return new JsonResponse([
-            'items' => $items,
-            'total' => $total,
+            'items' => $this->cartService->getCart(),
+            'total' => $this->cartService->getTotal(),
         ]);
     }
 
@@ -70,12 +75,10 @@ class CartController extends AbstractController
     public function removeFromCart($id): JsonResponse
     {
         $this->cartService->remove($id);
-        $items = $this->cartService->getCart();
-        $total = $this->cartService->getTotal();
 
         return new JsonResponse([
-            'items' => $items,
-            'total' => $total,
+            'items' => $this->cartService->getCart(),
+            'total' => $this->cartService->getTotal(),
         ]);
     }
 }
