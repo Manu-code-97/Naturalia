@@ -4,28 +4,87 @@
 
 {% block body %}
 
-<div class="block-affiche-r">
- 
-    <div class="recetteunique-block">
-        <h3 class="recette-title">Recette: {{ recette.nom }}</h3>
-            <div class="image-wrapper">
-                <img src="{{ recette.image }}" alt="Image de la recette : {{ recette.nom }}" class="recette-image">
+
+<article class="block-affiche-r" id="mainrecette">
+    {# <div class="recetteunique-block">
+        <h3 class="recette-title text-center">Recette: {{ recette.nom }}</h3>
+            <div class="image-wrapper text-center my-4" >
+                <img class="recette-image" src="{{ recette.image }}" alt="Image de la recette : {{ recette.nom }}" class="img-fluid rounded shadow-lg"  >
+                <H5 class="text-secondary mt-3">Description recette: {{ recette.description }}</H5>
             </div>
-            <p>description recette: {{ recette.description }}</p>
-            <h2>Produits associés :</h2>
-    </div>
+           
+    </div> #}
 
-    <div>
-    
 
-  {#  {% if produits is not empty %}
-    
-        {% else %}
-             <p>Aucun produit associé à cette recette.</p>
-        {% endif %} 
-     
- #}
-             {{  include("partials/carousel.html.twig",{"products":produits}) }}	 
+
+
+    <div class="recetteunique-block container py-5">
+    <h3 class="recette-title text-center text-uppercase fw-bold mb-4">
+        Recette: {{ recette.nom }}
+    </h3>
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6 text-center">
+            <div class="image-wrapper position-relative overflow-hidden rounded shadow-lg">
+                <img 
+                    class="recette-image img-fluid w-100" 
+                    src="{{ recette.image }}" 
+                    alt="Image de la recette : {{ recette.nom }}">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5 class="text-secondary mt-4">
+                Description de la recette:
+            </h5>
+            <p class="text-dark">{{ recette.description }}</p>
+        </div>
     </div>
 </div>
+
+
+{# 
+    <div>
+    <h2 class="text-center mb-4 text-secondary">Produits Associés</h2>
+    {{ include('/partials/carousel.html.twig', {'products':produits }) }}
+    
+   
+    </div> #}
+    {# <div class="carousel container yellow">
+    {{ include('/partials/carousel.html.twig', {'products':productsSelection}) }}
+     </div>
+ #}
+
+
+ <section class="container" id="produitRecette">
+ <div class="blockProduits row yellow">
+     {% for produit in produits %}
+     
+         <div class="card-group col-3">
+             <div class="yellow me-2 align-self-stretch" style="width: 15rem;">
+                  <img src="{{produit.image}}" class="card-img-top" alt=""> 
+                 <div class="card-body">
+                     <h5 class="card-title">{{produit.nom}}</h5>
+                      <p class="card-text block-text">{{produit.description}}</p> 
+                     <p class="card-text">{{produit.prix}} €</p> 
+                     <button type="button">Ajouter
+                     <img src="{{ asset('/img/cart.png') }}" alt=""></button>
+                 </div>
+             </div>
+         </div>
+     {% endfor %}
+ </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
 {% endblock %}
+

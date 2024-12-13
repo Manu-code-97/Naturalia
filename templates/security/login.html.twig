@@ -2,36 +2,106 @@
 
 {% block title %}Log in!{% endblock %}
 
+
+
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+<article class="container d-flex justify-content-center align-items-stretch gap-3 mt-5 mb-5">
+    <!-- Bloc pour Se Connecter -->
+    <div class="form-block flex-fill p-3">
+        <form action="/login" method="POST" class="BlockLogInt">
+            <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
+            
+            <!-- Email -->
+            <label for="login_email">Email</label>
+            <input type="email" value="{{ last_username }}" name="login_email" id="login_email" class="form-control mb-3" autocomplete="email" required autofocus>
+            
+            <!-- Password -->
+            <label for="login_password">Mot de Passe</label>
+            <input type="password" name="login_password" id="login_password" class="form-control mb-3" autocomplete="current-password" required>
+            
+            <!-- CSRF Token -->
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
+            <!-- Checkbox -->
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Se souvenir
+                </label>
+            </div>
+
+            <!-- Button Login -->
+        <button class="btn btn-lg btn-primary" name="login" type="submit">Se connecter</button>
+        </form>
     </div>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+    <!-- Ligne de séparation avec "OU" -->
+    <div class="d-flex flex-column justify-content-center align-items-center mx-3">
+        <div class="border-right" style="height: 50%; width: 1px; background-color: #ccc;"></div>
+        <span class="px-2">OU</span>
+    <div class="border-right" style="height: 50%; width: 1px; background-color: #ccc;"></div>
+    </div>
+
+    <!-- Bloc pour S'inscrire -->
+    {# {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <h1>Register</h1>
+
+    {{ form_errors(registrationForm) }} #}
+
+    {# {{ form_start(registrationForm, {'action': path('app_register'), 'method': 'POST'}) }} #}
+    {# {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.password.first)}}
+        {{ form_row(registrationForm.password.second)}}
+        {{ form_row(registrationForm.agreeTerms) }}
+        <button type="submit" name="register" class="btn">Register</button>
+    {{ form_end(registrationForm) }} #}
+{# 
+{% if registrationErrorMessages %}
+    {{dump(registrationErrorMessages)}}
+{% endif %} #}
+
+
+
+    {% for message in app.flashes('registrationErrorMessages') %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                <li>{{message}}</li>
+            </ul>
+        </div>
+    {% endfor %}
+
+    <div class="form-block flex-fill p-3">
+        <form action="/register" method="POST" class="BlockSignUp">
+            <h1 class="h3 mb-3 font-weight-normal">Veuillez vous inscrire</h1>
+            
+            <!-- Email -->
+            <label for="register_email">Email</label>
+            <input type="email" value="{{ last_username }}" name="register_email" id="register_email" class="form-control mb-3" autocomplete="email" required autofocus>
+            
+            <!-- Password -->
+            <label for="register_password">Mot de Passe</label>
+            <input type="password" name="register_password" id="register_password" class="form-control mb-3" autocomplete="new-password" required>
+
+            <!-- Confirmation Password -->
+            <label for="register_confirm_password">Confirmation Mot de Passe</label>
+            <input type="password" name="register_confirm_password" id="register_confirm_password" class="form-control mb-3" autocomplete="new-password" required>
+
+            <!-- CSRF Token -->
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <!-- Button Register -->
+        <button formnovalidate class="btn btn-lg btn-primary mt-3" type="submit">S'inscrire</button>
+        </form>
+    </div>
+</article>
+
+
+
+
 {% endblock %}
