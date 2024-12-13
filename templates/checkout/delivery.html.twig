@@ -181,7 +181,7 @@
                                 </div>
     
                                 <div>
-                                    <form action="post">
+                                    <form action="" methode="post">
                                         <div>
                                             <input class="large-input" type="text" id="code-postal" placeholder="e.x 75000">
                                             <img class="loupe" src="{{ asset('img/input/loupe.svg') }}" alt="?">
@@ -195,26 +195,26 @@
                             <div>
                                 <h3>Choisissez votre magasin</h3>
                             </div>
-
                             <div>
-                                <article class="magasin">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <p>Naturalia Vincennes</p>
+                                {% for magasin in magasins %}
+                                    <article class="magasin">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <p>{{magasin.nom}}</p>
+                                            </div>
+    
+                                            <div>
+                                                <p>{{magasin.distance}}km</p>
+                                            </div>
                                         </div>
-
-                                        <div>
-                                            <p>3.4km</p>
+    
+                                        <div class="d-flex justify-content-start">
+                                            <ul>
+                                                {{magasin.horaire|raw}}
+                                            </ul>
                                         </div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-start">
-                                        <div>
-                                            <p>lun - ven 10h-12h</p>
-                                        </div>
-                                    </div>
-                                </article> 
-
+                                    </article> 
+                            {% endfor %}
                                 <article>
                                     <div>
                                         <div>
@@ -246,7 +246,7 @@
                                         </div>
                                     </div>
                                 </article>     
-                        </div>
+                            </div>
                     </section>
                     
 
