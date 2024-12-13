@@ -14,30 +14,36 @@
 
         <div id="menu" class="d-flex justify-content-between">
             <div class="content">
-                <div class="circle">
-                    <img src="{{ asset('img/card/panier.svg') }}" alt="?">
-                </div>
-                <div>
-                    <p>Panier</p>
-                </div>
+                <a href="{{ path('app_check_out') }}" class="d-flex flex-column align-items-center">
+                    <div class="circle">
+                        <img src="{{ asset('img/card/panier.svg') }}" alt="Panier">
+                    </div>
+                    <div>
+                        <p>Panier</p>
+                    </div>
+                </a>
             </div>
 
             <div class="content">
-                <div class="circle">
-                    <img src="{{ asset('img/card/profil.svg') }}" alt="?">
-                </div>
-                <div>
-                    <p>Profil</p>
-                </div>
+                <a href="#" class="d-flex flex-column align-items-center">
+                    <div class="circle">
+                        <img src="{{ asset('img/card/profil.svg') }}" alt="Profil">
+                    </div>
+                    <div>
+                        <p>Profil</p>
+                    </div>
+                </a>
             </div>
 
             <div class="content">
-                <div class="circle">
-                    <img src="{{ asset('img/card/magasin.svg') }}" alt="?">
-                </div>
-                <div>
-                    <p>Magasin</p>
-                </div>
+                <a href="#" class="d-flex flex-column align-items-center">
+                    <div class="circle">
+                        <img src="{{ asset('img/card/magasin.svg') }}" alt="Magasin">
+                    </div>
+                    <div>
+                        <p>Magasin</p>
+                    </div>
+                </a>
             </div>
         </div>
     </nav>
