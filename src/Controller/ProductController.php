@@ -36,22 +36,37 @@ class ProductController extends AbstractController
         $totalProducts = $repo->count([]);
         $totalPages = ceil($totalProducts / $limit);
 
+        // Barre pagination dans les catégorie
         $products = $repo -> findProductsByCategoryWithPagination( $category, $offset, $limit);
         /* $products = $repo -> findProductsByCategory($category); */
-        $productsPromos = $repo -> getProductsOnPromotion();
+
+        // Affiche les catégorie
         $category= $repoCat->showCategory($category);
+
+        // Trier par nom croissant et décroissant
+        $nomProduit = $request->query->get('nomProduit', ''); 
+        $categoryId = $category[0]->getId();
+        $sousCategoryId = 0; 
+        $nameTrie = $repo-> nameTrie($nomProduit, [$categoryId], $sousCategoryId) ; 
+        
+
+        // Trier par prix croissant et décroissant
+        $prixProduit = $request->query->get('prixProduit', ''); 
+        $priceTrie = $repo-> priceTrie($prixProduit, [$categoryId], $sousCategoryId) ; 
+
+
+        // Sort les produit en promos
+        $productsPromos = $repo -> getProductsOnPromotion();
+
+
+        // Liste des sous-catégorie dans une catégorie 
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
         // $sousProduct = $repo->findProductsOfSousCategory($sousCategory);
-        $sousCategoryId = 0; 
-
-    
     
         // Récupérer les filtres depuis la requête
         $localForm = $request->query->get('local', null); 
         $labelIds = $request->query->all('label'); 
-    
-        $categoryId = $category[0]->getId(); 
     
         // Appel de la méthode de filtrage par label et local
         $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, [$categoryId]);
@@ -60,7 +75,10 @@ class ProductController extends AbstractController
         //dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
         [ 'products' => $products, 
+        'localForm' => $localForm, 
         'labelLocal' => $labelLocal,
+        'priceTrie' => $priceTrie,
+        'nameTrie'=> $nameTrie,
         'productsPromos' => $productsPromos,
         'category'=> $category[0],
         'sousCategories'=> $sousCategoryList,
@@ -85,7 +103,7 @@ class ProductController extends AbstractController
     
         // Charger les produits de la sous-catégorie
     $products = $repo->findProductsOfSousCategory($sousCategory);
-// dd($products[0]->getProduit());
+    
 
     $limit = 20; // Nombre de produits par page
     $offset = ($page - 1) * $limit; // Calcul de l'offset
@@ -96,24 +114,41 @@ class ProductController extends AbstractController
     $totalProducts = $repo->count([]);
     $totalPages = ceil($totalProducts / $limit);
 
+
+    // Barre pagination dans les sous-catégorie
     $products = $repo -> findProductsBySousCategoryWithPagination( $sousCategory, $offset, $limit);
+
+
 
     // Produits en promotion
     $productsPromos = $repo->getProductsOnPromotion();
 
+    // Liste des sous-catégorie dans les catégorie
     $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
 
     // Récupérer les filtres depuis la requête
     $localForm = $request->query->get('local', null); 
     $labelIds = $request->query->all('label'); 
-
     $sousCategoryId = $repoSCat->getSousCategoriesId($sousCategory); 
-    //dd($sousCategoryId);
+    
     $categoryId = $category[0]->getId(); 
+    
+
 
     // Appel de la méthode de filtrage par label et local
-    $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, $sousCategoryId, [$categoryId]);
+    $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, $sousCategoryId[0]['id'], [$categoryId]);
 
+
+    // Trier par nom croissant et décroissant
+    $nomProduit = $request->query->get('nomProduit', ''); 
+    $nameTrie = $repo->nameTrie($nomProduit, [$categoryId], $sousCategoryId[0]['id']) ; 
+    
+
+    // Trier par prix croissant et décroissant
+    $prixProduit = $request->query->get('prixProduit', '');  
+    $priceTrie = $repo-> priceTrie($prixProduit, [$categoryId], $sousCategoryId[0]['id']) ; 
+
+// dd($prixProduit, $nomProduit );
     // Afficher la vue
     return $this->render('product/sousCatProducts.html.twig', [
        // 'sousproduct' => $sousProduct, 
@@ -125,6 +160,8 @@ class ProductController extends AbstractController
         'sousCategoryId'=>$sousCategoryId[0]['id'],
         'currentPage' => $page,
         'totalPages' => $totalPages,
+        'namePrice'=> $nameTrie,
+        'piceTrie' => $priceTrie,
     ]);
     }
     

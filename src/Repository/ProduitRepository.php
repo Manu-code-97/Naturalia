@@ -164,40 +164,75 @@ public function filterByLabelAndLocal($localForm , $labelIds, $categoryId = null
 
 
 
-/* trier par prix et nom croissant  */
-public function priceCroissant($nomProduit){
+/* trier par nom croissant et décroissant  */
+public function nameTrie($nomProduit , $categoryId = null, $sousCategoryId = null){
 
-    $dql=
-    '
-    SELECT p
-    FROM App\Entity\Produit p
-    WHERE p.nom =:nomProduit
-    ORDER BY nom, prix 
     
-    ';
+    $dql = $this->createQueryBuilder('p'); 
 
-    $query = $this->getEntityManager()->createQuery($dql);
-    $query->setParameter('nomProduit', $nomProduit);
+    if (!empty($nomProduit)) {
+        $dql->andWhere('p.nom = :nomProduit')
+        ->setParameter('nomProduit', $nomProduit);
+    }
     
-    return $query->getResult(); 
+    
+
+    // Filtrage par sous-catégorie ou catégorie principale
+    if (!empty($sousCategoryId)) {
+        $dql->join('p.sousCategorie', 'sc')
+            ->andWhere('sc.id = :sousCategoryId')
+            ->setParameter('sousCategoryId', $sousCategoryId);
+    }
+    
+    if (!empty($categoryId)) {
+        $dql->join('p.sousCategorie', 'cat')
+            ->andWhere('cat.categorie IN (:categoryId)')
+            ->setParameter('categoryId', $categoryId);
+    }
+    
+    $dql->orderBy('p.nom', 'ASC')
+        ->addOrderBy('p.nom', 'DESC');
+
+
+        $query = $dql->getQuery();
+        
+        return $query->getResult(); 
 }
 
 
-/* trier par prix et nom décroissant  */
-public function priceDesc($nomProduit){
 
-    $dql=
-    '
-    SELECT p
-    FROM App\Entity\Produit p
-    WHERE p.nom =:nomProduit
-    ORDER BY nom DESC, prix DESC
+/* trier par prix croissant et décroissant  */
+public function priceTrie($prixProduit , $categoryId = null, $sousCategoryId = null){
+
+    $dql = $this->createQueryBuilder('p'); 
+
+    if (!empty($prixProduit)) {
+        $dql->where('p.prix = :prixProduit')
+        ->setParameter('prixProduit', $prixProduit);
+    }
     
-    ';
+    
 
-    $query = $this->getEntityManager()->createQuery($dql);
-    $query->setParameter('nomProduit', $nomProduit);
+    // Filtrage par sous-catégorie ou catégorie principale
+    if (!empty($sousCategoryId)) {
+        $dql->join('p.sousCategorie', 'sc')
+            ->andWhere('sc.id = :sousCategorySlug')
+            ->setParameter('sousCategorySlug', $sousCategoryId);
+    }
+    
+    if (!empty($categoryId)) {
+        $dql->join('p.sousCategorie', 'cat')
+            ->andWhere('cat.categorie IN (:categoryId)')
+            ->setParameter('categoryId', $categoryId);
+    }
+    
+    $dql->orderBy('p.nom', 'ASC')
+        ->addOrderBy('p.nom', 'DESC');
 
+        $query = $dql->getQuery();
+        // dd($query->getResult());
+        
+        return $query->getResult(); 
 }
 
 
@@ -235,7 +270,7 @@ public function aleatProducts(int $nbProducts) {
             ->getQuery()
             ->getResult();
 
-            dd($results);
+            
 
             return $results;
 
