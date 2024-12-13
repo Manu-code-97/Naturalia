@@ -9,15 +9,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+
 class SecurityController extends AbstractController
 {
+
     #[Route(path: '/login', name: 'app_login')]
-    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
@@ -34,6 +38,8 @@ class SecurityController extends AbstractController
         ]);
     }
 
+
+
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
@@ -42,7 +48,7 @@ class SecurityController extends AbstractController
 
 
     // route d'enregistrement si jamais on n'est logué ? 
-    #[Route(path: '/register', name: 'app_register')]
+    #[Route(path: '/register', name: 'app_register', methods: ['POST'])]
     public function register(
         Request $request, 
         UserPasswordHasherInterface $passwordHasher,
@@ -62,26 +68,27 @@ class SecurityController extends AbstractController
         $utilisateur = new Utilisateur();
         $utilisateur->setEmail($request->request->get('register_email'));
         $utilisateur->setPassword($request->request->get('register_password'));
+        $utilisateur->setPassword($request->request->get('register_confirm_password'));
 
         // Validation
         $errors = $validator->validate($utilisateur);
 
         //  je Vérifie que les mots de passe correspondent
-        $errorMessages = [];
         if ($request->request->get('register_password') !== $request->request->get('register_confirm_password')) 
         {
-            $errorMessages[] = "Les mots de passe ne correspondent pas !";
+            // $errorMessages[] = "Les mots de passe ne correspondent pas !";
+            $this->addFlash('registrationErrorMessages', "Les mots de passe ne correspondent pas !");
+            return $this->redirectToRoute('app_login');
         }
 
-        if (count($errors) > 0 || count($errorMessages) > 0)
+        if (count($errors) > 0)
         {
-            // dd('hello');
             foreach ($errors as $error) 
             {
-                $errorMessages[] = $error->getMessage();
+                // $errorMessages[] = $error->getMessage();
+                $this->addFlash('registrationErrorMessages', $error->getMessage());
             }
-
-            $this->addFlash('registrationErrorMessages', $errorMessages);
+            
             return $this->redirectToRoute('app_login');
         }
 
