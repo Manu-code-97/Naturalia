@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Checkout{% endblock %}
+
+
+{% block title %}Votre Panier{% endblock %}
 
 {% block body %}
-<main id="check-out" class="container">
+
+
+   <main id="check-out" class="container">
+
+   <nav>
+    {% include'partials/co-stages.html.twig' %}
+   </nav>
+
     <section class="d-flex">
         <article>
             <div id="product-checkout">

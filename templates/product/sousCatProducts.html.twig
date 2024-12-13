@@ -53,8 +53,8 @@
                 </ul>
             </nav>
         </div>
-    
-    <article>
+    </section>
+    {# <article>
         <div class="d-flex container justify-content-around">
             {% for produit in productsPromos %}
                 <div class="promo">
@@ -76,27 +76,7 @@
                 </div>
             {% endfor %}
         </div>
-    </article>
-    </section>
-    <div class="pagination-container">
-        <div class="pagination">
-            {% if currentPage > 1 %}
-                <a href="{{ path('catProduits', { category: category.slug, page: currentPage - 1 }) }}">Précédent</a>
-            {% endif %}
-
-            {% for page in 1..totalPages %}
-                {% if page == currentPage %}
-                    <span>{{ page }}</span>
-                {% else %}
-                    <a href="{{ path('catProduits', { category: category.slug, page: page }) }}">{{ page }}</a>
-                {% endif %}
-            {% endfor %}
-
-            {% if currentPage < totalPages %}
-                <a href="{{ path('catProduits', { category: category.slug, page: currentPage + 1 }) }}">Suivant</a>
-            {% endif %}
-        </div>
-    </div>
+    </article> #}
     <section class="container">
         <div class="blockProduits row yellow">
             {% for produit in products %}
