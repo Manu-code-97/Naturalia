@@ -11,10 +11,18 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class CheckOutController extends AbstractController
 {
     #[Route('/panier', name: 'app_check_out')]
-    public function index(): Response
+    public function index(ProduitRepository $repo ): Response
     {
+
+        $productsSelection = $repo -> aleatProducts(20);
+ 
+        ;
+
         return $this->render('checkout/index.html.twig', [
             'controller_name' => 'CheckOutController',
+        
+        'productsSelection' => $productsSelection, 
+
         ]);
     }
     

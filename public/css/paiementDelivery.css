@@ -1,4 +1,5 @@
-#paiement{
+#paiement {
+    margin-bottom: 180px;
 
     label::before {
         background-color: var(--White-naturalia);
@@ -9,19 +10,19 @@
         border-radius: 50%;
         margin-right: 0.5em;
         transition: border ease-in 150ms, box-shadow ease-in 150ms;
-      }
+    }
 
-    .small-input{
+    .small-input {
         width: 340px;
         background: var(--Light-gray, #EFEFEF);
         color: var(--Moody-gray, #675F5F);
         border: 1.5px solid var(--Moody-gray, #675F5F);
-        border-radius: 12px; 
+        border-radius: 12px;
         padding: 10px 16px;
         margin-bottom: 19px;
     }
 
-    .large-input{
+    .large-input {
         width: 716px;
         background: var(--Light-gray, #EFEFEF);
         color: var(--Moody-gray, #675F5F);
@@ -31,33 +32,96 @@
         margin-bottom: 19px;
     }
 
-    .medium-input{
+    .medium-input {
         width: 383px;
         padding: 10px;
         border: 1px solid var(--Black, #250C0E);
         border-radius: 12px;
         background-color: var(--White-naturalia);
     }
-    
-    .x-small-input{
+
+    .x-small-input {
         width: 105px;
         padding: 10px;
         border: 1px solid var(--Black, #250C0E);
         border-radius: 12px;
         background-color: var(--White-naturalia);
     }
-    article{
 
+    #delivery {
+        margin-bottom: 48px;
+    }
+    
+    #chooseCardType {
+        margin-top: 48px;
+        margin-bottom: 41px;
+    
+        div {
+            margin-bottom: 15px;
+        }
+    
+        input,
+        label,
+        img {
+            margin-left: 21px;
+        }
+    
     }
 
-    article{
+    #add-cc-card{
+        h6{
+            margin-bottom: 22px;
+        }
+    }
+
+    #credit-card{
+        padding: 36px 24px;
         
     }
 
-    #chooseCardType{
-        div{
-            margin-bottom: 15px;
+    #cc-value{
+        margin-bottom: 24px;
+    }
+
+    #form{
+        .top-bottom{
+            margin-top: 22px;
+            margin-bottom: 22px;
         }
     }
+
+    button{
+        width: 190px;
+        background: var(--moody-gray, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #868686);
+        color: var(--white, #F6F6F6);
+        border: 1px solid var(--moody-gray, #868686);
+        padding: 15px 10px;
+        border-radius: 10px;
+        
+    }
+
+    .marbottom{
+        margin-bottom: 48px;
+    }
+
+    .top-button{
+        width: 295px;
+        color: var(--Moody-gray, #675F5F);
+        margin-top: 21px;
+        margin-bottom: 21px;
+        background: var(--Light-gray, #EFEFEF);
+        
+        border: solid 2px #675F5F;
+        border: 1px solid var(--Moody-gray, #675F5F);
+        
+        border-radius: 12px;
+        padding: 8px 10px;
+
+        img{
+            margin-right: 5px;
+        }
+        
+    }
 }
+
 

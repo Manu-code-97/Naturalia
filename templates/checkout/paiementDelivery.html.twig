@@ -3,22 +3,70 @@
 
 {% block body %}
 	<main id="paiement" class="d-flex container">
+
+
 		<section>
-			<article>
+			{# <article id="delivery">
 				<div>
-					<div>
+					<div id="user-info">
 						<h6>Adresse de livraison</h6>
 						<p>Catherine</p>
 					</div>
 
-					<div>
-						<p>Horaires</p>
+					<div id="timetable">
+						<p>Horaires:</p>
 						<p>Dim.: 11:00 - 21:00</p>
 						<p>Lun. - Sam.: 10:30 - 12:00, 15:30 - 21:00</p>
 					</div>
 
 					<div>
 						<h5>Détails de livraison</h5>
+					</div>
+				</div>
+			</article> #}
+
+			<article>
+				<div>
+					<div class="d-flex justify-content-between" style="width: 656px;">
+						<div>
+							<h3>Votre option de livraison</h3>
+						</div>
+
+						<div>
+							<p>Modifier</p>
+						</div>
+					</div>
+
+					<div class="d-flex justify-content-around">
+						<div>
+                            <button class="top-button"><img src="{{ asset('img/camion.svg')}}" alt=""> Livraison</button>
+                            
+                        </div>
+
+                        <div>
+                            <button class="top-button"><img src="{{ asset('img/retrait.svg')}}" alt="">Retrait</button>
+                        </div>
+					</div>
+				</div>
+			</article>
+
+			<article id="collect">
+				<div>
+					<div class="marbottom">
+						<h3>Information sur le magasin</h3>
+						<p>NATURALIA VINCENNES (0,2km de distance)</p>
+						<p>4 Rue de Montreuil</p>
+						<p>94300 Vincennes</p>
+						<p>Horaires</p>
+						<p>Dim.: 12:00 - 21:00</p>
+						<p>Lun. - Sam.: 10:30 - 12:00, 15:30 - 21:00</p>
+					</div>
+
+					<div>
+						<h3>Information de retrait</h3>
+						<p>Marie Dupont</p>
+						<p>marie.dupont@gmail.com</p>
+						<p>01 23 45 67 89</p>
 					</div>
 				</div>
 			</article>
@@ -63,47 +111,49 @@
 									</div>
 								</div>
 
-								<div>
+								<div id="add-cc-card">
 									<div class="d-flex justify-content-start">
 										<div>
-											<h6>Ajouter un carte</h6>
+											<h6>Ajouter une carte</h6>
 										</div>
 									</div>
 
-									<div id="credit-card">
-										<div class="d-flex justify-content-around">
-											<div>
-												<input class="medium-input" type="text" id="card-number" placeholder="Numéro de carte">
-												<img src="" alt="">
+									<div>
+										<div id="credit-card">
+											<div class="d-flex justify-content-evenly" id="cc-value">
+												<div>
+													<input class="medium-input" type="text" id="card-number" placeholder="Numéro de carte">
+													<img src="" alt="">
+												</div>
+
+												<div>
+													<input class="x-small-input" type="text" id="expiration" placeholder="MM/AA">
+												</div>
+
+												<div>
+													<input class="x-small-input" type="text" id="cvv" placeholder="CVV">
+												</div>
 											</div>
 
-											<div>
-												<input class="x-small-input" type="text" id="expiration" placeholder="MM/AA">
-											</div>
+											<div class="d-flex justify-content-evenly">
+												<div>
+													<input type="checkbox" id="save" name="save">
+													<label for="save">Enregistrer la carte de crédit pour les achats ultérieurs</label>
+												</div>
 
-											<div>
-												<input class="x-small-input" type="text" id="cvv" placeholder="CVV">
+												<div>
+													<p>
+														<strong>Où est ma CVV?</strong>
+													</p>
+												</div>
 											</div>
 										</div>
 
-										<div class="d-flex justify-content-around">
-											<div>
-												<input type="checkbox" id="save" name="save">
-												<label for="save">Enregistrer la carte de crédit pour les achats ultérieurs</label>
+										<div id="form">
+											<div class="top-bottom">
+												<input type="checkbox" id="yes" name="yes">
+												<label for="yes">Adresse de facturation idsentique à l'adresse de livraison</label>
 											</div>
-
-											<div>
-												<p>
-													<strong>Où est ma CVV?</strong>
-												</p>
-											</div>
-										</div>
-
-										<div>
-											<div>
-                                                <input type="checkbox" id="yes" name="yes">
-                                                <label for="yes">Adresse de facturation idsentique à l'adresse de livraison</label>
-                                            </div>
 
 											<div>
 												<div class="d-flex justify-content-between">
@@ -131,6 +181,11 @@
 														<input class="small-input" type="phone" placeholder="Numéro de téléphone" id="phone" for="phone">
 													</div>
 												</div>
+												<div id="confirmer" class="d-flex justify-content-end">
+													<div>
+														<button type="submit">confirmer</button>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -141,6 +196,15 @@
 				</article>
 			</section>
 
-			<section>{{include('/partials/recapitulatif.html.twig')}}</section>
+			<section>
+				{{include('/partials/recapitulatif.html.twig')}}
+			</section>
+			<section>
+				
+					<div>
+						{{ include("partials/bill.html.twig") }}
+					</div>
+				
+			</section>
 		</main>
 	{% endblock %}
