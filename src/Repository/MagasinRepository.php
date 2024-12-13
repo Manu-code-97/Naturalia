@@ -16,20 +16,21 @@ class MagasinRepository extends ServiceEntityRepository
         parent::__construct($registry, Magasin::class);
     }
 
-    //    /**
-    //     * @return Magasin[] Returns an array of Magasin objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+        /**
+        * @return Magasin[] Returns an array of Magasin objects
+        */
+        public function getAllStores(): array
+        {
+            $dql = '
+            SELECT m
+            FROM App\Entity\Magasin m
+            ';
+
+            $query = $this->getEntityManager()->createQuery($dql)->getResult();
+            
+            // dd($query);
+            return $query;
+        }
 
     //    public function findOneBySomeField($value): ?Magasin
     //    {

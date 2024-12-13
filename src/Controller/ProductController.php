@@ -25,10 +25,19 @@ class ProductController extends AbstractController
 
 
     /* Cette route affiche une catégorie ainsi que ces produits */
-    #[Route('/categorie/{category}', name: 'catProduits', priority:1)]
-    public function categoryProduit (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category ): Response{
+    #[Route('/categorie/{category}', name: 'catProduits', requirements: ['page' => '\d+'], defaults: ['page' => 1])]
+    public function categoryProduit (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, int $page ): Response{
+        $limit = 20; // Nombre de produits par page
+        $offset = ($page - 1) * $limit; // Calcul de l'offset
 
-        $products = $repo -> findProductsByCategory($category);
+        
+
+        // Compter le nombre total de produits pour calculer le nombre de pages
+        $totalProducts = $repo->count([]);
+        $totalPages = ceil($totalProducts / $limit);
+
+        $products = $repo -> findProductsByCategoryWithPagination( $category, $offset, $limit);
+        /* $products = $repo -> findProductsByCategory($category); */
         $productsPromos = $repo -> getProductsOnPromotion();
         $category= $repoCat->showCategory($category);
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
@@ -58,6 +67,8 @@ class ProductController extends AbstractController
         'sousCategoryId'=>$sousCategoryId,
         'sousCategory' => [],
         'sousproduct' => [], 
+        'currentPage' => $page,
+        'totalPages' => $totalPages,
         ]); 
     }
 
@@ -65,8 +76,8 @@ class ProductController extends AbstractController
 
 
     /* Route pour afficher une sous catégorie d'une catégorie */
-    #[Route('/categorie/{category}/{sousCategory}/', name: 'sousCatProduits')]
-    public function sousCategory (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, $sousCategory): Response{
+    #[Route('/categorie/{category}/{sousCategory}/', name: 'sousCatProduits', requirements: ['page' => '\d+'], defaults: ['page' => 1])]
+    public function sousCategory (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, $sousCategory, int $page ): Response{
         
          // Charger la catégorie principale
     $category = $repoCat->showCategory($category);
@@ -75,6 +86,17 @@ class ProductController extends AbstractController
         // Charger les produits de la sous-catégorie
     $products = $repo->findProductsOfSousCategory($sousCategory);
 // dd($products[0]->getProduit());
+
+    $limit = 20; // Nombre de produits par page
+    $offset = ($page - 1) * $limit; // Calcul de l'offset
+
+
+
+    // Compter le nombre total de produits pour calculer le nombre de pages
+    $totalProducts = $repo->count([]);
+    $totalPages = ceil($totalProducts / $limit);
+
+    $products = $repo -> findProductsBySousCategoryWithPagination( $sousCategory, $offset, $limit);
 
     // Produits en promotion
     $productsPromos = $repo->getProductsOnPromotion();
@@ -98,9 +120,11 @@ class ProductController extends AbstractController
         'productsPromos' => $productsPromos, 
         'labelLocal' => $labelLocal,
         'category' => $category[0],
-        'products' => $products[0]->getProduit(),
+        'products' => $products,
         'sousCategories'=> $sousCategoryList,
         'sousCategoryId'=>$sousCategoryId[0]['id'],
+        'currentPage' => $page,
+        'totalPages' => $totalPages,
     ]);
     }
     
@@ -138,7 +162,30 @@ class ProductController extends AbstractController
     }
 
 
+    /* #[Route('/products/{page}', name: 'product_list', requirements: ['page' => '\d+'], defaults: ['page' => 1])]
+    public function list(ProduitRepository $productRepository, int $page): Response
+    {
+        $limit = 20; // Nombre de produits par page
+        $offset = ($page - 1) * $limit; // Calcul de l'offset
 
+        // Récupérer les produits avec pagination
+        $products = $productRepository->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+
+        // Compter le nombre total de produits pour calculer le nombre de pages
+        $totalProducts = $productRepository->count([]);
+        $totalPages = ceil($totalProducts / $limit);
+
+        return $this->render('product/list.html.twig', [
+            'products' => $products,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+        ]);
+    } *//* Function qui sert à afficher le nom des catégorie */
 
     
     // public function showMenu(CategorieRepository $categoryRepository): Response 

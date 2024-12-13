@@ -19,37 +19,31 @@
                 <p>statut: Lorem ipsum dolor, sit amet consectetur.</p>
             </div>
                 <div class="d-flex flex-row mb-3">
-                    <div class="card p-2" style="width: 18rem;">
-                        <h4 class="card-title">Mon impact social</h4>
-                        <div class="card-body">
-                            <img src="/img/pourcentage.png" class="card-img-top" alt="...">
-                            <p class="card-text">78%</p>
-                        </div>
+                    <div class="p-2" id="impactSocial">
+                        <h4>Mon impact social</h4>
+                        <img src="/img/pourcentage.png" alt="...">
+                        <p>78%</p>
                     </div>
-                    <div class="card p-2" style="width: 18rem;">
-                        <h5 class="card-title">Mes points Naturalia</h5>
-                        <div class="card-body">
-                            <p class="card-text"><span>120</span></p>
-                            <p class="card-text">points</p>
-                        </div>
+                    <div class="p-2" id="points">
+                        <h4 >Mes points Naturalia</h4>
+                        <p><span>120</span></p>
+                        <p>points</p>
                     </div>
-                    <div class="card p-2" style="width: 18rem;">
-                        <h5 class="card-title">Mon magasin favori</h5>
-                        <div class="card-body">
-                            <img src="https://picsum.photos/200" class="card-img-top" alt="...">
-                            <p class="card-text">lorem</p>
-                        </div>
+                    <div class="p-2" id="magasinFavori">
+                        <h4>Mon magasin favori</h4>
+                        <img src="https://picsum.photos/200" alt="...">
+                        <p>lorem</p>
                     </div>
                 </div>
-            <div>
-                <h3>Mon historique</h3>
-                {{ include('/partials/carousel.html.twig', {'products':productsSelection})}}
-            </div>
-            <div>
-                <h3>Mes coups de coeurs</h3>
-                {{ include('/partials/carousel.html.twig', {'products':productsSelection})}}
-            </div>
         </section>
+        <div>
+        <h3>Mon historique</h3>
+        {{ include('/partials/carousel.html.twig', {'products':historique})}}
+    </div>
+    <div>
+        <h3>Mes coups de coeurs</h3>
+        {{ include('/partials/carousel.html.twig', {'products':favoris})}}
+    </div>
     </div>
 </div>
 {% endblock %}

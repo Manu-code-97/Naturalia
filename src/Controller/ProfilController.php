@@ -16,10 +16,14 @@ class ProfilController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(UtilisateurRepository $repo): Response
     {
+        // dd($this->getUser()->getId());
+        $favoris = $repo->productInFavoris($this->getUser()->getId());
+
         $historique = $repo->productInHistorique($this->getUser()->getId());
+
         return $this->render('profil/index.html.twig', [
-            'controller_name' => 'ProfilController',
-            'historique' => $historique
+            'historique' =>  $historique,
+            'favoris' => $favoris,
         ]);
 
     }

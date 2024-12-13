@@ -1,0 +1,208 @@
+#produitRecette {
+    --black-naturalia: #250C0E;
+    --white-naturalia: #FFFEFB;
+    --red-naturalia: #840000;
+    --yellow-naturalia: #FFF9F2;
+    --grey-naturalia: #EFEFEF;
+}
+
+#produitRecette{
+    background-color: var(--yellow-naturalia);
+    
+}
+
+#produitRecette h1{
+    text-align: center;
+}
+
+#produitRecette button{
+    width: 190px;
+    height: 44px;
+    color: var(--white-naturalia);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    text-align: center;
+    background: var(--black-naturalia);      /* Bouton fournisseur du moment */
+    margin-top: 10px;
+}
+
+
+#produitRecette section img {
+    border-radius: 15px;
+}
+
+.blockProduits div{
+    margin-top: 10px;
+}
+
+#produitRecette nav div{
+    margin-bottom: 13px;
+}
+
+#produitRecette .none{
+    background-color: var(--yellow-naturalia);
+    color: #000;
+    
+}
+
+#produitRecette ul{
+    justify-content: center;
+}
+
+#produitRecette input{
+    margin-left: 5px;
+    margin-top: 25px;
+}
+
+#produitRecette form div label{
+    margin-top: 10px;
+    margin-left: 10px;
+   
+}
+
+
+#produitRecette .blockProduits {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne suivante lorsque l'espace est plein */
+    justify-content: space-between; /* Espacement entre les cartes */
+    gap: 20px; /* Espace entre les éléments */
+    margin-top: 72px;
+}
+
+/* Chaque carte est un flexbox pour aligner les éléments verticalement */
+
+
+/* L'intérieur de la carte est également un flexbox */
+#produitRecette .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espace égal entre le titre, la description et le bouton */
+    flex-grow: 1; /* Fait en sorte que la carte prenne toute la hauteur possible */
+    padding: 15px;
+}
+
+/* Bouton dans la carte : pousse-le en bas */
+#produitRecette .card-body button {
+    margin-top: auto; /* Pousse le bouton vers le bas */
+    align-self: center; /* Aligne le bouton horizontalement au centre */
+}
+
+#produitRecette .card-group {
+    flex: 1 1 15rem; /* Limite la largeur des cartes à 15rem */
+    display: flex;
+    flex-direction: column; /* Empile les éléments verticalement */
+    align-items: stretch; /* S'assure que chaque élément prend toute la largeur de la carte */
+}
+
+
+#produitRecette .card-title {
+    white-space: nowrap;         /* Empêche le texte de se plier sur une nouvelle ligne */
+    overflow: hidden;            /* Cache tout texte qui dépasse la zone allouée */
+    text-overflow: ellipsis;     /* Affiche "..." quand le texte dépasse */
+    text-align: left;
+    margin-bottom: 5px;          
+    font-size: 1.1rem;          
+    font-weight: bold;           
+}
+
+
+.descriptif{
+    margin-top: 5px;
+}
+
+#produitRecette .circle p{
+    margin-top: 14px;
+    color: var(--white-naturalia);
+}
+
+#produitRecette article{
+    margin-top: 72px;
+}
+
+/* Pour la troncature du texte dans .card-text (y compris description) */
+#produitRecette .card-text {
+    display: -webkit-box; /* Utiliser un box flex avec une hauteur fixe */
+    -webkit-line-clamp: 3; /* Limiter à 3 lignes (vous pouvez ajuster selon vos besoins) */
+    -webkit-box-orient: vertical; /* Spécifier l'orientation en colonne */
+    overflow: hidden; /* Masquer tout texte débordant */
+    text-overflow: ellipsis; /* Afficher '...' quand le texte est coupé */
+    margin-bottom: 10px; /* Ajouter un petit espace entre les textes */
+}
+
+/* Assurez-vous que le bouton est poussé en bas de la carte */
+#produitRecette .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Laisse de l'espace entre le titre, description et bouton */
+    flex-grow: 1; /* Fait en sorte que la carte prenne toute la hauteur possible */
+    padding: 15px;
+}
+
+#produitRecette .card-body button {
+    margin-top: auto; /* Pousse le bouton vers le bas */
+    align-self: center; /* Centre le bouton horizontalement */
+}
+
+/* S'assurer que la carte ait une hauteur fixe ou un ratio pour que les éléments soient alignés */
+#produitRecette .card-group {
+    flex: 1 1 15rem; /* Limite la largeur des cartes à 15rem */
+    display: flex;
+    flex-direction: column; /* Empile les éléments verticalement */
+    align-items: stretch; /* S'assure que chaque élément prend toute la largeur de la carte */
+    height: 100%; /* Assurez-vous que chaque carte ait une hauteur de 100% de son conteneur */
+}
+
+/* S'assurer que l'image et la description soient bien stylisées */
+#produitRecette .card-img-top {
+    object-fit: cover; /* Permet à l'image de couvrir l'espace sans déformation */
+    border-radius: 10px; /* Ajouter un peu de bordure arrondie pour l'image */
+    width: 100%; /* S'assurer que l'image occupe toute la largeur */
+    height: 200px; /* Fixer une hauteur d'image (ajustez selon votre design) */
+}
+
+/* Si vous voulez plus de contrôle sur le texte de la description */
+.descriptif {
+    margin-top: 5px;
+    font-size: 1rem; /* Ajuster la taille de la police pour une meilleure lisibilité */
+    color: var(--black-naturalia); /* Utiliser la couleur noire pour la description */
+}
+
+.block-text {
+    display: block;                  /* Assure que le texte est en bloc */
+    max-height: 3.2em;               /* Limite la hauteur à 2 lignes (avec une taille de ligne de 1.6em) */
+    overflow: hidden;                /* Cache le texte qui dépasse */
+    text-overflow: ellipsis;         /* Affiche '...' à la fin du texte coupé */
+    line-height: 1.6em;              /* Hauteur de ligne pour bien ajuster la hauteur du texte */
+}
+
+.promo div{
+    position: relative;
+}
+
+#produitRecette .circle{
+    top: 25px;
+    right: 380px;
+}
+
+
+/*  css photo page recette */
+.image-wrapper {
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+    max-height: 500px; /* Hauteur plus grande */
+    max-width: 55%; /* Réduit légèrement la largeur de l'image */
+    margin: 0 auto; /* Centrer l'image dans le bloc */
+}
+
+.image-wrapper img {
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    height: 100%; /* Adapte la hauteur au conteneur */
+    object-fit: cover; /* Recadre l'image pour qu'elle remplisse le conteneur */
+}
+
+.image-wrapper:hover img {
+    transform: scale(1.1); /* Effet de zoom au survol */
+}

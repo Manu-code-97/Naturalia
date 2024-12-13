@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="overflow-y-scroll h-50">
+    {% for produit in products %}
+        <div id="achat">
+            <img src="{{produit.image}}" alt="">
+            <h5>{{produit.nom}}</h5>
+            <p>{{produit.description}}</p>
+            <p>{{produit.prix}}</p>
+        </div>
+    {% endfor %}
+    </div>  
+</div>

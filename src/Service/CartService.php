@@ -2,53 +2,97 @@
 
 namespace App\Service;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\ProduitRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CartService
 {
-    private SessionInterface $session;
-    private const CART_KEY = 'cart';
+    private $requestStack;
+    private $produitRepository;
 
-    public function __construct(SessionInterface $session)
+    public function __construct(RequestStack $requestStack, ProduitRepository $produitRepository)
     {
-        $this->session = $session;
+        $this->requestStack = $requestStack;
+        $this->produitRepository = $produitRepository;
     }
 
-    public function addItem(int $productId, int $quantity = 1): void
+    private function getSession()
     {
-        // Récupérer le panier actuel
-        $cart = $this->session->get(self::CART_KEY, []);
+        
 
-        // Ajouter ou mettre à jour le produit dans le panier
-        if (isset($cart[$productId])) {
-            $cart[$productId] += $quantity;
-        } else {
-            $cart[$productId] = $quantity;
-        }
-
-        // Sauvegarder dans la session
-        $this->session->set(self::CART_KEY, $cart);
+        return $this->requestStack->getSession();
     }
 
-    public function removeItem(int $productId): void
+    public function add(int $id)
     {
-        $cart = $this->session->get(self::CART_KEY, []);
+        $session = $this->getSession();
+        $cart = $session->get('cart', []);
 
-        if (isset($cart[$productId])) {
-            unset($cart[$productId]);
+        if (!isset($cart[$id])) {
+            $cart[$id] = 0;
         }
 
-        $this->session->set(self::CART_KEY, $cart);
+        $cart[$id]++;
+
+        $session->set('cart', $cart);
+    }
+
+    public function remove(int $id)
+    {
+        $session = $this->getSession();
+        $cart = $session->get('cart', []);
+
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+        }
+
+        $session->set('cart', $cart);
+    }
+
+    public function decrease(int $id)
+    {
+        $session = $this->getSession();
+        $cart = $session->get('cart', []);
+
+        if (isset($cart[$id])) {
+            if ($cart[$id] > 1) {
+                $cart[$id]--;
+            } else {
+                unset($cart[$id]);
+            }
+        }
+
+        $session->set('cart', $cart);
     }
 
     public function getCart(): array
     {
-        return $this->session->get(self::CART_KEY, []);
+        $session = $this->getSession();
+        $cart = $session->get('cart', []);
+        $cartWithData = [];
+        //dd($cart);
+        foreach ($cart as $id => $quantity) {
+            $cartWithData[] = [
+                'product' => $this->produitRepository->find($id),
+                'quantity' => $quantity,
+            ];
+        }
+
+        return $cartWithData;
     }
 
-    public function clearCart(): void
+    public function getTotal(): float
     {
-        $this->session->remove(self::CART_KEY);
+        $total = 0;
+        foreach ($this->getCart() as $item) {
+            $total += $item['product']->getPrix() * $item['quantity'];
+        }
+
+        return $total;
+    }
+
+    public function clear()
+    {
+        $this->getSession()->remove('cart');
     }
 }
-
