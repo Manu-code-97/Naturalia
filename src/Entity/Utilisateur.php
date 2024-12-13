@@ -8,9 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: "Cet email exist déjà.")]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -27,8 +32,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephone = null;
 
+    #[Assert\NotBlank(message: "L'email est obligatoire.")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "L'email ne doit pas dépasser {{ limit }} caractères."
+    )]
+    #[Assert\Email(
+        message: "L'email '{{ value }}' est invalide."
+    )]
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $email = null;
+    public ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
@@ -60,8 +73,22 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+    #[Assert\NotBlank(message: "Le mot de passe est obligatoire.")]
+    #[Assert\Length(
+        min: 4,
+        max: 255,
+        minMessage: "Le mot de passe doit contenir au minimum {{ limit }} caractères.",
+        maxMessage: "Le mot de passe ne doit pas dépasser {{ limit }} caractères."
+    )]
+    // #[Assert\NotCompromisedPassword(message: "Ce mot de passe est facilement piratable. Veuillez en choisir un autre.")]
     #[ORM\Column]
-    private ?string $password = null;
+    public ?string $password = null;
+
+    // #[Assert\EqualTo(
+    //     propertyPath: "password",
+    //     message: "Le mot de passe de confirmation doit être identique au mot de passe."
+    // )]
+    // public ?string $confirmPassword = null;
 
     public function __construct()
     {
