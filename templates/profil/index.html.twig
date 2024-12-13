@@ -41,7 +41,9 @@
         {% if historique is not empty %}
             {{ include('/partials/carousel.html.twig', {'products':historique})}}
         {% else %}
-            <p>Vous n'avez pas encore passé de commandes.</p>
+            <div class="alert alert-warning" role="alert">
+                Vous n'avez pas encore passé de commandes.
+            </div>
         {% endif %}
     </div>
     <div>
@@ -49,7 +51,9 @@
         {% if favoris is not empty %}
             {{ include('/partials/carousel.html.twig', {'products': favoris}) }}
         {% else %}
-            <p>Aucun produit n'a encore été ajouté dans vos favoris.</p>
+            <div class="alert alert-warning" role="alert">
+                Aucun produit n'a encore été ajouté dans vos favoris.
+            </div>
         {% endif %}
     </div>
     </div>
