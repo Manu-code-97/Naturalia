@@ -66,26 +66,31 @@ class CartService
     }
 
     public function getCart(): array
-    {
-        $session = $this->getSession();
-        $cart = $session->get('cart', []);
-        $cartWithData = [];
-        //dd($cart);
-        foreach ($cart as $id => $quantity) {
+{
+    $session = $this->getSession();
+    $cart = $session->get('cart', []);
+    $cartWithData = [];
+
+    foreach ($cart as $id => $quantity) {
+        $product = $this->produitRepository->find($id);
+        if ($product) {
             $cartWithData[] = [
-                'product' => $this->produitRepository->find($id),
+                'product' => $product,
                 'quantity' => $quantity,
             ];
         }
-
-        return $cartWithData;
     }
+
+    return $cartWithData;
+}
 
     public function getTotal(): float
     {
         $total = 0;
         foreach ($this->getCart() as $item) {
-            $total += $item['product']->getPrix() * $item['quantity'];
+            if ($item['product']) {
+                $total += $item['product']->getPrix() * $item['quantity'];
+            }
         }
 
         return $total;

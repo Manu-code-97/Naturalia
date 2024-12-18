@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-	Hello HomeController!
+	Home
 {% endblock %}
 
 {% block body %}
@@ -36,7 +36,7 @@
 			</div>
 		</article>
 
-		<div class="carousel container yellow">
+		<div class="carousel container yellow mg-top">
 
 			<h3>
 				Promotions
@@ -44,7 +44,7 @@
 			{{ include('/partials/carousel.html.twig', {'products': productsPromo}) }}
 		</div>
 
-		<article class="container yellow" id="p-two">
+		<article class="container yellow mg-top" id="p-two">
 			<h3>
 				Le Fournisseur du Moment
 			</h3>
@@ -60,15 +60,15 @@
 					<p class="yellow">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, natus autem tempora ipsum facere quod molestias cum consectetur quam recusandae odio beatae aperiam expedita at iure dolores suscipit unde officiis aut fugit sapiente labore! Provident numquam sequi adipisci magnam dolorem voluptas incidunt voluptates velit tempora aliquam. Nostrum fugit nemo saepe.
 					</p>
-					<button>
+					<button class="engage">
 						Découvrir
 					</button>
 				</div>
 			</div>
 		</article>
 
-		<article id="recettes-du-moment">
-			<h3>Recette du Moment</h3>
+		<article id="recettes-du-moment" class="mg-top container">
+			<h3>Les Recette du Moment</h3>
 			<div class="block-recette">
 
 				<div class="block-imgRecette">
@@ -94,7 +94,7 @@
 			</div>
 		</article>
 
-		<article class="container yellow" id="newsletter">
+		<article class="container yellow mg-top" id="newsletter">
 			<div class="yellow">
 				<div class="yellow">
 					<h3>
@@ -108,7 +108,8 @@
 							<div class="yellow">
 								<input type="email" id="email" placeholder="Email" for="email">
 								<button type="submit">
-									<img src="img/input/arrow.svg" alt=""></button>
+									<img src="img/input/arrow.svg" alt="">
+								</button>
 							</div>
 						</form>
 					</div>
@@ -118,7 +119,7 @@
 
 		</article>
 
-		<section class="container yellow">
+		<section class="container yellow mg-top">
 			<h3 class="yellow">
 				Nos services
 			</h3>
@@ -126,7 +127,8 @@
 			<div class="d-flex justify-content-around yellow" id="services">
 				<div class="yellow">
 					<div>
-						<img src="{{ asset('img/card/cadenas.svg') }}" alt="?"></div>
+						<a href=""><img src="{{ asset('img/card/cadenas.svg') }}" alt="?"></a>
+					</div>
 
 					<figcaption>
 						<p>
@@ -141,7 +143,8 @@
 
 				<div>
 					<div>
-						<img src="{{ asset('img/card/camion.svg') }}" alt="?"></div>
+						<img src="{{ asset('img/card/camion.svg') }}" alt="?">
+					</div>
 
 					<figcaption>
 						<p>
@@ -156,7 +159,8 @@
 
 				<div>
 					<div>
-						<img src="{{ asset('img/card/balise.svg') }}" alt="?"></div>
+						<img src="{{ asset('img/card/balise.svg') }}" alt="?">
+					</div>
 
 					<figcaption>
 						<p>
@@ -171,7 +175,8 @@
 
 				<div>
 					<div>
-						<img src="{{ asset('img/card/cube.svg') }}" alt="?"></div>
+						<img src="{{ asset('img/card/cube.svg') }}" alt="?">
+					</div>
 
 					<figcaption>
 						<p>
@@ -186,7 +191,8 @@
 
 				<div>
 					<div>
-						<img src="{{ asset('img/card/fleches.svg') }}" alt="?"></div>
+						<img src="{{ asset('img/card/fleches.svg') }}" alt="?">
+					</div>
 
 					<figcaption>
 						<p>

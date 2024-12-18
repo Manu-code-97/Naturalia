@@ -22,17 +22,18 @@
                                 </button>
                             </div>
                             <div>
-                                <form action="">
-                                    <div>
-                                        <label class="toggle-switch">
-                                            <input type="checkbox">
-                                            <div class="toggle-switch-background">
-                                                <div class="toggle-switch-handle"></div>
-                                            </div>
-                                        </label>
-                                        <span>Choisir local</span>
-                                    </div>
+                                <form id="filter-form" action="{{ path('catProduits', { 'category': category.slug }) }}" method="get"> 
+                                    <div> 
+                                        <label class="toggle-switch"> 
+                                        <input class="toggle-switch" type="checkbox" name="local" value="1" {% if localForm %} checked {% endif %} onchange="this.form.submit()"> 
+                                        <div class="toggle-switch-background"> 
+                                        <div class="toggle-switch-handle"></div> 
+                                        </div> 
+                                        </label>                    
+                                        <span>Choisir local</span> 
+                                    </div> 
                                 </form>
+
                             </div>
                         </div>
                     </div>

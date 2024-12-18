@@ -52,8 +52,8 @@ class SousCategorieRepository extends ServiceEntityRepository
         {
 
             $entityManager = $this->getEntityManager();
-            $query = $entityManager->createQuery(
-                'SELECT s
+            $query = $entityManager->createQuery(                                   
+                'SELECT s       
                 FROM App\Entity\SousCategorie s
                 WHERE s.categorie = :categorie'
             )->setParameter('categorie', $category) ;

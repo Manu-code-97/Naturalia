@@ -1,5 +1,16 @@
+#recap{
+    margin-top: 100px;
+    overflow-y: scroll;
+    max-height: 100vh;
+}
 
+#achat{
+    margin-left: 200px;
+
+}
 
 #achat img{
     border-radius: 12px;
+    width: 97px;
+    height: 97px;
 }
