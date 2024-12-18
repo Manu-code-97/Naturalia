@@ -1,0 +1,56 @@
+<div id="co-stages" class="d-flex container justify-content-around">
+	<div>
+		<div class="red-circle">
+			<p class="cabin">1</p>
+		</div>
+		<p class="red-p">Panier</p>
+	</div>
+
+	<div class="grey-border">
+    </div>
+
+	<div>
+		<div class="grey-circle">
+            <p class="cabin">2</p>
+        </div>
+        <p class="grey-p">Livraison</p>
+	</div>
+
+	<div class="grey-border">
+    </div>
+
+	<div>
+        <div class="grey-circle">
+            <p class="cabin">3</p>
+        </div>
+        <p class="grey-p">Paiement</p>
+    </div>
+</div>
+{# 
+<div id="co-stages" class="d-flex container justify-content-around">
+    <div>
+        <div class="red-circle">
+            <p class="cabin">1</p>
+        </div>
+        <p class="red-p">Panier</p>
+    </div>
+
+    <div class="grey-border"></div>
+
+    <div>
+        <div class="{{ current_page == 'delivery' ? 'red-circle' : 'grey-circle' }}">
+            <p class="cabin">2</p>
+        </div>
+        <p class="{{ current_page == 'delivery' ? 'red-p' : 'grey-p' }}">Livraison</p>
+    </div>
+
+    <div class="grey-border"></div>
+
+    <div>
+        <div class="{{ current_page == 'payment' ? 'red-circle' : 'grey-circle' }}">
+            <p class="cabin">3</p>
+        </div>
+        <p class="{{ current_page == 'payment' ? 'red-p' : 'grey-p' }}">Paiement</p>
+    </div>
+</div>
+ #}

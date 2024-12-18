@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Lora';
+    src: url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap'
+   );
+}
+
+@font-face {
+    font-family: 'Noto';
+    src: url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+}
+
+
+.cabin{
+    font-family: "Cabin", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700px;
+    font-style: normal;
+    width: 32px;
+  }

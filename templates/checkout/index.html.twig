@@ -1,16 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Checkout{% endblock %}
+
+
+{% block title %}Votre Panier{% endblock %}
 
 {% block body %}
+
+
    <main id="check-out" class="container">
+
+   <nav>
+    {% include'partials/co-stages.html.twig' %}
+   </nav>
+
     <section class="d-flex">
-            <article>
-                <div id="product-checkout">
-                    <h3>Panier</h3>
-                    <div class="d-flex justify-content-between">
+        <article>
+            <div id="product-checkout">
+                <h3>Panier</h3>
+                <div id="cart-items" class="d-flex justify-content-between">
                     {% for item in items %}
-                        <div class="d-flex justify-content-start">
+                        <div class="d-flex justify-content-start cart-item">
                             <div>
                                 <img src="{{ item.product.image }}" alt="{{ item.product.nom }}">
                             </div>
@@ -18,7 +27,7 @@
                                 <div>
                                     <h4>{{ item.product.prix }}</h4>
                                     <p>{{ item.product.nom }}</p>
-                                    <span>{{ item.product.poids }}</span> <span>{{ item.product.prix / item.product.poids }}/kg</span>
+                                    <span>{{ item.product.poids }}</span> {#<span>{{ item.product.prix / item.product.poids }} €/kg</span> #}
                                 </div>
                             </div>
                         </div>
@@ -37,114 +46,57 @@
                     {% endfor %}
                 </div>
             </div>
-                    
-                <div id="replace-product">
+
+            <div id="replace-product">
+                <div>
                     <div>
-                        <div>
-                            <h3 c≈>Remplacement produit</h3>
-                        </div>
-
-                        <div>
-                            <form action="" method"post">
-                                <div class="d-flex">
-                                    <div>
-                                        <input type="checkbox" id="remplacement">
-                                    </div>
-                                    <div>
-                                        <label for="remplacement">
-                                            En cas d’indisponibilité du produit, j’autorise le magasin à me proposer un produit équivalent sans augmentation de prix.
-                                        </label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        <h3>Remplacement produit</h3>
                     </div>
-                </div>
-
-                <div id="comment-section">
-                    <div>
-                        <h3>Commentaire client</h3>
-                    </div>
-
                     <div>
                         <form action="" method="post">
-                            <div>
-                                <input type="textarea" name="comment" id="comment" placeholder="Si vous souhaitez, vous pouvez laisser un commentaire pour nous aider à préparer votre commande.">
+                            <div class="d-flex">
+                                <div>
+                                    <input type="checkbox" id="remplacement">
+                                </div>
+                                <div>
+                                    <label for="remplacement">
+                                        En cas d’indisponibilité du produit, j’autorise le magasin à me proposer un produit équivalent sans augmentation de prix.
+                                    </label>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
-            </article> 
-
-            <div> 
-                {{ include("partials/bill.html.twig") }}
             </div>
-       
+            {# {{include('/partials/recapitulatif.html.twig')}} #}
+
+            <div id="comment-section">
+                <div>
+                    <h3>Commentaire client</h3>
+                </div>
+                <div>
+                    <form action="" method="post">
+                        <div>
+                            <input type="textarea" name="comment" id="comment" placeholder="Si vous souhaitez, vous pouvez laisser un commentaire pour nous aider à préparer votre commande.">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </article>
+        <div>
+            {{ include('partials/bill.html.twig') }}
+        </div>
     </section>
-        
+
     <section id="panier-carousel">
         {# {{ include('/partials/carousel.html.twig', {'products':productsSelection}) }} #}
     </section>
-    
-   </main>
 
-   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.cart-update-form .increase').forEach(button => {
-            button.addEventListener('click', function() {
-                const form = this.closest('.cart-update-form');
-                const id = form.dataset.id;
-                updateCart(id, 'increase');
-            });
-        });
+    <div class="total">
+        <h2>Total : {{ total }} €</h2>
+    </div>
+</main>
 
-        document.querySelectorAll('.cart-update-form .decrease').forEach(button => {
-            button.addEventListener('click', function() {
-                const form = this.closest('.cart-update-form');
-                const id = form.dataset.id;
-                updateCart(id, 'decrease');
-            });
-        });
-
-        document.querySelectorAll('.cart-remove-form .remove').forEach(button => {
-            button.addEventListener('click', function() {
-                const form = this.closest('.cart-remove-form');
-                const id = form.dataset.id;
-                removeFromCart(id);
-            });
-        });
-
-        function updateCart(id, action) {
-            fetch(`/cart/update/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                body: JSON.stringify({ action: action })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Mettre à jour l'interface utilisateur avec les nouvelles données du panier
-                //console.log(data);
-            });
-        }
-
-        function removeFromCart(id) {
-            fetch(`/cart/remove/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Mettre à jour l'interface utilisateur avec les nouvelles données du panier
-                //console.log(data);
-            });
-        }
-    });
-</script>
+<script src="{{ asset('js/panier-add.js') }}"></script>
 
 {% endblock %}

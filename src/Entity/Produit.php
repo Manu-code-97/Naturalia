@@ -43,7 +43,7 @@ class Produit
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $ingredient = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
+    #[ORM\Column(length: 80, nullable: true)]
     private ?string $poids = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
