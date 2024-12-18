@@ -113,12 +113,12 @@ class CheckOutController extends AbstractController
         ]);
     }
 
-    #[Route('/panier/retrait/', name: 'retrait')]
-    public function panierCollect(MagasinRepository $repo, CalculDistanceMag $calc): Response
+    #[Route('/panier/retrait/{cp}', name: 'retrait', defaults: ['cp' => '75001'])]
+    public function panierCollect(MagasinRepository $repo, CalculDistanceMag $calc, $cp): Response
     {   
         $magasinsDB = $repo->getAllStores();
         // dd($magasins);
-        $magasins = $calc->calculDistance($magasinsDB, $cp=75001);
+        $magasins = $calc->calculDistance($magasinsDB, $cp);
 
         return $this->render('checkout/collect.html.twig', [
             'magasins' => $magasins
