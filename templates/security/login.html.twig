@@ -76,9 +76,15 @@
             <label for="register_password">Mot de Passe</label>
             <input type="password" name="register_password" id="register_password" class="form-control mb-3" autocomplete="new-password" required>
 
+    
+            <!-- Confirmation Password -->
+        <label for="register_confirm_password">Confirmation Mot de Passe</label>
+        <input type="password" name="register_confirm_password" id="register_confirm_password" class="form-control mb-3" autocomplete="new-password" required>
+     
+        {# creation d'un input hidden pour generer le csrf-token #}
+        
     <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+        value="{{ csrf_token('authenticate') }}" >
 
             <!-- CSRF Token -->
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
