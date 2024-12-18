@@ -37,7 +37,7 @@
                                 <div>
                                     <form action="" methode="post">
                                         <div>
-                                            <input class="large-input" type="text" id="code-postal" placeholder="e.x 75000">
+                                            <input class="large-input" type="text" id="code-postal" placeholder="e.x {{cp}}">
                                             <img class="loupe" src="{{ asset('img/input/loupe.svg') }}" alt="?">
                                         </div>
                                     </form>
@@ -48,6 +48,12 @@
                         <div>
                             <div>
                                 <h3>Choisissez votre magasin</h3>
+                                {% if magasins|length > 1 %}
+                                    <p>{{ magasins|length }} magasins trouvés à proximité</p>
+                                {% elseif magasins|length == 1 %}
+                                    <p>{{ magasins|length }} magasin trouvé à proximité</p>
+                                {# {% else %} #}
+                                {% endif %}
                             </div>
                             <div>
                                 <div id="magasins">
@@ -71,6 +77,10 @@
                                                 </div>
                                             </article> 
                                         {% endfor %}
+                                    {% elseif magasins is null %}
+                                        <div class="alert alert-danger" role="alert">
+                                            Le code postal {{cp}} n'est pas valide.
+                                        </div>
                                     {% else %}
                                         <div class="alert alert-danger" role="alert">
                                             Aucun magasin trouvé à proximité.

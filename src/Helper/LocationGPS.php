@@ -20,7 +20,10 @@ class LocationGPS
     {
         $json = file_get_contents("https://geocode.maps.co/search?postalcode=$this->codePostal&country=FR&api_key=".$this->apiKey);
         $json = json_decode($json);
-
+        // dd($json);
+        if ($json == []) {
+            return null;
+        }
         $lat = $json[0]->lat;
         $long = $json[0]->lon;
         return $this->geoLoc = [$lat, $long];

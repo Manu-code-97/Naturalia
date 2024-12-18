@@ -119,9 +119,10 @@ class CheckOutController extends AbstractController
         $magasinsDB = $repo->getAllStores();
         // dd($magasins);
         $magasins = $calc->calculDistance($magasinsDB, $cp);
-
+        // dd($magasins);
         return $this->render('checkout/collect.html.twig', [
-            'magasins' => $magasins
+            'magasins' => $magasins,
+            'cp' => $cp
         ]);
     }
 
