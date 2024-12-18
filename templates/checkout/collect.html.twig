@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Collect/Delivery{% endblock %}
+
+{% block body %}
+   <main id="livraison" class="container d-flex">
+        <main>
+
+            <section style="width: 756px;">
+                <div>
+                    <div>
+                        <h3>Comment souhaitez-vous recevoir votre commande ?</h3>
+                    </div>
+    
+                    <div class="d-flex justify-content-around">
+                        <div>
+                            <button class="top-button"><img src="{{ asset('img/camion.svg')}}" alt=""> Livraison</button>
+                            
+                        </div>
+
+                        <div>
+                            <button class="top-button"><img src="{{ asset('img/retrait.svg')}}" alt="">Retrait</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="collect">
+                        <div>
+                            <div>
+                                <div>
+                                    <h3>Entrez votre code postal</h3>
+                                </div>
+    
+                                <div>
+                                    <form action="" methode="post">
+                                        <div>
+                                            <input class="large-input" type="text" id="code-postal" placeholder="e.x 75000">
+                                            <img class="loupe" src="{{ asset('img/input/loupe.svg') }}" alt="?">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div>
+                                <h3>Choisissez votre magasin</h3>
+                            </div>
+                            <div>
+                                {% if magasins is not empty %}
+                                    {% for magasin in magasins %}
+                                        <article class="magasin">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <p>{{magasin.nom}}</p>
+                                                </div>
+        
+                                                <div>
+                                                    <p>{{magasin.distance}}km</p>
+                                                </div>
+                                            </div>
+        
+                                            <div class="d-flex justify-content-start">
+                                                <ul>
+                                                    {{magasin.horaire|raw}}
+                                                </ul>
+                                            </div>
+                                        </article> 
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="alert alert-danger" role="alert">
+                                        Aucun magasin trouvé à proximité.
+                                    </div>
+                                {% endif %}
+                                <article>
+                                    <div>
+                                        <div>
+                                            <h2>Saisissez vos coordonnées pour le retrait</h2>
+                                        </div>
+
+                                        <div>
+                                            <form action="">
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <input class="small-input" type="text" id="name" placeholder="Prénom">
+                                                    </div>
+
+                                                    <div>
+                                                        <input class="small-input" type="text" id="l-name" placeholder="Nom">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <input class="small-input" type="email" id="email" placeholder="E-mail">
+                                                    </div>
+
+                                                    <div>
+                                                        <input class="small-input" type="text" id="phone" placeholder="Numéro de téléphone">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </article>     
+                            </div>
+                    </section>
+                    
+
+                    <div class="d-flex justify-content-end">
+                        <div>
+                            <button class="bottom-button">Passer au paiement</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <main>
+        {{ include("partials/bill.html.twig") }}
+        </main>
+        {# {{include('/partials/recapitulatif.html.twig')}} #}
+   </main>
+{% endblock %}

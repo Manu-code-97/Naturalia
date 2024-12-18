@@ -106,13 +106,21 @@ class CheckOutController extends AbstractController
     }
 
     #[Route('/panier/livraison/', name: 'app_panier_livraison')]
-    public function panierLivraison(MagasinRepository $repo, CalculDistanceMag $calc): Response
+    public function panierLivraison(): Response
+    {   
+
+        return $this->render('checkout/delivery.html.twig', [
+        ]);
+    }
+
+    #[Route('/panier/retrait/', name: 'retrait')]
+    public function panierCollect(MagasinRepository $repo, CalculDistanceMag $calc): Response
     {   
         $magasinsDB = $repo->getAllStores();
         // dd($magasins);
         $magasins = $calc->calculDistance($magasinsDB, $cp=75001);
 
-        return $this->render('checkout/delivery.html.twig', [
+        return $this->render('checkout/collect.html.twig', [
             'magasins' => $magasins
         ]);
     }
