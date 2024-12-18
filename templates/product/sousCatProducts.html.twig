@@ -12,28 +12,50 @@
                     <div class="d-flex justify-content-around">
                         <div>
                             <button class="none">Trier par
-                                <img src="{{ asset('img/card/select.svg') }}" alt="">
+                                
                             </button>
+                            
+                                  {# <select name="nameTrie" id="">
+                                    <option value="nameTrie">{{nameTrie}}</option>
+                                    
+                                </select>  #}
+                                <form method="get" action="">
+                                    <select name="priceTrie">
+                                            <option value="asc" {% if app.request.query.get('priceTrie') == 'asc' %} selected {% endif %}>Prix croissant</option>
+                                            <option value="desc" {% if app.request.query.get('priceTrie') == 'desc' %} selected {% endif %}>Prix décroissant</option>
+                                    </select>                    
+                                    <button type="submit">Trier</button>
+                                </form>
+            
+
                         </div>
                         <div class="d-flex justify">
                             <div>
-                                <button class="none" type="menu">Trier par label
-                                    <img src="{{ asset('img/card/select.svg') }}" alt="">
-                                </button>
+                                <button class="none" type="select">Trier par label </button>
+
+                                
+                           <form method="get" action="">
+                                <select name="label[]" id="labels" multiple> <!-- multiple permet de sélectionner plusieurs options -->
+                                {% for label in labels %}
+                                        <option value="{{ label }}" {% if label in app.request.query.get('label', []) %} selected {% endif %}>{{ label }}</option>
+                                {% endfor %}
+                                </select>
+                                <button type="submit">Filtrer</button>
+                            </form>
+                                
                             </div>
                             <div>
                                 <form id="filter-form" action="{{ path('catProduits', { 'category': category.slug }) }}" method="get"> 
                                     <div> 
                                         <label class="toggle-switch"> 
-                                        <input class="toggle-switch" type="checkbox" name="local" value="1" {% if localForm %} checked {% endif %} onchange="this.form.submit()"> 
-                                        <div class="toggle-switch-background"> 
-                                        <div class="toggle-switch-handle"></div> 
-                                        </div> 
-                                        </label>                    
-                                        <span>Choisir local</span> 
+                                            <input class="toggle-switch" type="checkbox" name="local" value="1" {% if localForm %} checked {% endif %} onchange="this.form.submit()"> 
+                                            <div class="toggle-switch-background"> 
+                                            <div class="toggle-switch-handle"></div> 
+                                            </div> 
+                                        </label> <span>Choisir local</span> 
                                     </div> 
+                                    <button type="submit">Lancer le filtre local</button>
                                 </form>
-
                             </div>
                         </div>
                     </div>
