@@ -67,11 +67,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function updateCartUI(data) {
+    /* function updateCartUI(data) {
         // Mettre à jour les éléments du panier dans le DOM
         const cartItemsContainer = document.querySelector('#cart-items');
         cartItemsContainer.innerHTML = ''; // Vider le conteneur des éléments du panier
         data.items.forEach(item => {
+            console.log(item);
             const cartItem = document.createElement('div');
             cartItem.classList.add('d-flex', 'justify-content-start', 'cart-item');
             cartItem.innerHTML = `
@@ -99,7 +100,49 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             cartItemsContainer.appendChild(cartItem);
-        });
+        }); */
+
+        function updateCartUI(data) {
+            // Voir le fichier CartService.php pour la structure de données de la variable data
+
+            console.log('updateCartUI called');
+            console.log('Data received:', data);
+        
+            // Mettre à jour les éléments du panier dans le DOM
+            const cartItemsContainer = document.querySelector('#cart-items');
+        
+            cartItemsContainer.innerHTML = ''; // Vider le conteneur des éléments du panier
+
+            data.items.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('d-flex', 'justify-content-start', 'cart-item');
+                cartItem.innerHTML = `
+                    <div>
+                        <img src="${item.product.image}" alt="${item.product.nom}">
+                    </div>
+                    <div>
+                        <div>
+                            <h4>${item.product.prix}</h4>
+                            <p>${item.product.nom}</p>
+                            <span>${item.product.poids}</span> <span>${Math.round(item.product.prix / item.product.poids)} €/kg</span>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div>
+                            <form class="cart-update-form" data-id="${item.product.id}" method="post">
+                                <button type="button" class="decrease">-</button>
+                                <span>${item.quantity}</span>
+                                <button type="button" class="increase">+</button>
+                            </form>
+                            <form class="cart-remove-form" data-id="${item.product.id}" method="post">
+                                <button type="button" class="remove">Supprimer</button>
+                            </form>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+        }
 
         // Mettre à jour le total
         const totalElement = document.querySelector('.total h2');
@@ -110,4 +153,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // Réattacher les événements aux nouveaux éléments
         attachEventListeners();
     }
-});
+);

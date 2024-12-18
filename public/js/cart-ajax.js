@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            // Mettre à jour l'interface utilisateur avec les nouvelles données du panier
-            console.log(data);
+            console.log("DEBUG : ajout au panier du produit" + productId, "Panier = " + data);
         });
     }
 });
