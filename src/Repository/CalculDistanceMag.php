@@ -11,7 +11,7 @@ class CalculDistanceMag
         $location = new LocationGPS($cp);
         $locationUser = $location->getGeoLocByPostalCode();
         
-        $magasins = array_splice($magasins, 0, 5);
+        $magasins = array_splice($magasins, 0, 19);
         // $magasins = $magasins[0]->getAdresse();
         // dd($magasins);
         foreach($magasins as $key => $locationMag)

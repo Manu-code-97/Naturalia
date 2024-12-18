@@ -1,3 +1,8 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Facture{% endblock %}
+
+{% block body %} #}
 <article id="bill">
     <div>
         <div id="title" class="d-flex justify-content-around">
@@ -6,14 +11,14 @@
             </div>
 
             <div>
-                <p>Modifier</p>
+                <a href="{{ path('app_check_out') }}">Modifier</a>
             </div>
         </div>
 
         <div id="bill-content">
             <div>
                 <div>
-                    <p>Avez-vous un code de réduction ? <img src="{{ asset('img/card/select.svg') }}" alt=""></p>
+                    <p>Avez-vous un code de réduction ? <img src="{{ asset('img/card/select.svg') }}" alt="" id="open-popup"></p>
                 </div>
             </div>
 
@@ -23,17 +28,17 @@
                 </div>
 
                 <div>
-                    <p>100,25€</p>
+                    {# <p>{{ total }} €</p> #}
                 </div>
             </div>
 
             <div class="d-flex justify-content-between">
-                 <div>
+                <div>
                     <p>Frais de livraison :</p>
                 </div>
 
                 <div>
-                    <p>100,25€</p>
+                    <p>1,25€</p>
                 </div>
             </div>
 
@@ -43,15 +48,51 @@
                 </div>
 
                 <div>
-                    <p class="margin-top"><strong>100,25€</strong></p>
+                    {# <p class="margin-top"><strong>{{ total + 1.25 }} €</strong></p> #}
                 </div>
             </div>
 
             <div class="d-flex justify-content-center">
                 <div>
-                    <button>Valider ma commande</button>
+                    <button type="button" id="validate-order-button">Valider ma commande</button>
                 </div>
             </div>
+
+            <script>
+            document.getElementById('validate-order-button').addEventListener('click', function() {
+                window.location.href = "{{ path('app_panier_livraison') }}";
+            });
+
+            document.getElementById('open-popup').addEventListener('click', function() {
+                document.getElementById('popup').style.display = 'block';
+            });
+
+            document.getElementById('close-popup').addEventListener('click', function() {
+                document.getElementById('popup').style.display = 'none';
+            });
+            </script>
         </div>
-    </div>
+
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span id="close-popup" class="close">&times;</span>
+                <h2>Entrez votre code de réduction</h2>
+                <input type="text" placeholder="Code de réduction">
+                <button type="button">Appliquer</button>
+            </div>
+        </div>
+
+        {# <div id="products">
+            <h3>Produits dans votre panier</h3>
+            {% for item in items %}
+                <div class="product">
+                    <h4>{{ item.product.nom }}</h4>
+                    <p>{{ item.product.description }}</p>
+                    <p>{{ item.product.prix }} €</p>
+                    <p>Quantité : {{ item.quantity }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div> #}
 </article>
+{# {% endblock %} #}

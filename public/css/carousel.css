@@ -20,6 +20,9 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    border: none; /* Retirer les bordures */
+    background-color: var(--yellow-naturalia); /* Appliquer la couleur de fond */
+    
 }
 
 /* Titre des cartes avec gestion du texte trop long */
@@ -62,7 +65,9 @@
     padding: 10px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     margin-top: auto; /* Force le bouton à être aligné en bas */
-    width: 100%;
+    padding: 0px 10px;
+    width: 190px;
+    
 }
 
 #ishaana a{

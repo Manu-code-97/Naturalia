@@ -6,7 +6,7 @@
 <main id="category" class="">
     <section>
         <div class="">
-            <h1 class="">{{ category.nom }}</h1>
+            <h1 class="">{{category.nom}}</h1>
             <div class="container">
                 <nav>
                     <div class="d-flex justify-content-around">
@@ -75,14 +75,14 @@
                 </ul>
             </nav>
         </div>
-    
+    </section>
     <article>
         <div class="d-flex container justify-content-around">
-            {% for produit in productsPromos %}
+            {% for produit in products %}
                 <div class="promo">
                     <div class="d-flex">
                         <div class="image">
-                            <img src="{{ produit.image }}" style="border-radius: 20px;" alt="{{ produit.nom }}">
+                            <img src={{ asset('img/produit/' ~ produit.image) }} style="border-radius: 20px;" alt="{{ produit.nom }}">
                         </div>
                         <div class="circle">
                             <p>Promo</p>
@@ -93,69 +93,32 @@
                         <p class="card-text">{{ produit.description }}</p>
                         <p class="card-text">{{ produit.prix }}€</p>
                         <button class="add-to-cart" data-product-id="{{ produit.id }}">Ajouter
-                            <img src="/img/cart.png" alt=""></button>
+                            <img src="{{ asset('img/cart.png') }}" alt="Ajouter au panier">
+                        </button>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </article>
-    </section>
-    <div class="pagination-container">
-        <div class="pagination">
-            {% if currentPage > 1 %}
-                <a href="{{ path('catProduits', { category: category.slug, page: currentPage - 1 }) }}">Précédent</a>
-            {% endif %}
-
-            {% for page in 1..totalPages %}
-                {% if page == currentPage %}
-                    <span>{{ page }}</span>
-                {% else %}
-                    <a href="{{ path('catProduits', { category: category.slug, page: page }) }}">{{ page }}</a>
-                {% endif %}
-            {% endfor %}
-
-            {% if currentPage < totalPages %}
-                <a href="{{ path('catProduits', { category: category.slug, page: currentPage + 1 }) }}">Suivant</a>
-            {% endif %}
-        </div>
-    </div>
     <section class="container">
         <div class="blockProduits row yellow">
             {% for produit in products %}
                 <div class="card-group col-3">
                     <div class="yellow me-2 align-self-stretch" style="width: 15rem;">
-                        <img src="{{ produit.image }}" class="card-img-top" alt="">
+                        <img src={{ asset('img/produit/' ~ produit.image) }} class="card-img-top" alt="">
                         <div class="card-body">
                             <h5 class="card-title">{{ produit.nom }}</h5>
                             <p class="card-text block-text">{{ produit.description }}</p>
                             <p class="card-text">{{ produit.prix }} €</p>
                             <button class="add-to-cart" data-product-id="{{ produit.id }}">Ajouter
-                                <img src="/img/cart.png" alt=""></button>
+                                <img src="{{ asset('img/cart.png') }}" alt="Ajouter au panier">
+                            </button>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </section>
-    <div class="pagination-container">
-        <div class="pagination">
-            {% if currentPage > 1 %}
-                <a href="{{ path('catProduits', { category: category.slug, page: currentPage - 1 }) }}">Précédent</a>
-            {% endif %}
-
-            {% for page in 1..totalPages %}
-                {% if page == currentPage %}
-                    <span>{{ page }}</span>
-                {% else %}
-                    <a href="{{ path('catProduits', { category: category.slug, page: page }) }}">{{ page }}</a>
-                {% endif %}
-            {% endfor %}
-
-            {% if currentPage < totalPages %}
-                <a href="{{ path('catProduits', { category: category.slug, page: currentPage + 1 }) }}">Suivant</a>
-            {% endif %}
-        </div>
-    </div>
+    
 </main>
-<script src="{{ asset('assets/js/cart.js') }}"></script>
 {% endblock %}
