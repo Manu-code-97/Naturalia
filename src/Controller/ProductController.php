@@ -46,6 +46,8 @@ class ProductController extends AbstractController
         // Trier par nom croissant et décroissant
         $nomProduit = $request->query->get('nomProduit', ''); 
         $categoryId = $category[0]->getId();
+        // dump($category[0]->getId());
+
         $sousCategoryId = 0; 
         $nameTrie = $repo-> nameTrie($nomProduit, [$categoryId], $sousCategoryId) ; 
         
@@ -58,6 +60,7 @@ class ProductController extends AbstractController
         // Sort les produit en promos
         $productsPromos = $repo -> getProductsOnPromotion();
 
+        
 
         // Liste des sous-catégorie dans une catégorie 
         $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
@@ -69,7 +72,10 @@ class ProductController extends AbstractController
     
         // Récupérer les filtres depuis la requête
         $localForm = $request->query->get('local', null); 
+        // dd($localForm);
         $labelIds = $request->query->all('label'); 
+
+        
     
         // Appel de la méthode de filtrage par label et local
         $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, [$categoryId]);
@@ -78,6 +84,7 @@ class ProductController extends AbstractController
         //dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
         [ 'products' => $products, 
+        'labels' => $labelIds, 
         'localForm' => $localForm, 
         'labelLocal' => $labelLocal,
         'priceTrie' => $priceTrie,
@@ -89,7 +96,8 @@ class ProductController extends AbstractController
         'sousCategory' => [],
         'sousproduct' => [], 
         'currentPage' => $page,
-        'totalPages' => min($totalPages, 3), // Limiter à 3 pages
+        'totalPages' => min($totalPages, 3), 
+        'categoryId ' => $category[0]->getId(),
         ]); 
     }
 
@@ -156,15 +164,17 @@ class ProductController extends AbstractController
     return $this->render('product/sousCatProducts.html.twig', [
        // 'sousproduct' => $sousProduct, 
         'productsPromos' => $productsPromos, 
+        'labels' => $labelIds,         
         'labelLocal' => $labelLocal,
+        'localForm '=> $localForm ,
         'category' => $category[0],
         'products' => $products,
         'sousCategories'=> $sousCategoryList,
         'sousCategoryId'=>$sousCategoryId[0]['id'],
         'currentPage' => $page,
-        'namePrice'=> $nameTrie,
-        'piceTrie' => $priceTrie,
         'totalPages' => min($totalPages, 3), // Limiter à 3 pages
+        'nameTrie'=> $nameTrie,
+        'priceTrie' => $priceTrie,
     ]);
     }
     
@@ -174,10 +184,9 @@ class ProductController extends AbstractController
 
     /* Cette route affiche un produit d'une sous catégorie */
     #[Route('/produit/{product}', name: 'detailProduit')]
-    public function detailProduit ( ProduitRepository $repo , $product): Response{
+    public function detailProduit (Request $request, ProduitRepository $repo , $product): Response{
         $productDetail = $repo->find($product);
-
-
+        
         
         $productsSelection = $repo -> aleatProducts(20);
         //dd ($productsSelection);

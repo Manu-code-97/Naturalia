@@ -35,7 +35,7 @@
 
                                 
                            <form method="get" action="">
-                                <select name="label[]" id="labels" multiple> <!-- multiple permet de sélectionner plusieurs options -->
+                                <select name="label" id="labels" multiple> <!-- multiple permet de sélectionner plusieurs options -->
                                 {% for label in labels %}
                                         <option value="{{ label }}" {% if label in app.request.query.get('label', []) %} selected {% endif %}>{{ label }}</option>
                                 {% endfor %}
@@ -45,7 +45,7 @@
                                 
                             </div>
                             <div>
-                                <form id="filter-form" action="{{ path('catProduits', { 'category': category.slug }) }}" method="get"> 
+                                <form id="filter-form" action="" method="get"> 
                                     <div> 
                                         <label class="toggle-switch"> 
                                             <input class="toggle-switch" type="checkbox" name="local" value="1" {% if localForm %} checked {% endif %} onchange="this.form.submit()"> 
