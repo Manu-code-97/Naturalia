@@ -182,23 +182,38 @@ class ProductController extends AbstractController
 
 
 
-    /* Cette route affiche un produit d'une sous catégorie */
-    #[Route('/produit/{product}', name: 'detailProduit')]
-    public function detailProduit (Request $request, ProduitRepository $repo , $product): Response{
-        $productDetail = $repo->find($product);
+    // /* Cette route affiche un produit d'une sous catégorie */
+    // #[Route('/produit/{product}', name: 'detailProduit')]
+    // public function detailProduit (Request $request, ProduitRepository $repo , $product): Response{
+    //     $productDetail = $repo->find($product);
         
         
-        $productsSelection = $repo -> aleatProducts(20);
-        //dd ($productsSelection);
-        return $this->render('product/detail.html.twig', 
-        [ 'productDetail' => $productDetail, 
+    //     $productsSelection = $repo -> aleatProducts(20);
+    //     //dd ($productsSelection);
+    //     return $this->render('product/detail.html.twig', 
+    //     [ 'productDetail' => $productDetail, 
         
-        'productsSelection' => $productsSelection, 
-    ]); 
+    //     'productsSelection' => $productsSelection, 
+    // ]); 
+    // }
+
+    #[Route('/produit/{slug}', name: 'detailProduit')]
+    public function detailProduit(Request $request, ProduitRepository $repo, string $slug): Response
+    {
+    $productDetail = $repo->findOneBy(['slug' => $slug]); // Find product by slug
+    if (!$productDetail) {
+        throw $this->createNotFoundException('Product not found.');
     }
+    
+    $productsSelection = $repo->aleatProducts(20);
+
+    return $this->render('product/detail.html.twig', [
+        'productDetail' => $productDetail,
+        'productsSelection' => $productsSelection,
+    ]);
+}
 
 
-     
 
 
 

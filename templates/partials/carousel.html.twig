@@ -5,11 +5,13 @@
     {% for produit in products %}
 		<div class="card-group flex-nowrap flex-row" id="card">
 			<div class="card me-2" style="width: 15rem;">
-				<img src={{ asset('img/produit/' ~ produit.image) }} class="card-img-top" alt="">
+				<a href="{{ path('detailProduit', { slug: produit.slug }) }}">
+					<img src={{ asset('img/produit/' ~ produit.image) }} class="card-img-top" alt="">
+				</a>
 				<div class="card-body">
 					<h5 class="card-title">{{produit.nom}}</h5>
 					<p class="card-text block-text">{{produit.description}}</p>
-          <p class="card-text">{{produit.prix}}</p>
+          <p class="card-text">{{produit.prix}} €</p>
 		  			<button class="add-to-cart" data-product-id="{{ produit.id }}">Ajouter
                     	<img src="/img/cart.png" alt="">
 					</button>

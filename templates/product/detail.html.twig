@@ -8,24 +8,23 @@
 
         <div id="produit" class="d-flex justify-content-evenly">
             <div id="image">
-                <img src="https://picsum.photos/300/300" alt="">
+                <img src="{{asset('img/produit/' ~ productDetail.image)}}" alt="">
                 <div id="favourite">
                 <img src="/img/favourite.png" alt="">
                 </div>
             </div>
             <div>
                 <div id="description">
-                    <h3>Produit</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h3>{{productDetail.nom}}</h3>
+                    <p>{{productDetail.description}}</p>
                 </div>
                 <div id="label">
-                    <img src="/img/logo-nature-progres.png" alt="">
-                    <img src="/img/logo-ecocert-colour.png" alt="">
-                    <img src="/img/agribio.png" alt="">
-                    <img src="/img/logobio.png" alt="">
+                    {% for label in productDetail.label %}
+                        <img src="/img/logo-nature-progres.png" alt="">
+                    {% endfor %}
                 </div>
                 <div id="ajouter">
-                    <button id="ishaana"><a href="{{ path('cart_add', { id: produit.id }) }}">Ajouter au panier<img src="/img/cart.png" alt=""></a></button>
+                    <button class="add-to-cart" data-product-id="{{ productDetail.id }}">Ajouter au panier<img src="/img/cart.png" alt=""></a></button>
                 </div>
             </div>
         </div>

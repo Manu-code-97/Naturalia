@@ -37,7 +37,7 @@
                 </div>
         </section>
         <div>
-        <h3>Mon historique</h3>
+        <h3 id="historique">Mon historique</h3>
         {% if historique is not empty %}
             {{ include('/partials/carousel.html.twig', {'products':historique})}}
         {% else %}
@@ -47,7 +47,7 @@
         {% endif %}
     </div>
     <div>
-        <h3>Mes coups de coeurs</h3>
+        <h3 id="favoris">Mes coups de coeurs</h3>
         {% if favoris is not empty %}
             {{ include('/partials/carousel.html.twig', {'products': favoris}) }}
         {% else %}
