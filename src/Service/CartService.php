@@ -72,10 +72,18 @@ class CartService
     $cartWithData = [];
 
     foreach ($cart as $id => $quantity) {
-        $product = $this->produitRepository->find($id);
+        $product = $this->produitRepository->findOneBy([ 'id' => $id ]);
+
         if ($product) {
             $cartWithData[] = [
-                'product' => $product,
+                'product' => [
+                    'id'          => $product->getId(),
+                    'image'       => $product->getImage(),
+                    'nom'         => $product->getNom(),
+                    'prix'        => $product->getPrix(),
+                    'description' => $product->getDescription(),
+                    'poids'       => $product->getPoids()
+                ],
                 'quantity' => $quantity,
             ];
         }
@@ -87,9 +95,11 @@ class CartService
     public function getTotal(): float
     {
         $total = 0;
+
         foreach ($this->getCart() as $item) {
             if ($item['product']) {
-                $total += $item['product']->getPrix() * $item['quantity'];
+                $total += $item['product']['prix'] * $item['quantity'];
+
             }
         }
 
