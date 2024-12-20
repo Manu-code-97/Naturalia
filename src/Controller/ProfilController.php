@@ -21,9 +21,13 @@ class ProfilController extends AbstractController
 
         $historique = $repo->productInHistorique($this->getUser()->getId());
 
+        $user = $this->getUser();
+        // dd($user);
+
         return $this->render('profil/index.html.twig', [
             'historique' =>  $historique,
             'favoris' => $favoris,
+            'user' => $user,
         ]);
 
     }

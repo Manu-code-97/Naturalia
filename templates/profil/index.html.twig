@@ -14,9 +14,32 @@
         </div>
         <section id="global" class="col">
             <div id="profil">
-                <h3>Nom</h3>
-                <p>statut: Lorem ipsum dolor, sit amet consectetur.</p>
-                <p>statut: Lorem ipsum dolor, sit amet consectetur.</p>
+                {% if user.nom and user.prenom is not empty %}
+                <h3>{{user.nom}} {{user.prenom}}</h3>
+                {% else %}
+                <h3>Profil utilisateur</h3>
+                {% endif %}
+                <ul>
+                    {% if user.telephone is not empty %}
+                    <li>
+                        Téléphone: {{user.telephone}}
+                    </li>
+                    {% else %}
+                    <li>
+                    Vous n'avez pas fourni de numèro de téléphone.
+                    </li>
+                    {% endif %}
+                    {% if user.email is not empty %}
+                    <li>Email: {{user.email}}</li>
+                    {% else %}
+                    Vous n'avez pas fourni d'adresse email.
+                    {% endif %}
+                    {% if user.adresse is not empty and user.codePostal is not empty and user.ville is not empty%}
+                    <li>Adresse: {{user.adresse}} {{user.codePostal}} {{user.ville}}</li>
+                    {% else %}
+                    <li>Vous n'avez pas enregistré une adresse de livraison.</li>
+                    {% endif %}
+                </ul>
             </div>
                 <div class="d-flex flex-row mb-3">
                     <div class="p-2" id="impactSocial">
