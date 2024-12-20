@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class SearchboxController extends AbstractController
 {
+    #[Route('/search', name: 'search')]
     public function searchBox(Request $request, ProduitRepository $productRepository): Response
     {
         $form = $this->createForm(SearchType::class);

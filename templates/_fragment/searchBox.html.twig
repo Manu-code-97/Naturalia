@@ -1,8 +1,8 @@
 <div id="searchbox">
-    {{ form_start(form, {'attr': {'class': 'd-flex'}}) }}
+    {{ form_start(form, {'attr': {'class': 'd-flex', 'id': 'searchBox'}}) }}
         <div>
             {{ form_widget(form.query, {'attr': {'class': 'form-control', 'placeholder': 'Rechercher un produit...', 'name': 'search_query'}}) }}
-            <img src="{{ asset('img/input/loupe.svg') }}" alt="?" onclick="document.getElementById('searchBox').form.submit();">
+            <img src="{{ asset('img/input/loupe.svg') }}" alt="?" onclick="document.getElementById('searchBox').submit();">
         </div>
     {{ form_end(form) }} 
 </div>

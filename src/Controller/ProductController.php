@@ -281,7 +281,8 @@ class ProductController extends AbstractController
     // }
 
 
-    public function search(Request $request, ProduitRepository $productRepository): Response
+    #[Route('/search', name: 'search')]
+    public function searchBox(Request $request, ProduitRepository $productRepository): Response
     {
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
@@ -293,7 +294,7 @@ class ProductController extends AbstractController
             $products = $productRepository->findByQuery($query);
         }
 
-        return $this->render('partials/header.html.twig', [
+        return $this->render('_fragment/searchBox.html.twig', [
             'form' => $form->createView(),
             'products' => $products,
         ]);
