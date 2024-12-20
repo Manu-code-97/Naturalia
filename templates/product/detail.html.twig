@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-    <div class="d-flex justify-content-center" id="btn">
+    {# <div class="d-flex justify-content-center" id="btn">
         <button>Origine</button>
         <button>Marque</button>
         <button>Ingrédient</button>
@@ -36,6 +36,30 @@
     </div>
     <div>
         <p class="d-flex justify-content-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br>Quam fugiat adipisci doloribus suscipit pariatur, modi facilis delectus molestiae.</p>
+    </div> #}
+    <div class="container my-5">
+        <table class="table table-striped-columns text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Origine</th>
+                    <th scope="col">Marque</th>
+                    {% if productDetail.ingredient is not empty %}
+                    <th scope="col">Ingrédients</th>
+                    {% endif %}
+                    <th scope="col">Fournisseur</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{productDetail.origine}}</td>
+                    <td>{{productDetail.marque}}</td>
+                    {% if productDetail.ingredient is not empty %}
+                    <td>{{productDetail.ingredient}}</td>
+                    {% endif %}
+                    <td>{{fournisseur.nom}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
    <div id="selections">
         <div class="container">

@@ -12,6 +12,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Helper\CategoryHelper;
 use App\Form\SearchType;
+use App\Repository\FournisseurRepository;
 
 class ProductController extends AbstractController 
 { 
@@ -198,7 +199,7 @@ class ProductController extends AbstractController
     // }
 
     #[Route('/produit/{slug}', name: 'detailProduit')]
-    public function detailProduit(Request $request, ProduitRepository $repo, string $slug): Response
+    public function detailProduit(Request $request, ProduitRepository $repo, string $slug, FournisseurRepository $repoFour): Response
     {
     $productDetail = $repo->findOneBy(['slug' => $slug]); // Find product by slug
     if (!$productDetail) {
@@ -206,10 +207,13 @@ class ProductController extends AbstractController
     }
     
     $productsSelection = $repo->aleatProducts(20);
-
+    $id = $productDetail->getFournisseur()->getId();
+    $fournisseur = $repoFour->findOneBy(['id'=> $id]);
+    // dd($fournisseur);
     return $this->render('product/detail.html.twig', [
         'productDetail' => $productDetail,
         'productsSelection' => $productsSelection,
+        'fournisseur' => $fournisseur,
     ]);
 }
 

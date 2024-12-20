@@ -30,7 +30,14 @@ class FournisseurRepository extends ServiceEntityRepository
         return $randomFournisseur;
     }
     
-
+    public function findFournisseurById($id): Fournisseur
+    {
+        // Récupérer tous les fournisseurs avec DQL
+        $dql = 'SELECT f FROM App\Entity\Fournisseur f WHERE f.id = :fournisseurId';
+        $query = $this->getEntityManager()->createQuery($dql)->setParameter('fournisseurId', $id);
+        
+        return $query->getResult();
+    }
 
 
 

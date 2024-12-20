@@ -34,7 +34,7 @@
                     {% else %}
                     Vous n'avez pas fourni d'adresse email.
                     {% endif %}
-                    {% if user.adresse is not empty and user.codePostal is not empty and user.ville is not empty%}
+                    {% if user.adresse and user.codePostal and user.ville is not empty%}
                     <li>Adresse: {{user.adresse}} {{user.codePostal}} {{user.ville}}</li>
                     {% else %}
                     <li>Vous n'avez pas enregistré une adresse de livraison.</li>
