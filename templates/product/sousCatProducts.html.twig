@@ -21,9 +21,14 @@
                                 </select>  #}
                                 <form method="get" action="">
                                     <select name="priceTrie">
-                                            <option value="asc" {% if app.request.query.get('priceTrie') == 'asc' %} selected {% endif %}>Prix croissant</option>
-                                            <option value="desc" {% if app.request.query.get('priceTrie') == 'desc' %} selected {% endif %}>Prix décroissant</option>
-                                    </select>                    
+                                            <option value="asc" {% if app.request.query.get('products') == 'asc' %} selected {% endif %}>Prix croissant</option>
+                                            <option value="desc" {% if app.request.query.get('products') == 'desc' %} selected {% endif %}>Prix décroissant</option>
+                                    </select>  
+
+                                    <select name="nameTrie">
+                                        <option value="asc" {% if nameTrie == 'asc' %}selected{% endif %}>Nom croissant</option>
+                                        <option value="desc" {% if nameTrie == 'desc' %}selected{% endif %}>Nom décroissant</option>
+                                    </select>
                                     <button type="submit">Trier</button>
                                 </form>
             

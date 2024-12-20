@@ -41,20 +41,29 @@ class ProductController extends AbstractController
         /* $products = $repo -> findProductsByCategory($category); */
 
         // Affiche les catégorie
-        $category= $repoCat->showCategory($category);
+        /* $category= $repoCat->showCategory($category); */
 
         // Trier par nom croissant et décroissant
-        $nomProduit = $request->query->get('nomProduit', ''); 
         $categoryId = $category[0]->getId();
         // dump($category[0]->getId());
 
         $sousCategoryId = 0; 
-        $nameTrie = $repo-> nameTrie($nomProduit, [$categoryId], $sousCategoryId) ; 
-        
+        $nomTrie = $request->query->get('nomProduit', ''); 
+        if ($nomTrie) {
+            // Si un tri par nom est sélectionné, on utilise la méthode nameTrie
+            $products = $repo->nameTrie($nomTrie, [$categoryId], $sousCategoryId);
+        }
 
         // Trier par prix croissant et décroissant
-        $prixProduit = $request->query->get('prixProduit', ''); 
-        $priceTrie = $repo-> priceTrie($prixProduit, [$categoryId], $sousCategoryId) ; 
+        
+        $prixTrie = $request->query->get('priceTrie', null);
+        if ($prixTrie) {
+            // Si un tri est sélectionné, on utilise la méthode priceTrie
+            $products = $repo->priceTrie($prixTrie, [$categoryId], $sousCategoryId);
+        } else {
+            // Si aucun tri n'est sélectionné, on charge les produits sans tri
+            $products = $repoCat->showCategory($category);
+        }
 
 
         // Sort les produit en promos
@@ -87,8 +96,8 @@ class ProductController extends AbstractController
         'labels' => $labelIds, 
         'localForm' => $localForm, 
         'labelLocal' => $labelLocal,
-        'priceTrie' => $priceTrie,
-        'nameTrie'=> $nameTrie,
+        'prixTrie' => $prixTrie,
+        'nomTrie'=> $nomTrie,
         'productsPromos' => $productsPromos,
         'category'=> $category[0],
         'sousCategories'=> $sousCategoryList,
@@ -151,13 +160,22 @@ class ProductController extends AbstractController
 
 
     // Trier par nom croissant et décroissant
-    $nomProduit = $request->query->get('nomProduit', ''); 
-    $nameTrie = $repo->nameTrie($nomProduit, [$categoryId], $sousCategoryId[0]['id']) ; 
+    $nomTrie = $request->query->get('nomProduit', ''); 
+    if ($nomTrie) {
+        // Si un tri par nom est sélectionné, on utilise la méthode nameTrie
+        $products = $repo->nameTrie($nomTrie, [$categoryId], $sousCategoryId);
+    }
     
 
     // Trier par prix croissant et décroissant
-    $prixProduit = $request->query->get('prixProduit', '');  
-    $priceTrie = $repo-> priceTrie($prixProduit, [$categoryId], $sousCategoryId[0]['id']) ; 
+    $prixTrie = $request->query->get('priceTrie', null);
+    if ($prixTrie) {
+        // Si un tri est sélectionné, on utilise la méthode priceTrie
+        $products = $repo->priceTrie($prixTrie, [$categoryId], $sousCategoryId);
+    } else {
+        // Si aucun tri n'est sélectionné, on charge les produits sans tri
+        $products = $repo->findProductsOfSousCategory($sousCategory);
+    }
 
 // dd($prixProduit, $nomProduit );
     // Afficher la vue
@@ -173,8 +191,8 @@ class ProductController extends AbstractController
         'sousCategoryId'=>$sousCategoryId[0]['id'],
         'currentPage' => $page,
         'totalPages' => min($totalPages, 3), // Limiter à 3 pages
-        'nameTrie'=> $nameTrie,
-        'priceTrie' => $priceTrie,
+        'nomTrie'=> $nomTrie,
+        'prixTrie' => $prixTrie,
     ]);
     }
     
