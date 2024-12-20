@@ -263,18 +263,13 @@ public function aleatProducts(int $nbProducts) {
 
 
     public function findByQuery(string $query)
-    {
-        $results = $this->createQueryBuilder('p')
-            ->andWhere('p.nom LIKE :query')
-            ->setParameter('query', '%' . $query . '%')
-            ->getQuery()
-            ->getResult();
-
-            
-
-            return $results;
-
-    }
+{
+    return $this->createQueryBuilder('p')
+        ->where('p.nom LIKE :query')
+        ->setParameter('query', '%' . $query . '%')
+        ->getQuery()
+        ->getResult();
+}
 
 
 
