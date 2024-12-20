@@ -20,7 +20,7 @@
                 </div>
                 <div id="label">
                     {% for label in productDetail.label %}
-                        <img src="/img/logo-nature-progres.png" alt="">
+                        <img src="{{ asset('img/' ~ label.image) }}" alt="{{label.nom}}">
                     {% endfor %}
                 </div>
                 <div id="ajouter">

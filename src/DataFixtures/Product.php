@@ -121,13 +121,12 @@ class Product extends Fixture
         for ($i=0; $i < 20; $i++) { 
             $fournisseur = new Fournisseur();
             $fournisseur->setNom($fakerBE->lastName());
-            $fournisseur->setPrenom($faker->firstNameMale());
             $fournisseur->setAdresse($fakerFR->departmentNumber().' '.$this->adresse[rand(0,2)].' '.$fakerFR->region());
             $fournisseur->setCodePostal($faker->randomNumber(5, true));
             $fournisseur->setVille($fakerFR->departmentName());
             $fournisseur->setTelephone($fakerFR->serviceNumber());
             $fournisseur->setEmail($fakerFR->safeEmail());
-            $fournisseur->setSlug($slugger->slug($fournisseur->getNom().'-'.$fournisseur->getPrenom())->lower());
+            $fournisseur->setSlug($slugger->slug($fournisseur->getNom())->lower());
             $fournisseur->setImage('https://picsum.photos/id/'.$faker->numberBetween(0, 300).'/200');
             $fournisseur->setDescription($faker->paragraph(6));
 
@@ -136,7 +135,7 @@ class Product extends Fixture
         }
 
         //LABELS
-        for ($i=0; $i < 5; $i++) { 
+        for ($i=0; $i < 4; $i++) { 
             $label = new Label();
             $label->setNom($faker->word());
             $label->setScore($faker->numberBetween(10, 50));
@@ -165,7 +164,7 @@ class Product extends Fixture
                 $produit->setSousCategorie($sousCategorie);
                 $produit->setFournisseur($this->fournisseurs[rand(0,19)]);
                 // LIAISON LABELS
-                $produit->addLabel($this->labels[rand(0, 4)]);
+                $produit->addLabel($this->labels[rand(0, 3)]);
                 
                 $manager->persist($produit);
                 array_push($this->produits, $produit);

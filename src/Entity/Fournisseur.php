@@ -41,9 +41,6 @@ class Fournisseur
     private Collection $produits;
 
     #[ORM\Column(length: 60, nullable: true)]
-    private ?string $prenom = null;
-
-    #[ORM\Column(length: 60, nullable: true)]
     private ?string $slug = null;
 
     #[ORM\Column(length: 100, nullable: true)]
@@ -160,18 +157,6 @@ class Fournisseur
                 $produit->setFournisseur(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(?string $prenom): static
-    {
-        $this->prenom = $prenom;
 
         return $this;
     }

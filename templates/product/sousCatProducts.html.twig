@@ -78,7 +78,9 @@
     </section>
     <article>
         <div class="d-flex container justify-content-around">
-            {% for produit in products %}
+            {% set shuffled_products = products|shuffle %}
+            {% set random_products = shuffled_products[:2] %}
+            {% for produit in random_products %}
                 <div class="promo">
                     <div class="d-flex">
                         <div class="image">

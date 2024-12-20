@@ -15,7 +15,8 @@ class CalculDistanceMag
             return null;
         }
 
-        $magasins = array_splice($magasins, 0, 19);
+        // Prends les 20 premiers magasins
+        // $magasins = array_splice($magasins, 0, 20);
         // $magasins = $magasins[0]->getAdresse();
         // dd($magasins);
         foreach($magasins as $key => $locationMag)
