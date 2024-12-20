@@ -69,26 +69,26 @@
 
 		<article id="recettes-du-moment" class="mg-top container">
 			<h3>Les Recettes du Moment</h3>
-			<div class="block-recette">
+			<div class="block-recette container row">
 
-				<div class="block-imgRecette">
+				<div class="col-3">
 					<div class="recette-img-div">
 						<img src="{{ asset('img/' ~ recetteDuMoment.image) }}" alt="recette-image">
 
 					</div>
 					<div>
-						<div class="d-flex justify-content-center">
+						<div class="">
 							<h3>{{recetteDuMoment.nom}}</h3>
 							{# <h3>NOM Recette</h3> #}
 						</div>
-						<div id="lien-button" class="d-flex justify-content-center">
+						<div id="lien-button" class="">
 							<a href="{{path('RecetteMoment')}}" id="lien-recetteMomment">Voir la recette</a>
 						</div>
 					</div>
 				</div>
 
 
-				<div class="d-flex justify-content-center" id="ingredients">
+				<div class="col-8" id="ingredients">
 					{{ include("partials/carousel.html.twig",{"products":recetteDuMoment.getProduit}) }}
 				</div>
 			</div>
