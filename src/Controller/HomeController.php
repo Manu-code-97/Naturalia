@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class HomeController extends AbstractController
 {
     // affichage de la page d'accueil du site 
-    
+    // un commentaire
     #[Route('/', name: 'app_home')]
     public function index(ProduitRepository $produitRepository,RecetteRepository $recetteRepository,FournisseurRepository $fournisseurRepository): Response
     {
