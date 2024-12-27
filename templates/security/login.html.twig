@@ -8,7 +8,7 @@
     <div class="form-block d-flex flex-column flex-fill p-3">
         <div class="alert" role="alert">
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="alert alert-danger text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
         </div>
         <form method="post" class="BlockLogInt">

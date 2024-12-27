@@ -109,29 +109,26 @@ class CheckOutController extends AbstractController
     public function panierLivraison(Request $request): Response
     {   
         $user= $this->getUser();
-         //dd($user);
+//    dd($user);
             // Recuperation des données du formulaire une fois qu'on rempli le formulaire 
         $formData = $request->request->all();
         // test
-        // dd($formData);
+    // dd($formData);
             // Vérification des champs obligatoires
-    if (
-        empty($formData['prenom']) || 
-        empty($formData['nom']) || 
-        empty($formData['adresse']) || 
-        empty($formData['email']) || 
-        empty($formData['telephone'])
-    ) {
-        $this->addFlash('error', 'Veuillez remplir tous les champs requis.');
-        return $this->redirectToRoute('app_profil');
-    }
+    // if (
+    //     empty($formData['prenom']) || 
+    //     empty($formData['nom']) || 
+    //     empty($formData['adresse']) || 
+    //     empty($formData['email']) || 
+    //     empty($formData['telephone'])
+    // ) {
+    //     $this->addFlash('error', 'Veuillez remplir tous les champs requis.');
+    //     return $this->redirectToRoute('app_profil');
+    // }
         return $this->render('checkout/delivery.html.twig', [
-            'user' => $user,
-            'formData' => $formData,
+            // 'user' => $user,
+            // 'formData' => $formData,
         ]);
-
-
-
 
     }
 

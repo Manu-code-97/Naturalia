@@ -32,35 +32,47 @@
 
             <section style="width: 716px;">
                 <div>
-                    <form action="post">
-                        <div>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <input class="small-input" type="text" required placeholder="Prénom">
-                                </div>
-    
-                                <div>
-                                    <input class="small-input" type="text" required placeholder="Nom">
-                                </div>
-                            </div>
-    
-                            <div>
-                                <div>
-                                    <input class="large-input" type="text" required id="address" for="address" placeholder="Adresse">
-                                </div>
-                            </div>
-    
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <input class="small-input" type="email" placeholder="E-mail" required for="email" id="email">
-                                </div>
-    
-                                <div>
-                                    <input class="small-input" type="phone" placeholder="Numéro de téléphone" id="phone" for="phone">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+<form action="{{ path('app_check_out') }}" method="post">
+	<div>
+		<div class="d-flex justify-content-between">
+			<div>
+				<input class="small-input" type="text" name="prenom" required placeholder="Prénom">
+			</div>
+
+			<div>
+				<input class="small-input" type="text" name="nom" required placeholder="Nom">
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<input class="large-input" type="text" name="adresse" required id="address" placeholder="Adresse">
+			</div>
+		</div>
+
+		<div class="d-flex justify-content-between">
+			<div>
+				<input class="small-input" type="email" name="email" required placeholder="E-mail">
+			</div>
+
+			<div>
+				<input class="small-input" type="tel" name="telephone" required placeholder="Numéro de téléphone">
+			</div>
+		</div>
+	</div>
+
+
+<div class="bouton-div">
+<a href="{{ path('app_panier_paiement') }}" class="btn btn-dark rounded p-2">Valider vos informations</a>
+
+
+
+</div>
+
+
+
+</form>
+
                 </div>
             </section>
     
