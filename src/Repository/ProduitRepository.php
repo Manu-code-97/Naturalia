@@ -72,7 +72,8 @@ public function findProductsOfSousCategory($sousCategory) {
     return $query->getResult(); 
 }
 
-/* Fonction pour trouver des produit par rappor a sa catégorie dans le product controller */
+
+/* Fonction pour trouver des produit par rappor a sa catégorie dans le product controller (grace à la pagination) */
 public function findProductsByCategoryWithPagination(string $category, int $offset, int $limit)
 {
     return $this->createQueryBuilder('p')
@@ -101,7 +102,7 @@ public function findProductsBySousCategoryWithPagination(string $sousCategory, i
         }
 
     
-    /* Fonction pour trouver des produit par rappor a sa catégorie dans le product controller */
+    
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!! ne retourne pas des produits !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 public function findProductsByCategory($productCategory)
 {

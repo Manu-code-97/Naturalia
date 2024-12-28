@@ -6,7 +6,7 @@
 <main id="category" class="">
     <section>
         <div class="">
-            <h1 class="">{{category.nom}}</h1>
+            <h1 class="">{{ category.nom }}</h1>
             <div class="container">
                 <nav>
                     <div class="d-flex justify-content-around">
@@ -25,10 +25,10 @@
                                             <option value="desc" {% if app.request.query.get('products') == 'desc' %} selected {% endif %}>Prix décroissant</option>
                                     </select>  
 
-                                    <select name="nameTrie">
+                                    {# <select name="nameTrie">
                                         <option value="asc" {% if nameTrie == 'asc' %}selected{% endif %}>Nom croissant</option>
                                         <option value="desc" {% if nameTrie == 'desc' %}selected{% endif %}>Nom décroissant</option>
-                                    </select>
+                                    </select> #}
                                     <button type="submit">Trier</button>
                                 </form>
             

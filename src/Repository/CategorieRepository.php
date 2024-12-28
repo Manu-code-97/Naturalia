@@ -42,17 +42,20 @@ class CategorieRepository extends ServiceEntityRepository
     } */
 
     /* Appel une catégorie en particulier */
-    public function showCategory(string $category) : array
+    public function showCategory(string $category) : ?Categorie
     {
         
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT c
-            FROM App\Entity\Categorie c
-            WHERE c.slug = :categorie'
-        )->setParameter('categorie', $category) ;
+        'SELECT c
+         FROM App\Entity\Categorie c
+         WHERE c.slug = :categorie'
+    )->setParameter('categorie', $category);
+
+    // Utilisez getResult() pour récupérer un tableau d'objets Categorie
+    return $query->getOneOrNullResult();
     
-        return $query->getResult();
+        
 
     }
 }

@@ -64,7 +64,7 @@ class SousCategorieRepository extends ServiceEntityRepository
         }
 
          /* appel les sous categorie d'une catégorie */
-         public function getSousCategoriesId(string $sousCategory) : array
+         public function getSousCategoriesId(string $sousCategory) : ?int
          {
  
              $entityManager = $this->getEntityManager();
@@ -74,7 +74,7 @@ class SousCategorieRepository extends ServiceEntityRepository
                  WHERE s.slug = :sousCategory'
              )->setParameter('sousCategory', $sousCategory) ;
          
-             return $query->getResult();
+             return $query->getSingleScalarResult();
  
      
          }

@@ -29,41 +29,42 @@ class ProductController extends AbstractController
     public function categoryProduit (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, int $page = 1 ): Response{
         $limit = 20; // Nombre de produits par page
         $offset = ($page - 1) * $limit; // Calcul de l'offset
+       /*  $category = $repoCat->showCategory($category); */
+       
 
-        
+       $categoryEntity = $repoCat->showCategory($category);
+       if (!$categoryEntity) {
+           throw $this->createNotFoundException('Category not found');
+       }
+
+       $categoryId = $categoryEntity->getId();
+
+    //    dd($category);
+
 
         // Compter le nombre total de produits pour calculer le nombre de pages
-        $totalProducts = $repo->count([]);
-        $totalPages = ceil($totalProducts / $limit);
+        /* $totalProducts = $repo->count(['categorie' => $category]); 
+        $totalPages = ceil($totalProducts / $limit); */
 
+        
         // Barre pagination dans les catégorie
-        $products = $repo -> findProductsByCategoryWithPagination( $category, $offset, $limit);
+        $products = $repo->findProductsByCategoryWithPagination($categoryId, $offset, $limit);
         /* $products = $repo -> findProductsByCategory($category); */
 
         // Affiche les catégorie
         /* $category= $repoCat->showCategory($category); */
 
         // Trier par nom croissant et décroissant
-        $categoryId = $category[0]->getId();
-        // dump($category[0]->getId());
-
+       
         $sousCategoryId = 0; 
-        $nomTrie = $request->query->get('nomProduit', ''); 
-        if ($nomTrie) {
-            // Si un tri par nom est sélectionné, on utilise la méthode nameTrie
-            $products = $repo->nameTrie($nomTrie, [$categoryId], $sousCategoryId);
-        }
+        $nomProduit = $request->query->get('nomProduit', ''); 
+        $nameTrie = $repo->nameTrie($nomProduit, $categoryId, $sousCategoryId) ; 
+
 
         // Trier par prix croissant et décroissant
         
-        $prixTrie = $request->query->get('priceTrie', null);
-        if ($prixTrie) {
-            // Si un tri est sélectionné, on utilise la méthode priceTrie
-            $products = $repo->priceTrie($prixTrie, [$categoryId], $sousCategoryId);
-        } else {
-            // Si aucun tri n'est sélectionné, on charge les produits sans tri
-            $products = $repoCat->showCategory($category);
-        }
+        $prixProduit = $request->query->get('prixProduit', '');  
+        $priceTrie = $repo-> priceTrie($prixProduit, $categoryId, $sousCategoryId) ; 
 
 
         // Sort les produit en promos
@@ -72,8 +73,9 @@ class ProductController extends AbstractController
         
 
         // Liste des sous-catégorie dans une catégorie 
-        $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
+        $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($categoryId);
 
+        
         // $sousProduct = $repo->findProductsOfSousCategory($sousCategory);
         $sousCategoryId = 0; 
 
@@ -84,29 +86,27 @@ class ProductController extends AbstractController
         // dd($localForm);
         $labelIds = $request->query->all('label'); 
 
-        
-    
         // Appel de la méthode de filtrage par label et local
         $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, [$categoryId]);
         
 
         //dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
-        [ 'products' => $products, 
+        [ 'products' => $products,
+        'category' => $categoryEntity,
         'labels' => $labelIds, 
         'localForm' => $localForm, 
         'labelLocal' => $labelLocal,
-        'prixTrie' => $prixTrie,
-        'nomTrie'=> $nomTrie,
+        'priceTrie' => $priceTrie,
+        'nameTrie'=> $nameTrie,
         'productsPromos' => $productsPromos,
-        'category'=> $category[0],
         'sousCategories'=> $sousCategoryList,
         'sousCategoryId'=>$sousCategoryId,
         'sousCategory' => [],
         'sousproduct' => [], 
         'currentPage' => $page,
-        'totalPages' => min($totalPages, 3), 
-        'categoryId ' => $category[0]->getId(),
+        /* 'totalPages' => min($totalPages, 3),  */
+        'categoryId' => $categoryEntity->getId(),
         ]); 
     }
 
@@ -117,84 +117,82 @@ class ProductController extends AbstractController
     #[Route('/categorie/{category}/{sousCategory}/', name: 'sousCatProduits', requirements: ['page' => '\d+'], defaults: ['page' => 1])]
     public function sousCategory (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, $sousCategory, int $page ): Response{
         
-         // Charger la catégorie principale
-    $category = $repoCat->showCategory($category);
+          // Charger la catégorie principale
+          $categoryEntity = $repoCat->showCategory($category);
+       if (!$categoryEntity) {
+           throw $this->createNotFoundException('Category not found');
+       }
+
+       $categoryId = $categoryEntity->getId();
+
         
     
-        // Charger les produits de la sous-catégorie
-    $products = $repo->findProductsOfSousCategory($sousCategory);
-    
-
-    $limit = 20; // Nombre de produits par page
-    $offset = ($page - 1) * $limit; // Calcul de l'offset
+    // Charger les produits de la sous-catégorie
+$products = $repo->findProductsOfSousCategory($sousCategory);
 
 
-
-    // Compter le nombre total de produits pour calculer le nombre de pages
-    $totalProducts = $repo->count([]);
-    $totalPages = ceil($totalProducts / $limit);
-
-
-    // Barre pagination dans les sous-catégorie
-    $products = $repo -> findProductsBySousCategoryWithPagination( $sousCategory, $offset, $limit);
+$limit = 20; // Nombre de produits par page
+$offset = ($page - 1) * $limit; // Calcul de l'offset
 
 
 
-    // Produits en promotion
-    $productsPromos = $repo->getProductsOnPromotion();
-
-    // Liste des sous-catégorie dans les catégorie
-    $sousCategoryList= $repoSCat->getSousCategoriesFromCategory($category[0]->getId());
-
-    // Récupérer les filtres depuis la requête
-    $localForm = $request->query->get('local', null); 
-    $labelIds = $request->query->all('label'); 
-    $sousCategoryId = $repoSCat->getSousCategoriesId($sousCategory); 
-    
-    $categoryId = $category[0]->getId(); 
-    
+// Compter le nombre total de produits pour calculer le nombre de pages
+$totalProducts = $repo->count([]);
+$totalPages = ceil($totalProducts / $limit);
 
 
-    // Appel de la méthode de filtrage par label et local
-    $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, $sousCategoryId[0]['id'], [$categoryId]);
+// Barre pagination dans les sous-catégorie
+$products = $repo -> findProductsBySousCategoryWithPagination( $sousCategory, $offset, $limit);
 
 
-    // Trier par nom croissant et décroissant
-    $nomTrie = $request->query->get('nomProduit', ''); 
-    if ($nomTrie) {
-        // Si un tri par nom est sélectionné, on utilise la méthode nameTrie
-        $products = $repo->nameTrie($nomTrie, [$categoryId], $sousCategoryId);
-    }
-    
 
-    // Trier par prix croissant et décroissant
-    $prixTrie = $request->query->get('priceTrie', null);
-    if ($prixTrie) {
-        // Si un tri est sélectionné, on utilise la méthode priceTrie
-        $products = $repo->priceTrie($prixTrie, [$categoryId], $sousCategoryId);
-    } else {
-        // Si aucun tri n'est sélectionné, on charge les produits sans tri
-        $products = $repo->findProductsOfSousCategory($sousCategory);
-    }
+// Produits en promotion
+$productsPromos = $repo->getProductsOnPromotion();
+
+
+// Récupérer les filtres depuis la requête
+$localForm = $request->query->get('local', null); 
+$labelIds = $request->query->all('label'); 
+$sousCategoryId = $repoSCat->getSousCategoriesId($sousCategory); 
+
+
+
+// Liste des sous-catégorie dans les catégorie
+$sousCategoryList= $repoSCat->getSousCategoriesFromCategory($categoryId);
+
+// Appel de la méthode de filtrage par label et local
+$labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, $sousCategoryId, [$categoryId]);
+
+
+// Trier par nom croissant et décroissant
+$nomProduit = $request->query->get('nomProduit', ''); 
+$nameTrie = $repo->nameTrie($nomProduit, $categoryId,$sousCategoryId) ; 
+
+
+// Trier par prix croissant et décroissant
+$prixProduit = $request->query->get('prixProduit', '');  
+$priceTrie = $repo-> priceTrie($prixProduit, $categoryId, $sousCategoryId) ; 
 
 // dd($prixProduit, $nomProduit );
-    // Afficher la vue
-    return $this->render('product/sousCatProducts.html.twig', [
-       // 'sousproduct' => $sousProduct, 
-        'productsPromos' => $productsPromos, 
-        'labels' => $labelIds,         
-        'labelLocal' => $labelLocal,
-        'localForm '=> $localForm ,
-        'category' => $category[0],
-        'products' => $products,
-        'sousCategories'=> $sousCategoryList,
-        'sousCategoryId'=>$sousCategoryId[0]['id'],
-        'currentPage' => $page,
-        'totalPages' => min($totalPages, 3), // Limiter à 3 pages
-        'nomTrie'=> $nomTrie,
-        'prixTrie' => $prixTrie,
-    ]);
-    }
+// Afficher la vue
+return $this->render('product/sousCatProducts.html.twig', [
+   // 'sousproduct' => $sousProduct, 
+    'productsPromos' => $productsPromos, 
+    'labels' => $labelIds,         
+    'labelLocal' => $labelLocal,
+    'localForm '=> $localForm ,
+    'category' => $category[0],
+    'products' => $products,
+    'sousCategories'=> $sousCategoryList,
+    'sousCategoryId'=>$sousCategoryId,
+    'currentPage' => $page,
+    'totalPages' => min($totalPages, 3), // Limiter à 3 pages
+    'nameTrie'=> $nameTrie,
+    'priceTrie' => $priceTrie,
+    'categoryId' => $categoryEntity->getId(),
+    'category' => $categoryEntity,
+]);
+}
     
 
 
