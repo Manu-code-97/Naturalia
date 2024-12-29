@@ -27,11 +27,8 @@ class ProductController extends AbstractController
     /* Cette route affiche une catégorie ainsi que ces produits */
     #[Route('/categorie/{category}', name: 'catProduits', requirements: ['page' => '\d+'], defaults: ['page' => 1])]
     public function categoryProduit (Request $request, ProduitRepository $repo, CategorieRepository $repoCat, SousCategorieRepository $repoSCat, $category, int $page = 1 ): Response{
-        $limit = 20; // Nombre de produits par page
-        $offset = ($page - 1) * $limit; // Calcul de l'offset
-       /*  $category = $repoCat->showCategory($category); */
        
-
+       
        $categoryEntity = $repoCat->showCategory($category);
        if (!$categoryEntity) {
            throw $this->createNotFoundException('Category not found');
@@ -41,14 +38,21 @@ class ProductController extends AbstractController
 
     //    dd($category);
 
+    $products = $repo->findProductsOfCategory($category);
+
+    $limit = 20; // Nombre de produits par page
+    $offset = ($page - 1) * $limit; // Calcul de l'offset
+   /*  $category = $repoCat->showCategory($category); */
+
 
         // Compter le nombre total de produits pour calculer le nombre de pages
-        /* $totalProducts = $repo->count(['categorie' => $category]); 
-        $totalPages = ceil($totalProducts / $limit); */
+        $totalProducts = count($categoryEntity->getSousCategories()->map(fn($sousCategorie) => $sousCategorie->getProduit())->toArray());
+        $totalPages = ceil($totalProducts / $limit);
 
         
         // Barre pagination dans les catégorie
-        $products = $repo->findProductsByCategoryWithPagination($categoryId, $offset, $limit);
+        $products = $repo->findProductsByCategoryWithPagination($category, $offset, $limit);
+        /* dd($products); */
         /* $products = $repo -> findProductsByCategory($category); */
 
         // Affiche les catégorie
@@ -105,7 +109,7 @@ class ProductController extends AbstractController
         'sousCategory' => [],
         'sousproduct' => [], 
         'currentPage' => $page,
-        /* 'totalPages' => min($totalPages, 3),  */
+        'totalPages' => min($totalPages, 3), 
         'categoryId' => $categoryEntity->getId(),
         ]); 
     }

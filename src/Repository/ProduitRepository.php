@@ -52,7 +52,7 @@ public function findProductsBySousCategory($product) {
 }
 
 
-/* Afficher tout les produit d'une sous-catégorie */
+/* Affiche tout les produits d'une sous-catégorie */
 
 public function findProductsOfSousCategory($sousCategory) { 
 
@@ -69,6 +69,27 @@ public function findProductsOfSousCategory($sousCategory) {
 
     
     /* dd($query->getResult()); */
+    return $query->getResult(); 
+}
+
+/* Affiche tout les produits d'une catégorie */
+
+public function findProductsOfCategory($category) { 
+
+
+    $dql = 
+    ' 
+    SELECT c , sc , p 
+    FROM App\Entity\Categorie c
+    INNER JOIN c.sousCategories sc
+    INNER JOIN sc.produit p
+    WHERE c.slug =:sousCategory
+    ';
+    $query = $this->getEntityManager()->createQuery($dql); 
+    $query->setParameter('sousCategory', $category);  
+
+    
+    // dd($query->getResult());
     return $query->getResult(); 
 }
 
