@@ -11,9 +11,7 @@
                 <nav>
                     <div class="d-flex justify-content-around">
                         <div>
-                            <button class="none">Trier par
-                                
-                            </button>
+                            
                             
                                   {# <select name="nameTrie" id="">
                                     <option value="nameTrie">{{nameTrie}}</option>
@@ -21,15 +19,18 @@
                                 </select>  #}
                                 <form method="get" action="">
                                     <select name="priceTrie">
-                                            <option value="asc" {% if app.request.query.get('products') == 'asc' %} selected {% endif %}>Prix croissant</option>
-                                            <option value="desc" {% if app.request.query.get('products') == 'desc' %} selected {% endif %}>Prix décroissant</option>
+                                            <option value="asc" {% if app.request.query.get('priceTrie') == 'asc' %} selected {% endif %}>Prix croissant</option>
+                                            <option value="desc" {% if app.request.query.get('priceTrie') == 'desc' %} selected {% endif %}>Prix décroissant</option>
+                                            
                                     </select>  
 
                                     {# <select name="nameTrie">
                                         <option value="asc" {% if nameTrie == 'asc' %}selected{% endif %}>Nom croissant</option>
                                         <option value="desc" {% if nameTrie == 'desc' %}selected{% endif %}>Nom décroissant</option>
                                     </select> #}
-                                    <button type="submit">Trier</button>
+                                    <button class="none">Trier par
+                                
+                            </button>
                                 </form>
             
 
@@ -59,7 +60,7 @@
                                             </div> 
                                         </label> <span>Choisir local</span> 
                                     </div> 
-                                    <button type="submit">Lancer le filtre local</button>
+                                    
                                 </form>
                             </div>
                         </div>
@@ -111,7 +112,14 @@
     </article>
     <section class="container">
         <div class="blockProduits row yellow">
-            {% for produit in products %}
+           {% set sorted_products = products %}
+        
+        {% if app.request.query.get('priceTrie') == 'asc' %}
+            {% set sorted_products = products|sort((a, b) => a.prix <=> b.prix) %}
+        {% elseif app.request.query.get('priceTrie') == 'desc' %}
+            {% set sorted_products = products|sort((a, b) => b.prix <=> a.prix) %}
+        {% endif %}
+            {% for produit in sorted_products %}
                 <div class="card-group col-3">
                     <div class="yellow me-2 align-self-stretch" style="width: 15rem;">
                         <a href="{{ path('detailProduit', { slug: produit.slug }) }}">
