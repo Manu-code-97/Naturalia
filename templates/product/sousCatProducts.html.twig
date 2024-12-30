@@ -18,19 +18,18 @@
                                     
                                 </select>  #}
                                 <form method="get" action="">
-                                    <select name="priceTrie">
-                                            <option value="asc" {% if app.request.query.get('priceTrie') == 'asc' %} selected {% endif %}>Prix croissant</option>
-                                            <option value="desc" {% if app.request.query.get('priceTrie') == 'desc' %} selected {% endif %}>Prix décroissant</option>
-                                            
+                                    <select name="trie" id="trie">
+                                        <option value="">-- Sélectionnez un tri --</option>
+                                        <option value="price_asc" {% if app.request.query.get('trie') == 'price_asc' %} selected {% endif %}>Prix croissant</option>
+                                        <option value="price_desc" {% if app.request.query.get('trie') == 'price_desc' %} selected {% endif %}>Prix décroissant</option>
+                                        <option value="name_asc" {% if app.request.query.get('trie') == 'name_asc' %} selected {% endif %}>Nom croissant</option>
+                                        <option value="name_desc" {% if app.request.query.get('trie') == 'name_desc' %} selected {% endif %}>Nom décroissant</option>
                                     </select>  
 
-                                    {# <select name="nameTrie">
-                                        <option value="asc" {% if nameTrie == 'asc' %}selected{% endif %}>Nom croissant</option>
-                                        <option value="desc" {% if nameTrie == 'desc' %}selected{% endif %}>Nom décroissant</option>
-                                    </select> #}
+                                    
                                     <button class="none">Trier par
                                 
-                            </button>
+                                    </button>
                                 </form>
             
 
@@ -53,8 +52,8 @@
                             <div>
                                 <form id="filter-form" action="" method="get"> 
                                     <div> 
-                                        <label class="toggle-switch"> 
-                                            <input class="toggle-switch" type="checkbox" name="local" value="1" {# {% if localForm %} checked {% endif %} #} onchange="this.form.submit()"> 
+                                        <label class="toggle-switch" name="localForm"> 
+                                           <input class="toggle-switch" type="checkbox" name="local" value="1" {% if app.request.query.get('local') %} checked {% endif %} onchange="this.form.submit()"> 
                                             <div class="toggle-switch-background"> 
                                             <div class="toggle-switch-handle"></div> 
                                             </div> 
@@ -113,12 +112,30 @@
     <section class="container">
         <div class="blockProduits row yellow">
            {% set sorted_products = products %}
+
+           {# Filtre local si activé #}
+            {% if app.request.query.get('local') %}
+                 {% set sorted_products = sorted_products|filter(product => product.isLocal) %}
+            {% endif %}
         
-        {% if app.request.query.get('priceTrie') == 'asc' %}
-            {% set sorted_products = products|sort((a, b) => a.prix <=> b.prix) %}
-        {% elseif app.request.query.get('priceTrie') == 'desc' %}
-            {% set sorted_products = products|sort((a, b) => b.prix <=> a.prix) %}
-        {% endif %}
+        
+            {# Décodage des valeurs en clés spécifiques #}
+            {% set nameTrie = app.request.query.get('trie') in ['name_asc', 'name_desc'] ? app.request.query.get('trie') : null %}
+            {% set priceTrie = app.request.query.get('trie') in ['price_asc', 'price_desc'] ? app.request.query.get('trie') : null %}
+
+            {# Application du tri #}
+            {% if priceTrie == 'price_asc' %}
+                {% set sorted_products = products|sort((a, b) => a.prix <=> b.prix) %}
+            {% elseif priceTrie == 'price_desc' %}
+                {% set sorted_products = products|sort((a, b) => b.prix <=> a.prix) %}
+            {% endif %}
+
+            {% if nameTrie == 'name_asc' %}
+                {% set sorted_products = products|sort((a, b) => a.nom <=> b.nom) %}
+            {% elseif nameTrie == 'name_desc' %}
+                {% set sorted_products = products|sort((a, b) => b.nom <=> a.nom) %}
+            {% endif %}
+
             {% for produit in sorted_products %}
                 <div class="card-group col-3">
                     <div class="yellow me-2 align-self-stretch" style="width: 15rem;">

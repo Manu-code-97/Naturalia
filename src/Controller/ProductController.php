@@ -184,7 +184,7 @@ return $this->render('product/sousCatProducts.html.twig', [
     'productsPromos' => $productsPromos, 
     'labels' => $labelIds,         
     'labelLocal' => $labelLocal,
-    'localForm '=> $localForm ,
+    'localForm'=> $localForm ,
     'category' => $category[0],
     'products' => $products,
     'sousCategories'=> $sousCategoryList,
