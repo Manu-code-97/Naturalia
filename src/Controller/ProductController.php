@@ -93,6 +93,7 @@ class ProductController extends AbstractController
         // Appel de la méthode de filtrage par label et local
         $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, [$categoryId]);
         
+        
 
         //dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
