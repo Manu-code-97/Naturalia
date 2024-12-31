@@ -93,13 +93,16 @@ class ProductController extends AbstractController
         // Appel de la méthode de filtrage par label et local
         $labelLocal = $repo->filterByLabelAndLocal($localForm, $labelIds, [$categoryId]);
         
-        
+        /* Récupére le nom des labels */
+        $labels = $repo->getLabelsByCategory($categoryId); 
+
 
         //dd ($products);
         return $this->render('product/sousCatProducts.html.twig', 
         [ 'products' => $products,
         'category' => $categoryEntity,
-        'labels' => $labelIds, 
+        'labelsId' => $labelIds, 
+        'labels' => $labels,
         'localForm' => $localForm, 
         'labelLocal' => $labelLocal,
         'priceTrie' => $priceTrie,
@@ -179,11 +182,16 @@ $prixProduit = $request->query->get('prixProduit', '');
 $priceTrie = $repo-> priceTrie($prixProduit, $categoryId, $sousCategoryId) ; 
 
 // dd($prixProduit, $nomProduit );
+
+/* Récupére le nom des labels */
+$labels = $repo->getLabelsByCategory($categoryId); 
+
 // Afficher la vue
 return $this->render('product/sousCatProducts.html.twig', [
    // 'sousproduct' => $sousProduct, 
     'productsPromos' => $productsPromos, 
-    'labels' => $labelIds,         
+    'labelsId' => $labelIds,
+    'labels' => $labels,         
     'labelLocal' => $labelLocal,
     'localForm'=> $localForm ,
     'category' => $category[0],

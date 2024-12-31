@@ -39,8 +39,10 @@
                             <form method="get" action="">
                                 <select name="labels" id="labels"> 
                                         {% for label in labels %}
-                                           <option value="{{ label.id }}" {% if label.id in app.request.query.get('label', []) %} selected {% endif %}>
-                                           {{ label.nom }}
+                                        
+                                           <option value="{{ label.id }}" {% if label.id in app.request.query.all('label') %} selected {% endif %}>
+                                            {{ label.nom }}
+                                            </option>
                                         {% endfor %}
                                 
                                 </select>
@@ -48,9 +50,7 @@
                             </form>
                                 
 
-                                
-                           
-                                
+  
                             </div>
                             <div>
                                 <form id="filter-form" action="" method="get"> 
@@ -139,12 +139,12 @@
                 {% set sorted_products = products|sort((a, b) => b.nom <=> a.nom) %}
             {% endif %}
 
-            {# Filtrage par labels #}
+            {# Récupérer les labels sélectionnés depuis la requête #}
             {% set selected_labels = app.request.query.get('label') %}
-               {% if selected_labels is not iterable %}
+            {% if selected_labels is not iterable %}
             {% set selected_labels = [] %}
             {% endif %}
-
+            
             {% for produit in sorted_products %}
                 <div class="card-group col-3">
                     <div class="yellow me-2 align-self-stretch" style="width: 15rem;">

@@ -294,8 +294,24 @@ public function aleatProducts(int $nbProducts) {
 }
 
 
+public function getLabelsByCategory(int $categoryId): array
+{
+    $qb = $this->createQueryBuilder('p')
+        ->select('DISTINCT l.id, l.nom') // Récupère uniquement les ID et noms uniques des labels
+        ->join('p.label', 'l') // Associe les labels aux produits
+        ->join('p.sousCategorie', 'sc') // Lien avec les sous-catégories
+        ->join('sc.categorie', 'c') // Lien avec la catégorie
+        ->where('c.id = :categoryId') // Filtre par catégorie
+        ->setParameter('categoryId', $categoryId)
+        ->orderBy('l.nom', 'ASC'); // Trie les labels par nom pour un affichage plus propre
+
+    return $qb->getQuery()->getResult();
+}
+
 
 }
+
+
 
 
 
